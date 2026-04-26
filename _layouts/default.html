@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    {% seo %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0d1117;
+        --accent: #00e5a0;
+        --muted: #5a6b82;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Inter', -apple-system, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: var(--bg);
+        font-family: var(--sans);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .landing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        gap: 6px;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      canvas#logo { display: none; }
+      .wordmark {
+        font-family: var(--mono);
+        font-weight: 700;
+        letter-spacing: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .tagline {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      @media (max-width: 700px) {
+        .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
+      }
+      @media (max-width: 600px) {
+        .wordmark { font-size: 30px; letter-spacing: 5px; }
+        .tagline  { font-size: 10px; letter-spacing: 2px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="landing">
+      <canvas id="logo" width="240" height="216" style="display:none;"></canvas>
+      <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
+      <div class="tagline">CyberSec Specialists, Hackers @ Work</div>
+    </div>
+
+    <script>
+      document.fonts.ready.then(function () {
+        var wm  = document.querySelector('.wordmark');
+        var tag = document.querySelector('.tagline');
+        var target = tag.offsetWidth;
+        var size = 40;
+        wm.style.fontSize = size + 'px';
+        while (wm.offsetWidth < target && size < 300) {
+          size += 0.5;
+          wm.style.fontSize = size + 'px';
+        }
+        while (wm.offsetWidth > target && size > 10) {
+          size -= 0.5;
+          wm.style.fontSize = size + 'px';
+        }
+      });
+    </script>
+      (function () {
+        var canvas = document.getElementById('logo');
+        var ctx    = canvas.getContext('2d');
+        var W = canvas.width;
+        var H = canvas.height;
+
+        // Outer equilateral triangle vertices
+        var pad  = 6;
+        var T    = { x: W / 2,       y: pad };
+        var BL   = { x: pad,          y: H - pad };
+        var BR   = { x: W - pad,      y: H - pad };
+
+        // Midpoints (medial triangle)
+        var mTBL = { x: (T.x  + BL.x) / 2, y: (T.y  + BL.y) / 2 };
+        var mTBR = { x: (T.x  + BR.x) / 2, y: (T.y  + BR.y) / 2 };
+        var mBLR = { x: (BL.x + BR.x) / 2, y: (BL.y + BR.y) / 2 };
+
+        // Colors — three teal-green shades, none identical to HTB palette
+        var C1 = '#006e66';  // top corner     — deep teal
+        var C2 = '#009978';  // bottom-left    — medium teal-green
+        var C3 = '#004d52';  // bottom-right   — dark ocean
+        var CC = '#0d1117';  // centre         — background
+
+        function tri(p1, p2, p3, fill) {
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.lineTo(p3.x, p3.y);
+          ctx.closePath();
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+
+        // Four medial sections
+        tri(T,    mTBL, mTBR, C1);   // top corner
+        tri(BL,   mBLR, mTBL, C2);   // bottom-left corner
+        tri(BR,   mTBR, mBLR, C3);   // bottom-right corner
+        tri(mTBL, mTBR, mBLR, CC);   // centre (inverted)
+
+        // Thin accent borders on all inner lines + outer edge
+        ctx.strokeStyle = '#0d1117';
+        ctx.lineWidth   = 3;
+        ctx.lineJoin    = 'round';
+        ctx.beginPath();
+        ctx.moveTo(T.x, T.y); ctx.lineTo(BL.x, BL.y);
+        ctx.lineTo(BR.x, BR.y); ctx.closePath();
+        ctx.stroke();
+
+        ctx.strokeStyle = '#0d1117';
+        ctx.lineWidth   = 2;
+        [[mTBL, mTBR], [mTBL, mBLR], [mTBR, mBLR]].forEach(function(pair) {
+          ctx.beginPath();
+          ctx.moveTo(pair[0].x, pair[0].y);
+          ctx.lineTo(pair[1].x, pair[1].y);
+          ctx.stroke();
+        });
+
+        // Outer accent glow
+        ctx.strokeStyle = '#00e5a0';
+        ctx.lineWidth   = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(T.x, T.y); ctx.lineTo(BL.x, BL.y);
+        ctx.lineTo(BR.x, BR.y); ctx.closePath();
+        ctx.stroke();
+
+        // Centre ∆ symbol
+        var cx = (mTBL.x + mTBR.x + mBLR.x) / 3;
+        var cy = (mTBL.y + mTBR.y + mBLR.y) / 3;
+        ctx.fillStyle    = '#00e5a0';
+        ctx.font         = 'bold 18px JetBrains Mono, monospace';
+        ctx.textAlign    = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('\u25B3', cx, cy);
+      })();
+    </script>
+  </body>
+</html>
