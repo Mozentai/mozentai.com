@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title | default: site.title }}</title>
     {% seo %}
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -33,12 +35,6 @@
         user-select: none;
         -webkit-user-select: none;
       }
-      .logo {
-        width: 120px;
-        height: auto;
-        margin-bottom: 16px;
-        pointer-events: none;
-      }
       .wordmark {
         font-family: var(--mono);
         font-weight: 700;
@@ -61,7 +57,6 @@
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
       }
       @media (max-width: 600px) {
-        .logo     { width: 80px; margin-bottom: 12px; }
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
       }
@@ -69,7 +64,6 @@
   </head>
   <body>
     <div class="landing">
-      <img class="logo" src="/logo.png" alt="Mozentai" draggable="false">
       <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
       <div class="tagline">CyberSec Specialists, Hackers @ Work</div>
     </div>
