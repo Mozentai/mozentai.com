@@ -1,0 +1,48 @@
+---
+description: Project-wide rules for the Mozentai website workspace
+alwaysApply: true
+---
+
+# PROJECT — Mozentai
+
+## Mission
+
+Corporate landing page for **Mozentai**, a cybersecurity company (auditing, hardening). Static site at **https://mozentai.com**.
+
+## Conventions
+
+1. Never use emojis unless told otherwise.
+2. For text, never use em dash, en dash, or double hyphens as separators. Use commas instead.
+3. **All user-facing copy is English.** No Portuguese section titles or labels.
+4. Minimize scope. Match existing Jekyll, CSS, and data-file patterns.
+5. Learn from mistakes; when corrected, update `cortex.mdc` in this repo and mirror to `~/github/context/mozentai/rules/`.
+6. Do not commit secrets, credentials, or `.env*` files.
+
+## Deploy (mandatory)
+
+**After any change that should go live, ALWAYS push and deploy at the end without being asked:**
+
+1. `git status`, `git diff`, `git log` (parallel)
+2. Stage relevant files, commit with a clear message
+3. `git push origin main`
+4. Watch deploy: `gh run watch $(gh run list --workflow=pages.yml --limit 1 --json databaseId --jq '.[0].databaseId')`
+5. Confirm live URL: https://mozentai.com
+
+Never skip deploy when site content or assets changed.
+
+## Content rules
+
+- **Hero:** full viewport, wordmark + tagline only. Do not clutter above the fold.
+- **Below fold:** Services, Partners (marquee), Clients (Europe + United States), Certifications.
+- **Partners:** Axonius-style infinite horizontal logo marquee (muted logos, edge fades, pause on hover).
+- **Clients:** grouped by region with SVG wordmark logos.
+- **404:** dedicated `error` layout, message "Got lost on the way home?"
+- **Logos:** SVG in `assets/partners/` and `assets/clients/`. Icon + wordmark, distinct accent per brand.
+
+## What belongs here
+
+- Jekyll layouts, includes, `_data/` YAML, SVG assets, GitHub Pages workflow
+
+## What does not belong here
+
+- Backend services, secrets, customer PII, production app code

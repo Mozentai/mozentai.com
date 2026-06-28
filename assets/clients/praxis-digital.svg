@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" fill="none">
+  <rect x="6" y="10" width="20" height="20" rx="2" stroke="#a371f7" stroke-width="1.5"/>
+  <path d="M11 25l5-10 5 10" stroke="#a371f7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="14" r="2" fill="#a371f7"/>
+  <text x="36" y="17" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#e6edf3" letter-spacing="0.5">PRAXIS</text>
+  <text x="36" y="29" font-family="system-ui,sans-serif" font-size="8" font-weight="500" fill="#5a6b82" letter-spacing="2">DIGITAL B.V.</text>
+</svg>

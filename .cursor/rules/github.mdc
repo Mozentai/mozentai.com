@@ -1,0 +1,40 @@
+---
+description: Git and GitHub Pages deploy workflow for Mozentai
+alwaysApply: true
+---
+
+# GIT & GITHUB — Mozentai
+
+## Repository
+
+- **Remote:** `github.com:Mozentai/mozentai.com.git`
+- **Branch:** `main` (auto-deploys to GitHub Pages)
+- **Domain:** mozentai.com (`CNAME`)
+
+## Commit messages
+
+- Short imperative summary (1-2 sentences), focus on why
+- Use HEREDOC for commit body
+- NEVER force-push to `main`
+- Only commit when user asks OR when completing site work (project rule: always deploy)
+
+## Deploy workflow
+
+File: `.github/workflows/pages.yml`
+
+On push to `main`:
+1. Jekyll build via `actions/jekyll-build-pages@v1`
+2. Deploy via `actions/deploy-pages@v4`
+
+Verify:
+```bash
+gh run list --workflow=pages.yml --limit 3
+gh run watch <run-id>
+```
+
+## Rules
+
+- Use `gh` CLI for GitHub operations
+- NEVER skip hooks unless explicitly requested
+- NEVER commit `Gemfile.lock` (gitignored)
+- NEVER update git config

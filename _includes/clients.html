@@ -1,0 +1,23 @@
+<section class="section reveal" id="clients">
+  <h2 class="section-title">Clients</h2>
+
+  <h3 class="region-label reveal">Europe</h3>
+  <div class="clients">
+    {% for client in site.data.clients.europe %}
+    <div class="client reveal" style="--delay: {{ forloop.index0 | times: 80 }}ms">
+      <img class="client-logo" src="{{ client.logo }}" alt="{{ client.name }}" width="200" height="40" loading="lazy">
+      <span class="client-tag">{{ client.tag }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h3 class="region-label reveal">United States</h3>
+  <div class="clients">
+    {% for client in site.data.clients.united_states %}
+    <div class="client reveal" style="--delay: {{ forloop.index0 | times: 80 }}ms">
+      <img class="client-logo" src="{{ client.logo }}" alt="{{ client.name }}" width="200" height="40" loading="lazy">
+      <span class="client-tag">{{ client.tag }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>

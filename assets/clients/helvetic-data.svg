@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" fill="none">
+  <path d="M16 8l12 6.9V23L16 30 4 23V14.9L16 8z" stroke="#e3b341" stroke-width="1.5" fill="rgba(227,179,65,0.06)"/>
+  <path d="M16 14v12M10 17l6 3.5 6-3.5" stroke="#e3b341" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="36" y="17" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#e6edf3" letter-spacing="0.5">HELVETIC</text>
+  <text x="36" y="29" font-family="system-ui,sans-serif" font-size="9" font-weight="500" fill="#5a6b82" letter-spacing="2.5">DATA AG</text>
+</svg>

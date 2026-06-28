@@ -1,0 +1,99 @@
+---
+description: Persistent project context for Mozentai — consult before acting
+alwaysApply: true
+---
+
+# BRAIN — Mozentai Site Context
+
+## What This Project Is
+
+Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at **mozentai.com** via `.github/workflows/pages.yml` on push to `main`.
+
+**Tagline:** CyberSec Specialists, Hackers @ Work
+
+## Repo layout
+
+| Path | Purpose |
+|------|---------|
+| `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
+| `_layouts/error.html` | 404 page layout |
+| `_includes/services.html` | Service cards |
+| `_includes/partners.html` | Axonius-style logo marquee |
+| `_includes/clients.html` | Clients by region (Europe, United States) |
+| `_includes/certifications.html` | ISO/SOC/PCI badge grid |
+| `_data/services.yml` | Auditing, Hardening |
+| `_data/partners.yml` | Partner names + logo paths |
+| `_data/clients.yml` | `europe` and `united_states` client lists |
+| `_data/certifications.yml` | Market certifications |
+| `assets/partners/*.svg` | Partner wordmark logos |
+| `assets/clients/*.svg` | Client wordmark logos |
+| `index.md` | Homepage entry |
+| `404.md` | Custom 404 |
+| `_config.yml` | Site config, `lang: en-US`, `jekyll-seo-tag` |
+
+## Design system
+
+```css
+--bg: #0d1117;
+--surface: #161b22;
+--border: #21262d;
+--accent: #00e5a0;
+--muted: #5a6b82;
+--text: #c9d1d9;
+--mono: JetBrains Mono;
+--sans: Inter;
+```
+
+- Dark cyber aesthetic, mint green accent
+- Hero: `100dvh`, centered wordmark, "Explore" scroll hint with chevron
+- Scroll reveal via `IntersectionObserver` on `.reveal` elements
+- `prefers-reduced-motion` respected
+
+## Page sections (top to bottom)
+
+1. **Hero** — MOZENT△I wordmark, tagline
+2. **Services** — Auditing (one-year certification), Hardening
+3. **Partners** — infinite marquee, logos only (no category tags in ticker)
+4. **Clients** — Europe (Germany, Switzerland, Netherlands) + United States
+5. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
+
+## Partners (marquee)
+
+- Full-width `marquee-wrap` breaks out of `.below` container
+- Duplicated track for seamless `-50%` translate loop
+- Logos: grayscale/muted by default, full color on hover
+- Pause animation on hover
+
+## Fictional brands (do not present as real companies)
+
+**Partners:** Fortress Digital, Sentinel Alliance, ShieldCore Technologies, Nexus Defense, Vortex Defense Labs, CyberPro
+
+**Clients Europe:** Rheinwerk AG, NordSec GmbH, Helvetic Data AG, Praxis Digital B.V.
+
+**Clients US:** Meridian Health Systems, Atlas Federal Solutions, Pacific Grid Energy, Keystone Financial Group
+
+## Deploy commands
+
+```bash
+cd ~/github/mozentai
+bundle exec jekyll build   # local verify
+git push origin main       # triggers GitHub Pages
+gh run watch $(gh run list --workflow=pages.yml --limit 1 --json databaseId --jq '.[0].databaseId')
+```
+
+## Context repo mirror
+
+Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `.cursor/rules/`, copy changes there and run `~/github/context/sync.sh`.
+
+## Learnings log
+
+| Date | Learning |
+|------|----------|
+| 2026-06-28 | Site must stay English; user saw "Serviços" likely from browser translate |
+| 2026-06-28 | Partners should be Axonius-style rolling marquee, not static grid |
+| 2026-06-28 | Always push and deploy after site changes |
+
+## Self-update protocol
+
+- Read this file at session start before editing the site.
+- After corrections from the user, append to Learnings log and update relevant rules.

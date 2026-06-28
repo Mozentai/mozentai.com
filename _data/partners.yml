@@ -1,17 +1,23 @@
 - name: Fortress Digital
   tag: Cloud & Infra
+  logo: /assets/partners/fortress-digital.svg
 
 - name: Sentinel Alliance
   tag: Threat Intelligence
+  logo: /assets/partners/sentinel-alliance.svg
 
 - name: ShieldCore Technologies
   tag: Endpoint Security
+  logo: /assets/partners/shieldcore.svg
 
 - name: Nexus Defense
   tag: Compliance
+  logo: /assets/partners/nexus-defense.svg
 
 - name: Vortex Defense Labs
   tag: Penetration Testing
+  logo: /assets/partners/vortex-defense.svg
 
 - name: CyberPro
   tag: SOC Operations
+  logo: /assets/partners/cyberpro.svg

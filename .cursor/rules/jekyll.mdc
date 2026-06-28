@@ -1,0 +1,43 @@
+---
+description: Jekyll site structure and editing patterns for Mozentai
+globs: "{_layouts/**,_includes/**,_data/**,*.md,assets/**}"
+alwaysApply: false
+---
+
+# Jekyll — Mozentai
+
+## Stack
+
+- Jekyll ~4.3, `jekyll-seo-tag`, GitHub Pages build action
+- No SASS split: CSS lives inline in `_layouts/default.html`
+- Content driven by `_data/*.yml` + Liquid includes
+
+## Adding a new section
+
+1. Create `_data/<section>.yml`
+2. Create `_includes/<section>.html` with `.reveal` classes for scroll animation
+3. Add CSS to `_layouts/default.html`
+4. `{% include <section>.html %}` in the `.below` div (order matters)
+5. Build, commit, push, deploy
+
+## Adding a partner or client logo
+
+- SVG wordmark: icon mark + company name, ~200x40 viewBox
+- Save to `assets/partners/` or `assets/clients/`
+- Add entry to corresponding YAML with `logo:` path
+- For partners marquee: duplicate loop in `partners.html` handles itself via `{% for %}` twice
+
+## Local dev
+
+```bash
+bundle install
+bundle exec jekyll serve
+bundle exec jekyll build
+```
+
+## Layout notes
+
+- `default.html` does NOT render `{{ content }}` (landing is self-contained)
+- `error.html` is used only by `404.md`
+- `html lang` from `_config.yml` (`en-US`)
+- `notranslate` meta prevents browser auto-translation to Portuguese

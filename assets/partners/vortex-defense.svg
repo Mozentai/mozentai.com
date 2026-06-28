@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 40" fill="none">
+  <path d="M16 20c0-6 4-10 4-10s4 4 4 10-4 10-4 10-4-4-4-10z" stroke="#f78166" stroke-width="1.5" fill="none"/>
+  <path d="M16 20c-6 0-10-4-10-4s4-4 10-4 4 4 4 10-4 10-10 4-10 4z" stroke="#f78166" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <circle cx="16" cy="20" r="2.5" fill="#f78166"/>
+  <text x="36" y="17" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#e6edf3" letter-spacing="0.5">VORTEX</text>
+  <text x="36" y="29" font-family="system-ui,sans-serif" font-size="8" font-weight="500" fill="#5a6b82" letter-spacing="2.5">DEFENSE LABS</text>
+</svg>

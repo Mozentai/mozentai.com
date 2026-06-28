@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <path d="M8 28V14l8-6 8 6v14H8z" stroke="#00e5a0" stroke-width="1.5" fill="none"/>
+  <path d="M12 28v-8h8v8" stroke="#00e5a0" stroke-width="1.5"/>
+  <rect x="14" y="16" width="4" height="4" fill="#00e5a0"/>
+  <text x="36" y="18" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#e6edf3" letter-spacing="1">FORTRESS</text>
+  <text x="36" y="30" font-family="system-ui,sans-serif" font-size="9" font-weight="500" fill="#5a6b82" letter-spacing="3">DIGITAL</text>
+</svg>
