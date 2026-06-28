@@ -1,0 +1,15 @@
+<section class="section reveal" id="testimonials">
+  <h2 class="section-title">What Clients Say</h2>
+  <p class="section-lead">Built on trust, proven in production.</p>
+  <div class="testimonials">
+    {% for t in site.data.testimonials %}
+    <blockquote class="testimonial reveal" style="--delay: {{ forloop.index0 | times: 70 }}ms">
+      <p class="testimonial-quote">{{ t.quote }}</p>
+      <footer class="testimonial-author">
+        <span class="testimonial-name">{{ t.name }}</span>
+        <span class="testimonial-role">{{ t.role }}</span>
+      </footer>
+    </blockquote>
+    {% endfor %}
+  </div>
+</section>

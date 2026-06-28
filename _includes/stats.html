@@ -1,0 +1,10 @@
+<section class="section reveal" id="stats">
+  <div class="stats">
+    {% for stat in site.data.stats %}
+    <div class="stat reveal" style="--delay: {{ forloop.index0 | times: 90 }}ms">
+      <span class="stat-value">{{ stat.value }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>

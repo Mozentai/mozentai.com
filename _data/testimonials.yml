@@ -1,0 +1,23 @@
+- quote: "They didn't just find our gaps, they closed them. Mozentai hardened our entire cloud stack in six weeks and we passed ISO 27001 on the first attempt."
+  name: Klaus Weber
+  role: CTO, Rheinwerk AG
+
+- quote: "Our fraud detection was drowning in noise. After Mozentai's audit and hardening sprint, false positives dropped 91% and we cut quarterly losses from seven figures to under six."
+  name: Elena Hoffmann
+  role: CISO, NordSec GmbH
+
+- quote: "Most security firms hand you a PDF and disappear. Mozentai stayed in the trenches with us until every critical finding was remediated. That one-year certification actually means something."
+  name: Thomas Keller
+  role: Head of Infrastructure, Helvetic Data AG
+
+- quote: "We were scaling fast and security was an afterthought. Mozentai built our baseline from zero, hardened every deployment pipeline, and gave our investors the confidence to keep writing checks."
+  name: Sophie van der Berg
+  role: CEO, Praxis Digital B.V.
+
+- quote: "HIPAA audits used to keep me up at night. Mozentai mapped every control, fixed what mattered, and our compliance team finally sleeps through the night."
+  name: Dr. Amanda Reyes
+  role: CISO, Meridian Health Systems
+
+- quote: "When you handle federal data, there is no room for guesswork. Mozentai brought military-grade rigor to our environment and delivered measurable results we could take to our contracting officer."
+  name: James Whitfield
+  role: VP Security, Atlas Federal Solutions
