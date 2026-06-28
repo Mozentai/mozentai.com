@@ -1,0 +1,17 @@
+- name: Fortaleza Digital
+  tag: Cloud & Infra
+
+- name: Sentinel Alliance
+  tag: Threat Intelligence
+
+- name: ShieldCore Technologies
+  tag: Endpoint Security
+
+- name: Nexus Defesa
+  tag: Compliance
+
+- name: Vortex Defense Labs
+  tag: Penetration Testing
+
+- name: CiberPro Brasil
+  tag: SOC Operations
