@@ -320,62 +320,6 @@
         from { transform: translateX(0); }
         to   { transform: translateX(-50%); }
       }
-      .region-label {
-        font-family: var(--mono);
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 20px;
-        opacity: 0.8;
-      }
-      .region-label + .clients {
-        margin-bottom: 48px;
-      }
-      .clients {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-      }
-      .client {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 28px 16px 22px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        min-height: 100px;
-        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      }
-      .client:hover {
-        border-color: var(--accent);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(0, 229, 160, 0.06);
-      }
-      .client-logo {
-        height: 28px;
-        width: auto;
-        max-width: 100%;
-        object-fit: contain;
-        opacity: 0.92;
-        transition: opacity 0.3s;
-      }
-      .client:hover .client-logo {
-        opacity: 1;
-      }
-      .client-tag {
-        font-size: 10px;
-        font-weight: 500;
-        color: var(--muted);
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        text-align: center;
-        line-height: 1.4;
-      }
       .certifications {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -473,7 +417,6 @@
         .cards { grid-template-columns: 1fr; }
         .marquee-track { gap: 48px; animation-duration: 28s; }
         .marquee-fade { width: 64px; }
-        .clients { grid-template-columns: repeat(2, 1fr); }
         .certifications { grid-template-columns: repeat(2, 1fr); }
       }
       @media (max-width: 600px) {
@@ -483,7 +426,6 @@
         .marquee-logo { height: 26px; }
         .mitm-scene { opacity: 0.28; }
         .mitm-svg { width: min(720px, 100vw); }
-        .clients { grid-template-columns: 1fr; }
         .certifications { grid-template-columns: 1fr; }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -526,8 +468,7 @@
 
     <div class="below">
       {% include services.html %}
-      {% include partners.html %}
-      {% include clients.html %}
+      {% include customers.html %}
       {% include certifications.html %}
     </div>
 

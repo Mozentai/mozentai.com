@@ -1,0 +1,22 @@
+<section class="section reveal" id="customers">
+  <h2 class="section-title">Customers</h2>
+  {% assign all_customers = site.data.customers.europe | concat: site.data.customers.united_states %}
+  <div class="marquee-wrap">
+    <div class="marquee-fade marquee-fade--left" aria-hidden="true"></div>
+    <div class="marquee" aria-label="Customer logos">
+      <div class="marquee-track">
+        {% for customer in all_customers %}
+        <div class="marquee-item">
+          <img class="marquee-logo" src="{{ customer.logo }}" alt="{{ customer.name }}" width="200" height="40" loading="lazy">
+        </div>
+        {% endfor %}
+        {% for customer in all_customers %}
+        <div class="marquee-item" aria-hidden="true">
+          <img class="marquee-logo" src="{{ customer.logo }}" alt="" width="200" height="40" loading="lazy">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="marquee-fade marquee-fade--right" aria-hidden="true"></div>
+  </div>
+</section>

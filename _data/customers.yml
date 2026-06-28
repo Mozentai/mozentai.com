@@ -1,33 +1,33 @@
 europe:
   - name: Rheinwerk AG
     tag: Industrials · Germany
-    logo: /assets/clients/rheinwerk.svg
+    logo: /assets/customers/rheinwerk.svg
 
   - name: NordSec GmbH
     tag: Banking · Germany
-    logo: /assets/clients/nordsec.svg
+    logo: /assets/customers/nordsec.svg
 
   - name: Helvetic Data AG
     tag: Insurance · Switzerland
-    logo: /assets/clients/helvetic-data.svg
+    logo: /assets/customers/helvetic-data.svg
 
   - name: Praxis Digital B.V.
     tag: SaaS · Netherlands
-    logo: /assets/clients/praxis-digital.svg
+    logo: /assets/customers/praxis-digital.svg
 
 united_states:
   - name: Meridian Health Systems
     tag: Healthcare · United States
-    logo: /assets/clients/meridian-health.svg
+    logo: /assets/customers/meridian-health.svg
 
   - name: Atlas Federal Solutions
     tag: Defense · United States
-    logo: /assets/clients/atlas-federal.svg
+    logo: /assets/customers/atlas-federal.svg
 
   - name: Pacific Grid Energy
     tag: Energy · United States
-    logo: /assets/clients/pacific-grid.svg
+    logo: /assets/customers/pacific-grid.svg
 
   - name: Keystone Financial Group
     tag: Finance · United States
-    logo: /assets/clients/keystone-financial.svg
+    logo: /assets/customers/keystone-financial.svg
