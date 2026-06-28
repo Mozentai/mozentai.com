@@ -1,8 +1,8 @@
-<section class="section" id="servicos">
-  <h2 class="section-title">Serviços</h2>
+<section class="section reveal" id="services">
+  <h2 class="section-title">Services</h2>
   <div class="cards">
     {% for service in site.data.services %}
-    <article class="card">
+    <article class="card reveal" style="--delay: {{ forloop.index0 | times: 100 }}ms">
       <div class="card-icon">{{ service.icon }}</div>
       <h3 class="card-title">{{ service.name }}</h3>
       <p class="card-desc">{{ service.description }}</p>

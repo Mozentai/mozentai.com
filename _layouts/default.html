@@ -21,16 +21,22 @@
         --sans: 'Inter', -apple-system, sans-serif;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         background: var(--bg);
         font-family: var(--sans);
-        min-height: 100vh;
         color: var(--text);
       }
-      .page {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 60px 40px 80px;
+
+      /* ── Hero ── */
+      .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
       }
       .landing {
         display: flex;
@@ -39,7 +45,6 @@
         gap: 6px;
         user-select: none;
         -webkit-user-select: none;
-        margin-bottom: 72px;
       }
       .wordmark {
         font-family: var(--mono);
@@ -49,6 +54,7 @@
         text-transform: uppercase;
         line-height: 1;
         white-space: nowrap;
+        animation: fadeDown 1s ease both, glow 4s ease-in-out 1s infinite;
       }
       .tagline {
         font-size: 13px;
@@ -58,9 +64,44 @@
         text-transform: uppercase;
         line-height: 1;
         white-space: nowrap;
+        animation: fadeUp 1s ease 0.3s both;
+      }
+      .scroll-hint {
+        position: absolute;
+        bottom: 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: fadeUp 1s ease 1.2s both;
+      }
+      .scroll-hint span {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--muted);
+        opacity: 0.6;
+      }
+      .scroll-chevron {
+        width: 18px;
+        height: 18px;
+        border-right: 1.5px solid var(--accent);
+        border-bottom: 1.5px solid var(--accent);
+        transform: rotate(45deg);
+        opacity: 0.5;
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      /* ── Below fold ── */
+      .below {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 80px 40px 120px;
       }
       .section {
-        margin-bottom: 64px;
+        margin-bottom: 80px;
       }
       .section-title {
         font-family: var(--mono);
@@ -83,16 +124,22 @@
         border: 1px solid var(--border);
         border-radius: 8px;
         padding: 28px;
-        transition: border-color 0.2s;
+        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       }
       .card:hover {
         border-color: var(--accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(0, 229, 160, 0.08);
       }
       .card-icon {
         font-family: var(--mono);
         font-size: 20px;
         color: var(--accent);
         margin-bottom: 16px;
+        transition: transform 0.3s;
+      }
+      .card:hover .card-icon {
+        transform: scale(1.15);
       }
       .card-title {
         font-family: var(--mono);
@@ -120,10 +167,11 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
-        transition: border-color 0.2s;
+        transition: border-color 0.3s, transform 0.3s;
       }
       .partner:hover {
         border-color: var(--accent);
+        transform: translateY(-2px);
       }
       .partner-name {
         font-family: var(--mono);
@@ -139,26 +187,70 @@
         letter-spacing: 2px;
         text-transform: uppercase;
       }
+
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease var(--delay, 0ms),
+                    transform 0.7s ease var(--delay, 0ms);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Keyframes ── */
+      @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes glow {
+        0%, 100% { text-shadow: 0 0 20px rgba(0, 229, 160, 0); }
+        50%      { text-shadow: 0 0 30px rgba(0, 229, 160, 0.25); }
+      }
+      @keyframes bounce {
+        0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+        50%      { transform: rotate(45deg) translateY(6px); opacity: 0.9; }
+      }
+
       @media (max-width: 700px) {
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
         .cards { grid-template-columns: 1fr; }
         .partners { grid-template-columns: repeat(2, 1fr); }
       }
       @media (max-width: 600px) {
-        .page { padding: 40px 24px 60px; }
+        .below { padding: 60px 24px 80px; }
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .partners { grid-template-columns: 1fr; }
       }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+        .reveal { opacity: 1; transform: none; }
+      }
     </style>
   </head>
   <body>
-    <div class="page">
+    <section class="hero">
       <div class="landing">
         <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
         <div class="tagline">CyberSec Specialists, Hackers @ Work</div>
       </div>
+      <a class="scroll-hint" href="#services" aria-label="Scroll to services">
+        <span>Explore</span>
+        <div class="scroll-chevron"></div>
+      </a>
+    </section>
 
+    <div class="below">
       {% include services.html %}
       {% include partners.html %}
     </div>
@@ -178,6 +270,19 @@
           size -= 0.5;
           wm.style.fontSize = size + 'px';
         }
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
       });
     </script>
   </body>

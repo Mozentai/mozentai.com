@@ -1,8 +1,8 @@
-<section class="section" id="parceiros">
-  <h2 class="section-title">Parceiros</h2>
+<section class="section reveal" id="partners">
+  <h2 class="section-title">Partners</h2>
   <div class="partners">
     {% for partner in site.data.partners %}
-    <div class="partner">
+    <div class="partner reveal" style="--delay: {{ forloop.index0 | times: 80 }}ms">
       <span class="partner-name">{{ partner.name }}</span>
       <span class="partner-tag">{{ partner.tag }}</span>
     </div>

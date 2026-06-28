@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    {% seo %}
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0d1117;
+        --accent: #00e5a0;
+        --muted: #5a6b82;
+        --text: #c9d1d9;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Inter', -apple-system, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: var(--bg);
+        font-family: var(--sans);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+      }
+      .error {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        gap: 24px;
+        user-select: none;
+        -webkit-user-select: none;
+        text-align: center;
+      }
+      .wordmark {
+        font-family: var(--mono);
+        font-weight: 700;
+        letter-spacing: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .message {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        line-height: 1.6;
+        max-width: 420px;
+      }
+      .home {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .home:hover {
+        border-bottom-color: var(--accent);
+      }
+      @media (max-width: 600px) {
+        .wordmark { font-size: 30px; letter-spacing: 5px; }
+        .message  { font-size: 11px; letter-spacing: 2px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error">
+      <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
+      <p class="message">{{ page.message | default: "Got lost on the way home?" }}</p>
+      <a class="home" href="/">← Back home</a>
+    </div>
+
+    <script>
+      document.fonts.ready.then(function () {
+        var wm  = document.querySelector('.wordmark');
+        var msg = document.querySelector('.message');
+        var target = msg.offsetWidth;
+        var size = 40;
+        wm.style.fontSize = size + 'px';
+        while (wm.offsetWidth < target && size < 300) {
+          size += 0.5;
+          wm.style.fontSize = size + 'px';
+        }
+        while (wm.offsetWidth > target && size > 10) {
+          size -= 0.5;
+          wm.style.fontSize = size + 'px';
+        }
+      });
+    </script>
+  </body>
+</html>
