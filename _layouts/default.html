@@ -285,17 +285,15 @@
         padding: 16px 8px;
       }
       .marquee-logo {
-        height: 32px;
+        height: 26px;
         width: auto;
-        max-width: 180px;
+        max-width: 200px;
         object-fit: contain;
-        opacity: 0.55;
-        filter: grayscale(40%) brightness(0.95);
-        transition: opacity 0.3s, filter 0.3s;
+        opacity: 0.62;
+        transition: opacity 0.3s;
       }
       .marquee-item:hover .marquee-logo {
-        opacity: 1;
-        filter: grayscale(0%) brightness(1);
+        opacity: 0.95;
       }
       .marquee-fade {
         position: absolute;
@@ -420,7 +418,7 @@
         .below { padding: 60px 24px 80px; }
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
-        .marquee-logo { height: 26px; }
+        .marquee-logo { height: 22px; }
         .mitm-scene { opacity: 0.28; }
         .mitm-svg { width: min(720px, 100vw); }
         .certifications { grid-template-columns: 1fr; }
@@ -445,7 +443,7 @@
         }
         .marquee-fade { display: none; }
         .marquee-item[aria-hidden="true"] { display: none; }
-        .marquee-logo { opacity: 0.85; filter: none; }
+        .marquee-logo { opacity: 0.75; }
         .mitm-scene { display: none; }
       }
     </style>
