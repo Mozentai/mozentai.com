@@ -18,12 +18,12 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 | `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
 | `_layouts/error.html` | 404 page layout |
 | `_includes/mitm-animation.html` | Hero MITM packet traffic SVG animation |
-| `_includes/customers.html` | Axonius-style customer logo marquee |
+| `_includes/clients.html` | Axonius-style client logo marquee |
 | `_includes/certifications.html` | ISO/SOC/PCI badge grid |
 | `_data/services.yml` | Auditing, Hardening |
-| `_data/customers.yml` | `europe` and `united_states` customer lists |
+| `_data/clients.yml` | `europe` and `united_states` client lists |
 | `_data/certifications.yml` | Market certifications |
-| `assets/customers/*.svg` | Customer wordmark logos |
+| `assets/clients/*.svg` | Client wordmark logos |
 | `index.md` | Homepage entry |
 | `404.md` | Custom 404 |
 | `_config.yml` | Site config, `lang: en-US`, `jekyll-seo-tag` |
@@ -51,10 +51,10 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 1. **Hero** — MOZENT△I wordmark, tagline
 2. **Services** — Auditing (one-year certification), Hardening
-3. **Customers** — infinite marquee with EU and US customer logos
+3. **Clients** — infinite horizontal marquee with EU and US client logos
 4. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
 
-## Customers (marquee)
+## Clients (marquee)
 
 - Full-width `marquee-wrap` breaks out of `.below` container
 - Duplicated track for seamless `-50%` translate loop
@@ -63,9 +63,9 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 ## Fictional brands (do not present as real companies)
 
-**Customers Europe:** Rheinwerk AG, NordSec GmbH, Helvetic Data AG, Praxis Digital B.V.
+**Clients Europe:** Rheinwerk AG, NordSec GmbH, Helvetic Data AG, Praxis Digital B.V.
 
-**Customers US:** Meridian Health Systems, Atlas Federal Solutions, Pacific Grid Energy, Keystone Financial Group
+**Clients US:** Meridian Health Systems, Atlas Federal Solutions, Pacific Grid Energy, Keystone Financial Group
 
 ## Deploy commands
 

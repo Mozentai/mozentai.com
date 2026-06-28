@@ -20,12 +20,12 @@ alwaysApply: false
 4. `{% include <section>.html %}` in the `.below` div (order matters)
 5. Build, commit, push, deploy
 
-## Adding a customer logo
+## Adding a client logo
 
 - SVG wordmark: icon mark + company name, ~200x40 viewBox
-- Save to `assets/customers/`
-- Add entry to `_data/customers.yml` under `europe` or `united_states`
-- Marquee duplicate loop in `customers.html` handles itself via `{% for %}` twice
+- Save to `assets/clients/`
+- Add entry to `_data/clients.yml` under `europe` or `united_states`
+- Marquee duplicate loop in `clients.html` handles itself via `{% for %}` twice
 
 ## Local dev
 
