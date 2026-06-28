@@ -1,0 +1,23 @@
+- name: ISO/IEC 27001
+  tag: Information Security
+
+- name: ISO/IEC 27017
+  tag: Cloud Security
+
+- name: ISO/IEC 27018
+  tag: Cloud Privacy
+
+- name: ISO 9001
+  tag: Quality Management
+
+- name: SOC 2 Type II
+  tag: Service Organization Controls
+
+- name: PCI DSS
+  tag: Payment Card Industry
+
+- name: NIST CSF
+  tag: Cybersecurity Framework
+
+- name: ISO/IEC 27701
+  tag: Privacy Information Management

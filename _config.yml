@@ -1,5 +1,6 @@
 title: Mozentai
 description: CyberSec Specialists, Hackers @ Work
+lang: en-US
 show_downloads: false
 plugins:
   - jekyll-seo-tag

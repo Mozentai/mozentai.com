@@ -1,0 +1,11 @@
+<section class="section reveal" id="certifications">
+  <h2 class="section-title">Certifications</h2>
+  <div class="certifications">
+    {% for cert in site.data.certifications %}
+    <div class="cert reveal" style="--delay: {{ forloop.index0 | times: 70 }}ms">
+      <span class="cert-name">{{ cert.name }}</span>
+      <span class="cert-tag">{{ cert.tag }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
