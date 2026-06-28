@@ -17,7 +17,6 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 |------|---------|
 | `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
 | `_layouts/error.html` | 404 page layout |
-| `_includes/mitm-animation.html` | Hero MITM packet traffic SVG animation |
 | `_includes/clients.html` | Axonius-style client logo marquee |
 | `_includes/certifications.html` | ISO/SOC/PCI badge grid |
 | `_data/services.yml` | Auditing, Hardening |
@@ -43,7 +42,6 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 - Dark cyber aesthetic, mint green accent
 - Hero: `100dvh`, centered wordmark, "Explore" scroll hint with chevron
-- Hero background: MITM diagram (client → attacker → server) with animated packet flow
 - Scroll reveal via `IntersectionObserver` on `.reveal` elements
 - `prefers-reduced-motion` respected
 

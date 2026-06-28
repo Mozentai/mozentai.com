@@ -38,106 +38,6 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        overflow: hidden;
-      }
-      .mitm-scene {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.42;
-        animation: mitmFadeIn 2s ease 0.5s both;
-      }
-      .mitm-svg {
-        width: min(920px, 94vw);
-        height: auto;
-        max-height: 160px;
-      }
-      .mitm-wire {
-        stroke: var(--border);
-        stroke-width: 1.5;
-        stroke-dasharray: 6 5;
-        animation: wireDash 1.2s linear infinite;
-      }
-      .mitm-wire--dim {
-        opacity: 0.45;
-        stroke-dasharray: 4 6;
-      }
-      .mitm-wire--tap {
-        stroke: #f78166;
-        opacity: 0.35;
-        stroke-dasharray: 3 5;
-      }
-      .mitm-box {
-        fill: none;
-        stroke: var(--muted);
-        stroke-width: 1.5;
-      }
-      .mitm-screen {
-        fill: rgba(0, 229, 160, 0.06);
-        stroke: rgba(0, 229, 160, 0.25);
-        stroke-width: 1;
-      }
-      .mitm-server-line {
-        stroke: var(--muted);
-        stroke-width: 1.5;
-        opacity: 0.6;
-      }
-      .mitm-led {
-        fill: var(--accent);
-        animation: ledPulse 2s ease-in-out infinite;
-      }
-      .mitm-label {
-        fill: var(--muted);
-        font-family: var(--mono);
-        font-size: 8px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-      }
-      .mitm-label--alert {
-        fill: #f78166;
-        font-size: 7px;
-        letter-spacing: 3px;
-        animation: mitmLabelPulse 3s ease-in-out infinite;
-      }
-      .mitm-hex {
-        fill: rgba(247, 129, 102, 0.08);
-        stroke: #f78166;
-        stroke-width: 1.5;
-        animation: mitmHexPulse 3s ease-in-out infinite;
-      }
-      .mitm-eye-ring {
-        fill: none;
-        stroke: #f78166;
-        stroke-width: 1;
-        opacity: 0.7;
-      }
-      .mitm-eye {
-        fill: #f78166;
-        animation: mitmEyePulse 2s ease-in-out infinite;
-      }
-      .mitm-arm {
-        stroke: #f78166;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-        opacity: 0.5;
-      }
-      .pkt--fwd {
-        fill: var(--accent);
-      }
-      .pkt--block {
-        fill: rgba(0, 229, 160, 0.85);
-      }
-      .pkt--stolen {
-        fill: #f78166;
-        opacity: 0.85;
-      }
-      .pkt--ret {
-        fill: var(--muted);
-        opacity: 0.55;
       }
       .landing {
         display: flex;
@@ -146,8 +46,6 @@
         gap: 6px;
         user-select: none;
         -webkit-user-select: none;
-        position: relative;
-        z-index: 1;
       }
       .wordmark {
         font-family: var(--mono);
@@ -479,29 +377,6 @@
         0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
         50%      { transform: rotate(45deg) translateY(6px); opacity: 0.9; }
       }
-      @keyframes mitmFadeIn {
-        from { opacity: 0; }
-        to   { opacity: 0.42; }
-      }
-      @keyframes wireDash {
-        to { stroke-dashoffset: -11; }
-      }
-      @keyframes mitmHexPulse {
-        0%, 100% { stroke-opacity: 0.6; fill-opacity: 0.06; }
-        50%      { stroke-opacity: 1; fill-opacity: 0.14; }
-      }
-      @keyframes mitmEyePulse {
-        0%, 100% { opacity: 0.7; }
-        50%      { opacity: 1; }
-      }
-      @keyframes mitmLabelPulse {
-        0%, 100% { opacity: 0.6; }
-        50%      { opacity: 1; }
-      }
-      @keyframes ledPulse {
-        0%, 100% { opacity: 0.4; }
-        50%      { opacity: 1; }
-      }
 
       @media (max-width: 700px) {
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
@@ -517,8 +392,6 @@
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .marquee-logo { height: 22px; }
-        .mitm-scene { opacity: 0.28; }
-        .mitm-svg { width: min(720px, 100vw); }
         .certifications { grid-template-columns: 1fr; }
         .stats { grid-template-columns: 1fr; }
       }
@@ -543,13 +416,11 @@
         .marquee-fade { display: none; }
         .marquee-item[aria-hidden="true"] { display: none; }
         .marquee-logo { opacity: 0.75; }
-        .mitm-scene { display: none; }
       }
     </style>
   </head>
   <body>
     <section class="hero">
-      {% include mitm-animation.html %}
       <div class="landing">
         <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
         <div class="tagline">CyberSec Specialists, Hackers @ Work</div>
