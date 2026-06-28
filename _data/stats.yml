@@ -1,11 +1,15 @@
-- value: "2,400+"
+- target: 2400
+  suffix: "+"
   label: Critical Fixes Delivered
 
-- value: "98%"
+- target: 98
+  suffix: "%"
   label: Client Retention Rate
 
-- value: "120+"
+- target: 120
+  suffix: "+"
   label: Security Audits Completed
 
-- value: "14"
+- target: 14
+  suffix: ""
   label: Countries Served

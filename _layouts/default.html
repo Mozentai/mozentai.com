@@ -98,10 +98,13 @@
       .below {
         max-width: 960px;
         margin: 0 auto;
-        padding: 80px 40px 120px;
+        padding: 80px 40px 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 112px;
       }
       .section {
-        margin-bottom: 80px;
+        margin-bottom: 0;
       }
       .section-title {
         font-family: var(--mono);
@@ -117,7 +120,7 @@
       .cards {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 28px;
       }
       .card {
         background: var(--surface);
@@ -164,7 +167,7 @@
       .stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+        gap: 28px;
       }
       .stat {
         background: var(--surface);
@@ -200,7 +203,7 @@
       .testimonials {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 28px;
       }
       .testimonial {
         background: var(--surface);
@@ -312,7 +315,7 @@
       .certifications {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        gap: 20px;
       }
       .cert {
         background: var(--surface);
@@ -388,7 +391,7 @@
         .certifications { grid-template-columns: repeat(2, 1fr); }
       }
       @media (max-width: 600px) {
-        .below { padding: 60px 24px 80px; }
+        .below { padding: 60px 24px 100px; gap: 80px; }
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .marquee-logo { height: 22px; }
@@ -467,6 +470,47 @@
 
       document.querySelectorAll('.reveal').forEach(function (el) {
         observer.observe(el);
+      });
+
+      function formatStatValue(n, suffix) {
+        var rounded = Math.round(n);
+        if (suffix === '%') return rounded + '%';
+        return rounded.toLocaleString('en-US') + (suffix || '');
+      }
+
+      function animateStat(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = 'true';
+        var target = parseFloat(el.dataset.target);
+        var suffix = el.dataset.suffix || '';
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced || isNaN(target)) {
+          el.textContent = formatStatValue(target, suffix);
+          return;
+        }
+        var duration = 2000;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = formatStatValue(target * eased, suffix);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      var statObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateStat(entry.target);
+            statObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      document.querySelectorAll('.stat-value[data-target]').forEach(function (el) {
+        statObserver.observe(el);
       });
     </script>
   </body>
