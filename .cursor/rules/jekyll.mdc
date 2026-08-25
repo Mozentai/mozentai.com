@@ -22,10 +22,11 @@ alwaysApply: false
 
 ## Adding a client logo
 
-- SVG wordmark: icon mark + company name, ~200x40 viewBox
+- Fictional brands: SVG wordmark, icon + company name, ~200x40 viewBox
+- Real brands: use official artwork from the company repo (SANEARES: white PNG from `~/github/saneares`)
 - Save to `assets/clients/`
-- Add entry to `_data/clients.yml` under `europe` or `united_states`
-- Marquee duplicate loop in `clients.html` handles itself via `{% for %}` twice
+- Add entry to `_data/clients.yml` under `europe`, `united_states`, or `brazil`
+- Marquee duplicate loop in `clients.html` concatenates all three regions
 
 ## Local dev
 

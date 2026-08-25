@@ -1,6 +1,6 @@
 <section class="section reveal" id="clients">
   <h2 class="section-title">Clients</h2>
-  {% assign all_clients = site.data.clients.europe | concat: site.data.clients.united_states %}
+  {% assign all_clients = site.data.clients.europe | concat: site.data.clients.united_states | concat: site.data.clients.brazil %}
   <div class="marquee-wrap">
     <div class="marquee-fade marquee-fade--left" aria-hidden="true"></div>
     <div class="marquee" aria-label="Client logos">

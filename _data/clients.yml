@@ -31,3 +31,8 @@ united_states:
   - name: Keystone Financial Group
     tag: Finance · United States
     logo: /assets/clients/keystone-financial.svg
+
+brazil:
+  - name: SANEARES
+    tag: Environmental Engineering · Brazil
+    logo: /assets/clients/saneares.png

@@ -34,9 +34,9 @@ Never skip deploy when site content or assets changed.
 
 - **Hero:** full viewport, wordmark + tagline only. Do not clutter above the fold.
 - **Below fold:** Services, Clients (marquee), Certifications.
-- **Clients:** Axonius-style infinite horizontal logo marquee (EU + US logos).
+- **Clients:** Axonius-style infinite horizontal logo marquee (EU, US, and Brazil logos).
 - **404:** dedicated `error` layout, message "Got lost on the way home?"
-- **Logos:** SVG in `assets/clients/`. Icon + wordmark, distinct accent per brand.
+- **Logos:** SVG in `assets/clients/` for fictional brands. Use official artwork for real clients (SANEARES PNG).
 
 ## What belongs here
 
