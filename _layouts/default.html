@@ -98,7 +98,7 @@
       .below {
         max-width: 960px;
         margin: 0 auto;
-        padding: 80px 40px 140px;
+        padding: 80px 40px 80px;
         display: flex;
         flex-direction: column;
         gap: 112px;
@@ -417,6 +417,18 @@
         text-transform: uppercase;
         line-height: 1.4;
       }
+      .site-footer {
+        display: flex;
+        justify-content: center;
+        padding: 0 0 64px;
+      }
+      .glider {
+        width: 56px;
+        height: 56px;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        opacity: 0.9;
+      }
 
       /* ── Scroll reveal ── */
       .reveal {
@@ -466,7 +478,7 @@
         }
       }
       @media (max-width: 600px) {
-        .below { padding: 60px 24px 100px; gap: 80px; }
+        .below { padding: 60px 24px 48px; gap: 80px; }
         .wordmark { font-size: 30px; letter-spacing: 5px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .marquee-logo { height: 26px; }
@@ -520,6 +532,13 @@
       {% include certifications.html %}
       {% include testimonials.html %}
     </div>
+
+    <footer class="site-footer">
+      <picture>
+        <source srcset="/assets/glider.png" media="(prefers-reduced-motion: reduce)">
+        <img class="glider" src="/assets/glider.gif" alt="Conway glider, the hacker emblem" width="56" height="56">
+      </picture>
+    </footer>
 
     <script>
       document.fonts.ready.then(function () {
