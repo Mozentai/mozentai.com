@@ -1,7 +1,7 @@
 - name: Auditing
-  description: Comprehensive security audits of your infrastructure, applications, and processes. Successful completion earns your company a one-year Mozentai certification.
+  description: We audit infrastructure, applications, and processes against real attack paths so you know if your company is safe enough. Successful completion earns a one-year Mozentai certification.
   icon: "&#x25C8;"
 
 - name: Hardening
-  description: We lock down systems before attackers find the gaps — OS hardening, network segmentation, identity controls, and secure configuration baselines.
+  description: We lock down systems before attackers find the gaps, including OS hardening, network segmentation, identity controls, and secure configuration baselines.
   icon: "&#x25C7;"

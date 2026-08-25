@@ -164,9 +164,29 @@
         margin: -12px 0 32px;
         max-width: 480px;
       }
+      .pitch-question {
+        font-family: var(--sans);
+        font-size: 34px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.25;
+        letter-spacing: -0.4px;
+        max-width: 720px;
+        margin-bottom: 20px;
+      }
+      .pitch-body {
+        font-size: 16px;
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 640px;
+        margin-bottom: 14px;
+      }
+      .pitch-body:last-child {
+        margin-bottom: 0;
+      }
       .stats {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 28px;
       }
       .stat {
@@ -252,6 +272,53 @@
         font-weight: 500;
         color: var(--muted);
         letter-spacing: 1px;
+      }
+      .leader {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 40px;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 32px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .leader:hover {
+        border-color: rgba(0, 229, 160, 0.45);
+        box-shadow: 0 8px 32px rgba(0, 229, 160, 0.06);
+      }
+      .leader-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 18%;
+        border: 2px solid var(--accent);
+        display: block;
+      }
+      .leader-role {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .leader-name {
+        font-family: var(--mono);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 16px;
+        letter-spacing: 1px;
+      }
+      .leader-bio {
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--muted);
+        margin: 0;
       }
       .marquee-wrap {
         position: relative;
@@ -384,11 +451,19 @@
       @media (max-width: 700px) {
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
         .cards { grid-template-columns: 1fr; }
-        .stats { grid-template-columns: repeat(2, 1fr); }
+        .stats { grid-template-columns: 1fr; }
         .testimonials { grid-template-columns: 1fr; }
         .marquee-track { gap: 48px; animation-duration: 28s; }
         .marquee-fade { width: 64px; }
         .certifications { grid-template-columns: repeat(2, 1fr); }
+        .pitch-question { font-size: 26px; }
+        .leader {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          text-align: center;
+          gap: 24px;
+          padding: 28px 24px;
+        }
       }
       @media (max-width: 600px) {
         .below { padding: 60px 24px 100px; gap: 80px; }
@@ -397,6 +472,8 @@
         .marquee-logo { height: 26px; }
         .certifications { grid-template-columns: 1fr; }
         .stats { grid-template-columns: 1fr; }
+        .pitch-question { font-size: 24px; }
+        .leader-photo { width: 160px; height: 160px; }
       }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -428,15 +505,17 @@
         <div class="wordmark">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</div>
         <div class="tagline">CyberSec Specialists, Hackers @ Work</div>
       </div>
-      <a class="scroll-hint" href="#services" aria-label="Scroll to services">
+      <a class="scroll-hint" href="#pitch" aria-label="Scroll to audit pitch">
         <span>Explore</span>
         <div class="scroll-chevron"></div>
       </a>
     </section>
 
     <div class="below">
-      {% include services.html %}
+      {% include pitch.html %}
       {% include stats.html %}
+      {% include services.html %}
+      {% include leadership.html %}
       {% include clients.html %}
       {% include certifications.html %}
       {% include testimonials.html %}

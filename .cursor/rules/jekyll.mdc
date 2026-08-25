@@ -11,6 +11,7 @@ alwaysApply: false
 - Jekyll ~4.3, `jekyll-seo-tag`, GitHub Pages build action
 - No SASS split: CSS lives inline in `_layouts/default.html`
 - Content driven by `_data/*.yml` + Liquid includes
+- Team photos live in `assets/team/` (CEO: `victor-matos.jpg`)
 
 ## Adding a new section
 

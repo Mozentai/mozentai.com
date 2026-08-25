@@ -17,12 +17,21 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 |------|---------|
 | `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
 | `_layouts/error.html` | 404 page layout |
+| `_includes/pitch.html` | Below-fold audit hook: "Do you know if your company is safe enough?" |
+| `_includes/stats.html` | 10 years in market, 10+ / 15+ years expert experience |
+| `_includes/services.html` | Auditing and Hardening cards |
+| `_includes/leadership.html` | CEO Victor Matos with photo |
 | `_includes/clients.html` | Axonius-style client logo marquee |
 | `_includes/certifications.html` | ISO/SOC/PCI badge grid |
+| `_includes/testimonials.html` | Client quote grid |
+| `_data/pitch.yml` | Audit pitch question and body copy |
 | `_data/services.yml` | Auditing, Hardening |
+| `_data/stats.yml` | Years in market and specialist tenure (real figures from Victor, 2026-08-25) |
+| `_data/leadership.yml` | CEO name, role, bio, photo path |
 | `_data/clients.yml` | `europe`, `united_states`, and `brazil` client lists |
 | `_data/certifications.yml` | Market certifications |
 | `assets/clients/*` | Client wordmark logos (SVG fictional brands, PNG for SANEARES) |
+| `assets/team/victor-matos.jpg` | CEO photo, sourced from Victor's public LinkedIn headshot (linkedin.com/in/vvrmatos), 800x800 JPEG hosted locally |
 | `index.md` | Homepage entry |
 | `404.md` | Custom 404 |
 | `_config.yml` | Site config, `lang: en-US`, `jekyll-seo-tag` |
@@ -47,10 +56,22 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 ## Page sections (top to bottom)
 
-1. **Hero** — MOZENT△I wordmark, tagline
-2. **Services** — Auditing (one-year certification), Hardening
-3. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos
-4. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
+1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold.
+2. **Pitch** — "Do you know if your company is safe enough?" plus 10-year market / 10+ and 15+ years experience copy
+3. **Stats** — 10 years in the market, 10+ years specialist experience, 15+ years senior expertise
+4. **Services** — Auditing (lead offering, one-year certification), Hardening
+5. **Leadership** — Victor Matos, Chief Executive Officer, with photo
+6. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos
+7. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
+8. **Testimonials** — client quotes (EU/US fictional brands plus the rest of `_data/testimonials.yml`)
+
+## Company facts (from Victor, 2026-08-25)
+
+- Mozentai does auditing jobs. Lead public pitch is the safety question, not a product dump.
+- Mozentai has been in the market for 10 years.
+- Specialists have 10+ years and 15+ years of hands-on security experience (two tenure bands, not one number).
+- **CEO:** Victor Matos (professional name; full name Victor Vinicius Reis de Matos). Photo: `assets/team/victor-matos.jpg`.
+- Do not invent extra stats (audit counts, retention %, countries served) unless Victor supplies them. A previous INOTVMOS-inspired stats set (2,400+ fixes, 98% retention, 120+ audits, 14 countries) was marketing filler and was replaced.
 
 ## Clients (marquee)
 
@@ -89,6 +110,9 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-06-28 | Site must stay English; user saw "Serviços" likely from browser translate |
 | 2026-06-28 | Partners should be Axonius-style rolling marquee, not static grid |
 | 2026-08-25 | SANEARES is a real client. Use their official logo from `~/github/saneares`, never a made-up mark. |
+| 2026-08-25 | Lead with auditing: "Do you know if your company is safe enough?" Keep that copy below the fold. Hero stays wordmark + tagline only. |
+| 2026-08-25 | Company tenure is 10 years in the market. Experts are 10+ and 15+ years. CEO is Victor Matos. Use his real LinkedIn photo, never the GitHub astronaut illustration, never a generated face. |
+| 2026-08-25 | Do not keep invented marketing stats. Only publish numbers Victor stated. |
 
 ## Self-update protocol
 

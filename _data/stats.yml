@@ -1,15 +1,11 @@
-- target: 2400
-  suffix: "+"
-  label: Critical Fixes Delivered
-
-- target: 98
-  suffix: "%"
-  label: Client Retention Rate
-
-- target: 120
-  suffix: "+"
-  label: Security Audits Completed
-
-- target: 14
+- target: 10
   suffix: ""
-  label: Countries Served
+  label: Years in the Market
+
+- target: 10
+  suffix: "+"
+  label: Years of Specialist Experience
+
+- target: 15
+  suffix: "+"
+  label: Years of Senior Expertise
