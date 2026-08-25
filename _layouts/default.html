@@ -311,8 +311,34 @@
         font-size: 22px;
         font-weight: 700;
         color: var(--text);
-        margin-bottom: 16px;
+        margin-bottom: 10px;
         letter-spacing: 1px;
+      }
+      .leader-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        margin: 0 0 10px;
+      }
+      .leader-link {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.4px;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .leader-link:hover {
+        border-bottom-color: var(--accent);
+      }
+      .leader-cred {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        letter-spacing: 0.4px;
+        margin: 0 0 14px;
       }
       .leader-bio {
         font-size: 14px;
@@ -476,6 +502,7 @@
           gap: 24px;
           padding: 28px 24px;
         }
+        .leader-links { justify-content: center; }
       }
       @media (max-width: 600px) {
         .below { padding: 60px 24px 48px; gap: 80px; }

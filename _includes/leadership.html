@@ -11,6 +11,15 @@
     <div class="leader-copy">
       <p class="leader-role">{{ site.data.leadership.role }}</p>
       <h3 class="leader-name">{{ site.data.leadership.name }}</h3>
+      <div class="leader-links">
+        <a
+          class="leader-link"
+          href="{{ site.data.leadership.htb_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ site.data.leadership.htb_label }} · @{{ site.data.leadership.htb_handle }}</a>
+      </div>
+      <p class="leader-cred">{{ site.data.leadership.htb_cred }}</p>
       <p class="leader-bio">{{ site.data.leadership.bio }}</p>
     </div>
   </article>
