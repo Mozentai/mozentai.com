@@ -32,6 +32,8 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 | `_data/certifications.yml` | Market certifications |
 | `assets/clients/*` | Client wordmark logos (SVG fictional brands, PNG for SANEARES) |
 | `assets/team/victor-matos.jpg` | CEO photo, sourced from Victor's public LinkedIn headshot (linkedin.com/in/vvrmatos), 800x800 JPEG hosted locally |
+| `assets/glider.gif` | Animated Conway glider (hacker emblem), recolored to mint on `--bg` from Victor's `~/github/glider.gif` |
+| `assets/glider.png` | Static first frame of the glider for `prefers-reduced-motion` |
 | `index.md` | Homepage entry |
 | `404.md` | Custom 404 |
 | `_config.yml` | Site config, `lang: en-US`, `jekyll-seo-tag` |
@@ -64,6 +66,7 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 6. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos
 7. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
 8. **Testimonials** — client quotes (EU/US fictional brands plus the rest of `_data/testimonials.yml`)
+9. **Footer** — small Conway glider (hacker emblem). Not in the hero. A previous MITM packet animation was removed from the hero on 2026-06-28; keep the wordmark clean.
 
 ## Company facts (from Victor, 2026-08-25)
 
@@ -71,6 +74,7 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 - Mozentai has been in the market for 10 years.
 - Specialists have 10+ years and 15+ years of hands-on security experience (two tenure bands, not one number).
 - **CEO:** Victor Matos (professional name; full name Victor Vinicius Reis de Matos). Photo: `assets/team/victor-matos.jpg`.
+- **Hack The Box:** public profile [spacemany2k38](https://profile.hackthebox.com/profile/019cab82-c302-71b6-a445-abbfbbb76b89) (UUID `019cab82-c302-71b6-a445-abbfbbb76b89`). Linked from the Leadership card. Handle `@spacemany2k38`. Show credential as abbreviated "HTB CJCA" only, NEVER expand to "Junior" on the site (Victor is an expert, not junior-level). Do not paste the HTB About text (Avenue Code, Axonius, etc.) onto mozentai.com. Link out. Strip `utm_*` from the URL. Never mention Bitly on this public site.
 - Do not invent extra stats (audit counts, retention %, countries served) unless Victor supplies them. A previous INOTVMOS-inspired stats set (2,400+ fixes, 98% retention, 120+ audits, 14 countries) was marketing filler and was replaced.
 
 ## Clients (marquee)
@@ -113,6 +117,9 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-08-25 | Lead with auditing: "Do you know if your company is safe enough?" Keep that copy below the fold. Hero stays wordmark + tagline only. |
 | 2026-08-25 | Company tenure is 10 years in the market. Experts are 10+ and 15+ years. CEO is Victor Matos. Use his real LinkedIn photo, never the GitHub astronaut illustration, never a generated face. |
 | 2026-08-25 | Do not keep invented marketing stats. Only publish numbers Victor stated. |
+| 2026-08-25 | Conway glider (hacker emblem) lives in the footer as a small 56px animation. Do not put it in the hero. Recolor Victor's white/black GIF to mint on `--bg`. Static PNG for reduced motion. |
+| 2026-08-25 | CEO card links to Victor's Hack The Box profile spacemany2k38 (https://profile.hackthebox.com/profile/019cab82-c302-71b6-a445-abbfbbb76b89). Show handle and CJCA. Do not copy employer names from the HTB About onto the Mozentai site. |
+| 2026-08-25 | NEVER expand CJCA to "Certified Junior Cybersecurity Associate" on the site. Victor is an expert. Show only the abbreviation "HTB CJCA". |
 
 ## Self-update protocol
 
