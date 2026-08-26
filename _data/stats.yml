@@ -2,10 +2,6 @@
   suffix: ""
   label: Years in the Market
 
-- target: 10
-  suffix: "+"
-  label: Years of Specialist Experience
-
 - target: 15
   suffix: "+"
-  label: Years of Senior Expertise
+  label: Years of Experience
