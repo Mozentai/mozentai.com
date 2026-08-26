@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 32" fill="none">
-  <path d="M4 24L14 6l10 18H4z" fill="#fff" fill-opacity="0.12" stroke="#fff" stroke-opacity="0.5" stroke-width="1.2" stroke-linejoin="round"/>
-  <circle cx="14" cy="17" r="2" fill="#fff"/>
-  <text x="32" y="21" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" letter-spacing="1.8">ATLAS</text>
-  <text x="92" y="21" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="10" font-weight="400" fill="#fff" fill-opacity="0.4" letter-spacing="0.6">Federal</text>
-</svg>
