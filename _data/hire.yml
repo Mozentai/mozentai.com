@@ -1,0 +1,25 @@
+email: victor@mozentai.com
+headline: Hire a security engineer
+question: Need an engineer who writes code and thinks like an attacker?
+body: Tell us what you need. Staff augmentation, a dedicated squad, or a scoped project. Your message goes straight to Victor Matos.
+cta: Send message
+direct: Prefer email? Write Victor directly
+submit: Send message
+thanks_title: Message sent
+thanks_body: Victor has your note. He will get back to you.
+home: Back home
+fields:
+  name: Name
+  email: Work email
+  company: Company
+  engagement: How do you want to work?
+  message: What do you need?
+engagements:
+  - Staff Augmentation
+  - Dedicated Team
+  - Project-Based
+  - Not sure yet
+cta_home:
+  headline: Hire a security engineer
+  body: Embed Mozentai engineers in your standups, or start with a scoped audit. Same people who hack, same people who ship.
+  button: Start a conversation

@@ -445,8 +445,50 @@
       }
       .site-footer {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
         padding: 0 0 64px;
+      }
+      .footer-links {
+        display: flex;
+        gap: 28px;
+      }
+      .footer-links a {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+      .btn {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
       }
       .glider {
         width: 56px;
@@ -559,9 +601,14 @@
       {% include clients.html %}
       {% include certifications.html %}
       {% include testimonials.html %}
+      {% include hire-cta.html %}
     </div>
 
     <footer class="site-footer">
+      <nav class="footer-links" aria-label="Site">
+        <a href="/hire/">Hire</a>
+        <a href="mailto:victor@mozentai.com">victor@mozentai.com</a>
+      </nav>
       <picture>
         <source srcset="/assets/glider.png" media="(prefers-reduced-motion: reduce)">
         <img class="glider" src="/assets/glider.gif" alt="Conway glider, the hacker emblem" width="56" height="56">

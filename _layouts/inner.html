@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+    <title>{{ page.title | default: site.title }} · {{ site.title }}</title>
+    {% seo %}
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #21262d;
+        --accent: #00e5a0;
+        --muted: #5a6b82;
+        --text: #c9d1d9;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Inter', -apple-system, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg);
+        font-family: var(--sans);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 40px;
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .topbar-mark {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 6px;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .topbar-link {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .topbar-link:hover,
+      .topbar-link.is-active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+      .page {
+        max-width: 640px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 24px 40px 80px;
+        flex: 1;
+      }
+      .pitch-question {
+        font-family: var(--sans);
+        font-size: 34px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.25;
+        letter-spacing: -0.4px;
+        margin-bottom: 16px;
+      }
+      .pitch-body {
+        font-size: 16px;
+        line-height: 1.75;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+      .pitch-body a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      .pitch-body a:hover { border-bottom-color: var(--accent); }
+      .hire-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 36px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .field label {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 15px;
+        padding: 14px 16px;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+      }
+      .field select {
+        appearance: none;
+        background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+        background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+        background-size: 6px 6px, 6px 6px;
+        background-repeat: no-repeat;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--accent);
+      }
+      .field textarea { min-height: 140px; resize: vertical; }
+      .honey { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+      .btn {
+        display: inline-block;
+        align-self: flex-start;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
+      }
+      .site-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 0 64px;
+      }
+      .glider {
+        width: 56px;
+        height: 56px;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        opacity: 0.9;
+      }
+      @media (max-width: 700px) {
+        .pitch-question { font-size: 26px; }
+        .field-row { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 600px) {
+        .topbar { padding: 24px; }
+        .page { padding: 12px 24px 64px; }
+        .pitch-question { font-size: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="topbar-mark" href="/">MOZENT&#x25B3;I</a>
+      <a class="topbar-link{% if page.form %} is-active{% endif %}" href="/hire/">Hire</a>
+    </header>
+
+    <main class="page">
+      {% if page.form %}
+      <h1 class="pitch-question">{{ site.data.hire.question }}</h1>
+      <p class="pitch-body">{{ site.data.hire.body }}</p>
+      <p class="pitch-body">{{ site.data.hire.direct }} <a href="mailto:{{ site.data.hire.email }}">{{ site.data.hire.email }}</a></p>
+      <form class="hire-form" action="https://formsubmit.co/{{ site.data.hire.email }}" method="POST">
+        <input type="hidden" name="_subject" value="Mozentai hire inquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="{{ site.url }}/hire/sent/">
+        <input type="hidden" name="_captcha" value="true">
+        <div class="honey" aria-hidden="true">
+          <label>Leave blank<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="name">{{ site.data.hire.fields.name }}</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">{{ site.data.hire.fields.email }}</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+        </div>
+        <div class="field">
+          <label for="company">{{ site.data.hire.fields.company }}</label>
+          <input id="company" name="company" type="text" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="engagement">{{ site.data.hire.fields.engagement }}</label>
+          <select id="engagement" name="engagement" required>
+            <option value="" disabled selected>Select one</option>
+            {% for option in site.data.hire.engagements %}
+            <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">{{ site.data.hire.fields.message }}</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button class="btn" type="submit">{{ site.data.hire.submit }}</button>
+      </form>
+      {% elsif page.thanks %}
+      <h1 class="pitch-question">{{ site.data.hire.thanks_title }}</h1>
+      <p class="pitch-body">{{ site.data.hire.thanks_body }}</p>
+      <p class="pitch-body"><a class="btn" href="/">{{ site.data.hire.home }}</a></p>
+      {% else %}
+      {{ content }}
+      {% endif %}
+    </main>
+
+    <footer class="site-footer">
+      <picture>
+        <source srcset="/assets/glider.png" media="(prefers-reduced-motion: reduce)">
+        <img class="glider" src="/assets/glider.gif" alt="Conway glider, the hacker emblem" width="56" height="56">
+      </picture>
+    </footer>
+  </body>
+</html>
