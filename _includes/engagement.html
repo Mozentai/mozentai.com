@@ -1,0 +1,13 @@
+<section class="section reveal" id="engagement">
+  <h2 class="section-title">{{ site.data.engagement.headline }}</h2>
+  <p class="section-lead">{{ site.data.engagement.lead }}</p>
+  <div class="cards">
+    {% for model in site.data.engagement.models %}
+    <article class="card reveal" style="--delay: {{ forloop.index0 | times: 100 }}ms">
+      <div class="card-icon">{{ model.icon }}</div>
+      <h3 class="card-title">{{ model.name }}</h3>
+      <p class="card-desc">{{ model.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>

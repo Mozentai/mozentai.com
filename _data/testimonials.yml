@@ -2,7 +2,7 @@
   name: Klaus Weber
   role: CTO, Rheinwerk AG
 
-- quote: "Our fraud detection was drowning in noise. After Mozentai's audit and hardening sprint, false positives dropped 91% and we cut quarterly losses from seven figures to under six."
+- quote: "We embedded two Mozentai engineers into our platform team. Within a month they'd refactored our auth layer, caught a token-leak vulnerability in prod, and trained our devs on threat modeling. They code like senior engineers and think like attackers."
   name: Elena Hoffmann
   role: CISO, NordSec GmbH
 
@@ -10,7 +10,7 @@
   name: Thomas Keller
   role: Head of Infrastructure, Helvetic Data AG
 
-- quote: "We were scaling fast and security was an afterthought. Mozentai built our baseline from zero, hardened every deployment pipeline, and gave our investors the confidence to keep writing checks."
+- quote: "We needed a security engineer who could actually ship code, not just file tickets. Mozentai's staff augmentation gave us exactly that. Our release cadence didn't slow down, but our vulnerability count dropped 74%."
   name: Sophie van der Berg
   role: CEO, Praxis Digital B.V.
 
@@ -18,6 +18,6 @@
   name: Dr. Amanda Reyes
   role: CISO, Meridian Health Systems
 
-- quote: "When you handle federal data, there is no room for guesswork. Mozentai brought military-grade rigor to our environment and delivered measurable results we could take to our contracting officer."
+- quote: "We brought in a dedicated Mozentai squad to own security across three microservice teams. They write PRs, review ours, and run pen tests on their own code. It's like having a security-native engineering department on demand."
   name: James Whitfield
-  role: VP Security, Atlas Federal Solutions
+  role: VP Engineering, Atlas Federal Solutions

@@ -5,3 +5,7 @@
 - name: Hardening
   description: We lock down systems before attackers find the gaps, including OS hardening, network segmentation, identity controls, and secure configuration baselines.
   icon: "&#x25C7;"
+
+- name: Security Engineering
+  description: Embed our engineers directly into your team. They write production code with a security-first mindset, from secure architecture to threat modeling to code review. Hands-on developers whose foundation is cybersecurity.
+  icon: "&#x25CA;"
