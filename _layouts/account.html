@@ -468,21 +468,35 @@
         <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
 
         <div class="admin-panel" id="admin-panel">
-          <h2 class="dash-section-title">Admin</h2>
+          <h2 class="dash-section-title">Manage Engineers</h2>
           <div class="admin-field">
-            <label class="admin-label" for="admin-name">Name</label>
-            <input class="admin-input" id="admin-name" type="text" placeholder="Full name">
+            <label class="admin-label" for="admin-lookup">Find engineer by email or CITC number</label>
+            <div style="display:flex;gap:8px;">
+              <input class="admin-input" id="admin-lookup" type="text" placeholder="email or SmartHex" style="flex:1;">
+              <button class="admin-save" id="admin-find" type="button">Find</button>
+            </div>
           </div>
-          <div class="admin-field">
-            <label class="admin-label" for="admin-hex">CITC Number</label>
-            <input class="admin-input" id="admin-hex" type="text" placeholder="SmartHex-16" maxlength="16">
+          <div id="admin-editor" hidden>
+            <div class="admin-field">
+              <label class="admin-label">UID</label>
+              <div class="admin-input" id="admin-uid" style="opacity:0.5;user-select:all;"></div>
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="admin-name">Name</label>
+              <input class="admin-input" id="admin-name" type="text" placeholder="Full name">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="admin-hex">CITC Number</label>
+              <input class="admin-input" id="admin-hex" type="text" placeholder="SmartHex-16" maxlength="16">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="admin-titles">Titles (comma-separated exam codes)</label>
+              <input class="admin-input" id="admin-titles" type="text" placeholder="C1, C2, P1, AW1, GH1">
+            </div>
+            <button class="admin-save" id="admin-save" type="button">Save</button>
+            <span class="admin-ok" id="admin-ok">Saved</span>
           </div>
-          <div class="admin-field">
-            <label class="admin-label" for="admin-titles">Titles (comma-separated exam codes)</label>
-            <input class="admin-input" id="admin-titles" type="text" placeholder="C1, C2, P1, AW1, GH1">
-          </div>
-          <button class="admin-save" id="admin-save" type="button">Save</button>
-          <span class="admin-ok" id="admin-ok">Saved</span>
+          <p class="admin-err" id="admin-err" style="font-family:var(--mono);font-size:11px;color:var(--stale);margin-top:8px;display:none;"></p>
         </div>
       </div>
     </main>

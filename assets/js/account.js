@@ -11,6 +11,10 @@ import {
   doc,
   getDoc,
   setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 var gate = document.getElementById("gate");
@@ -32,11 +36,16 @@ var cpfInput = document.getElementById("cpf-input");
 var cpfErr = document.getElementById("cpf-err");
 
 var adminPanel = document.getElementById("admin-panel");
+var adminLookup = document.getElementById("admin-lookup");
+var adminFind = document.getElementById("admin-find");
+var adminEditor = document.getElementById("admin-editor");
+var adminUid = document.getElementById("admin-uid");
 var adminName = document.getElementById("admin-name");
 var adminHex = document.getElementById("admin-hex");
 var adminTitles = document.getElementById("admin-titles");
 var adminSave = document.getElementById("admin-save");
 var adminOk = document.getElementById("admin-ok");
+var adminErr = document.getElementById("admin-err");
 
 var MANAGER_EMAILS = [
   "victor@mozentai.com",
@@ -45,7 +54,6 @@ var MANAGER_EMAILS = [
 ];
 
 var stripe = window.MOZENTAI_STRIPE || {};
-
 var app = initializeApp(window.MOZENTAI_FIREBASE);
 var auth = getAuth(app);
 var db = getFirestore(app);
@@ -53,6 +61,8 @@ var provider = new GoogleAuthProvider();
 
 var FRESHNESS_MS = 6 * 30 * 24 * 60 * 60 * 1000;
 var EXPIRING_MS = 30 * 24 * 60 * 60 * 1000;
+
+var editingUid = null;
 
 function validateCPF(raw) {
   var cpf = raw.replace(/\D/g, "");
@@ -94,6 +104,11 @@ function showCpfError(msg) {
   cpfErr.textContent = msg;
   cpfErr.classList.add("is-visible");
   cpfInput.classList.add("is-invalid");
+}
+
+function showAdminError(msg) {
+  adminErr.textContent = msg;
+  adminErr.style.display = msg ? "block" : "none";
 }
 
 function showGate() {
@@ -182,20 +197,11 @@ async function claimCpf(cpfDigits, uid) {
   await setDoc(doc(db, "cpf_index", cpfDigits), { uid: uid });
 }
 
-function isManager(user) {
+function checkManager(user) {
   return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
 }
 
-function showAdminPanel(data) {
-  adminPanel.classList.add("is-visible");
-  adminName.value = data.name || "";
-  adminHex.value = data.smarthex || "";
-  var titles = data.titles || [];
-  adminTitles.value = titles.join(", ");
-}
-
 async function loadEngineer(user) {
-  var isAdmin = isManager(user);
   try {
     var snap = await getDoc(doc(db, "engineers", user.uid));
     if (!snap.exists()) {
@@ -203,7 +209,6 @@ async function loadEngineer(user) {
       dashHex.textContent = "Not registered";
       renderSubscription(null);
       dashEmpty.hidden = false;
-      if (isAdmin) showAdminPanel({ name: user.displayName || "" });
       return;
     }
     var data = snap.data();
@@ -215,22 +220,50 @@ async function loadEngineer(user) {
     }
     renderSubscription(data.subscription || null);
     renderCerts(data.certs || {});
-    if (isAdmin) showAdminPanel(data);
   } catch (err) {
-    console.error("loadEngineer", err);
     dashName.textContent = user.displayName || user.email;
     dashHex.textContent = "";
     renderSubscription(null);
     dashEmpty.textContent = "Could not load your data.";
     dashEmpty.hidden = false;
-    if (isAdmin) showAdminPanel({ name: user.displayName || "" });
   }
+}
+
+async function findEngineer(term) {
+  showAdminError("");
+  adminEditor.hidden = true;
+  editingUid = null;
+
+  var snap;
+  if (term.indexOf("@") !== -1) {
+    snap = await getDocs(query(collection(db, "engineers"), where("email", "==", term)));
+  } else {
+    snap = await getDocs(query(collection(db, "engineers"), where("smarthex", "==", term)));
+  }
+
+  if (snap.empty) {
+    showAdminError("No engineer found for \"" + term + "\"");
+    return;
+  }
+
+  var d = snap.docs[0];
+  var data = d.data();
+  editingUid = d.id;
+  adminUid.textContent = d.id;
+  adminName.value = data.name || "";
+  adminHex.value = data.smarthex || "";
+  adminTitles.value = (data.titles || []).join(", ");
+  adminEditor.hidden = false;
 }
 
 onAuthStateChanged(auth, function (user) {
   if (user) {
     showDash();
     loadEngineer(user);
+
+    if (checkManager(user)) {
+      adminPanel.classList.add("is-visible");
+    }
 
     subscribeBtn.onclick = async function () {
       cpfErr.classList.remove("is-visible");
@@ -270,7 +303,7 @@ onAuthStateChanged(auth, function (user) {
       }
 
       var link = stripe.engineer_link;
-      if (!link || !link.startsWith("https://")) {
+      if (!link || link.indexOf("REPLACE") !== -1) {
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = "Subscribe";
         return;
@@ -292,9 +325,23 @@ signOutBtn.addEventListener("click", function () {
   signOut(auth);
 });
 
+adminFind.addEventListener("click", function () {
+  var term = adminLookup.value.trim();
+  if (!term) return;
+  findEngineer(term);
+});
+
+adminLookup.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    var term = adminLookup.value.trim();
+    if (term) findEngineer(term);
+  }
+});
+
 adminSave.addEventListener("click", async function () {
   var user = auth.currentUser;
-  if (!user || !isManager(user)) return;
+  if (!user || !checkManager(user) || !editingUid) return;
 
   adminOk.classList.remove("is-visible");
   adminSave.disabled = true;
@@ -306,19 +353,18 @@ adminSave.addEventListener("click", async function () {
     : [];
 
   var update = {
-    name: adminName.value.trim() || user.displayName || "",
-    email: user.email || "",
+    name: adminName.value.trim(),
     smarthex: adminHex.value.trim(),
     titles: titles,
   };
 
   try {
-    await setDoc(doc(db, "engineers", user.uid), update, { merge: true });
-    dashName.textContent = update.name;
-    dashHex.textContent = update.smarthex;
+    await setDoc(doc(db, "engineers", editingUid), update, { merge: true });
     adminOk.classList.add("is-visible");
     setTimeout(function () { adminOk.classList.remove("is-visible"); }, 2000);
-  } catch (err) {}
+  } catch (err) {
+    showAdminError("Save failed. Check permissions.");
+  }
 
   adminSave.disabled = false;
   adminSave.textContent = "Save";
