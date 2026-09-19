@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Mission
 
-Corporate landing page for **Mozentai**, a cybersecurity company (auditing, hardening). Static site at **https://mozentai.com**.
+Corporate landing page for **Mozentai**, an engineering company (embedded engineers, auditing, hardening, CITC credentials). Static site at **https://mozentai.com**.
 
 ## Conventions
 
@@ -33,9 +33,10 @@ Never skip deploy when site content or assets changed.
 ## Content rules
 
 - **Hero:** full viewport, wordmark + tagline only. Do not clutter above the fold.
-- **Below fold:** Audit pitch ("Do you know if your company is safe enough?"), stats (10 years in market, 15+ years experience), Services (Auditing, Hardening, Security Engineering, CITC), Engagement, Clients (marquee), Certifications, Testimonials, Get in touch CTA, footer Conway glider. No Leadership / CEO photo on the public site.
-- **Get in touch:** dedicated `/hire/` page, headline "Get in touch" (never "Hire a security engineer"). Form delivers to victor@mozentai.com. Keep the hero wordmark-only.
+- **Below fold:** Pitch ("Need engineers who actually ship?"), stats (10 years in market, 15+ years experience), Services (Auditing, Hardening, Engineering, CITC), Engagement, Clients (marquee), Certifications, Testimonials, Get in touch CTA, footer Conway glider. No Leadership / CEO photo on the public site.
+- **Get in touch:** dedicated `/hire/` page, headline "Get in touch" (never "Hire a security engineer"). Form delivers to victor@mozentai.com and writes Firestore inquiries. Keep the hero wordmark-only.
 - **CITC:** Council of Information Technology & Computing. Credential service for software engineers (CREA/CRM analog). English copy only.
+- **Manager inbox:** `/login/` is unlisted. 404 until Victor signs in with Google from an IP in Firestore `config/allow.ips`. Do not link it from the public site.
 - **Clients:** Axonius-style infinite horizontal logo marquee (EU, US, and Brazil logos).
 - **404:** dedicated `error` layout, message "Got lost on the way home?"
 - **Logos:** PNG only in `assets/clients/`. Never ship SVG client logos. Use official artwork for real clients (SANEARES PNG).

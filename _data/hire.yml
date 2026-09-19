@@ -1,6 +1,6 @@
 email: victor@mozentai.com
 headline: Get in touch
-question: Need an engineer who writes code and thinks like an attacker?
+question: Need engineers who write production code?
 body: Tell us what you need. Staff augmentation, a dedicated squad, a scoped project, or a CITC credential. Your message goes to Mozentai.
 cta: Send message
 direct: Prefer email? Write us directly
@@ -22,5 +22,5 @@ engagements:
   - Not sure yet
 cta_home:
   headline: Get in touch
-  body: Embed Mozentai engineers in your standups, start with a scoped audit, or apply for a CITC credential. Same people who hack, same people who ship.
+  body: Embed Mozentai engineers in your standups, start a scoped project, or apply for a CITC credential. Same people who ship.
   button: Start a conversation

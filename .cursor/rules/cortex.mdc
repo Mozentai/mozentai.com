@@ -9,7 +9,7 @@ alwaysApply: true
 
 Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at **mozentai.com** via `.github/workflows/pages.yml` on push to `main`.
 
-**Tagline:** CyberSec Specialists, Hackers @ Work
+**Tagline:** Engineers @ Work
 
 ## Repo layout
 
@@ -17,16 +17,17 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 |------|---------|
 | `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
 | `_layouts/inner.html` | Inner pages (contact form). Compact top bar, no full-viewport hero |
+| `_layouts/inbox.html` | `/login/` manager inbox. Looks like the 404 page until Victor is signed in from an allowed IP |
 | `_includes/hire-cta.html` | Homepage closer: Get in touch |
-| `_includes/pitch.html` | Below-fold audit hook: "Do you know if your company is safe enough?" |
+| `_includes/pitch.html` | Below-fold hook: "Need engineers who actually ship?" |
 | `_includes/stats.html` | 10 years in market, 15+ years experience |
-| `_includes/services.html` | Auditing, Hardening, Security Engineering, and CITC cards (2x2) |
+| `_includes/services.html` | Auditing, Hardening, Engineering, and CITC cards (2x2) |
 | `_includes/engagement.html` | Engagement models: Staff Augmentation, Dedicated Team, Project-Based |
 | `_includes/clients.html` | Axonius-style client logo marquee |
 | `_includes/certifications.html` | ISO/SOC/PCI badge grid |
 | `_includes/testimonials.html` | Client quote grid |
 | `_data/pitch.yml` | Audit pitch question and body copy |
-| `_data/services.yml` | Auditing, Hardening, Security Engineering, CITC |
+| `_data/services.yml` | Auditing, Hardening, Engineering, CITC |
 | `_data/engagement.yml` | Engagement models (Staff Augmentation, Dedicated Team, Project-Based) |
 | `_data/stats.yml` | Years in market and specialist tenure (real figures from Victor, 2026-08-25) |
 | `_data/leadership.yml` | Unused on the public site as of 2026-09-19. Victor asked to be removed from the Leadership section. Keep off the live page. |
@@ -36,9 +37,12 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 | `assets/team/victor-matos.jpg` | CEO photo on disk, not displayed on the public site as of 2026-09-19. |
 | `assets/glider.gif` | Animated Conway glider (hacker emblem), recolored to mint on `--bg` from Victor's `~/github/glider.gif` |
 | `assets/glider.png` | Static first frame of the glider for `prefers-reduced-motion` |
-| `_data/hire.yml` | Hire page copy, form labels, destination email victor@mozentai.com |
-| `hire/index.md` | Hire page at `/hire/` |
+| `_data/hire.yml` | Contact page copy, form labels, destination email victor@mozentai.com |
+| `hire/index.md` | Contact page at `/hire/` |
 | `hire/sent.md` | Post-submit thank you at `/hire/sent/` |
+| `login/index.md` | Manager inbox at `/login/`. Not linked from the public site. |
+| `firestore.rules` | Firestore rules for inquiries and IP allowlist. Deploy with Firebase CLI. |
+| `_data/firebase.yml` | Public Firebase web config for the contact form and inbox. Not a secret. |
 | `404.md` | Custom 404 |
 | `_config.yml` | Site config, `lang: en-US`, `jekyll-seo-tag` |
 
@@ -63,9 +67,9 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 ## Page sections (top to bottom)
 
 1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold.
-2. **Pitch** — "Do you know if your company is safe enough?" plus 10-year market / 15+ years experience copy
+2. **Pitch** — "Need engineers who actually ship?" plus 10-year market / 15+ years experience copy
 3. **Stats** — 10 years in the market, 15+ years of experience
-4. **Services** — Auditing (lead offering, one-year certification), Hardening, Security Engineering (outsourcing/embed), CITC (credential service). Four cards in a 2x2 grid.
+4. **Services** — Auditing, Hardening, Engineering (embed), CITC (credential service). Four cards in a 2x2 grid.
 4b. **Engagement** — How We Work: Staff Augmentation, Dedicated Team, Project-Based
 5. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos
 6. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
@@ -75,11 +79,15 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 Do **not** put a Leadership / CEO photo section on the public site. Victor asked to be removed on 2026-09-19.
 
-**Contact page (`/hire/`):** Headline is "Get in touch". Form (name, work email, company, engagement model including CITC Credential, message) POSTs via FormSubmit to **victor@mozentai.com**. First live submission requires Victor to click FormSubmit's confirmation email. Mailto fallback on the same page. Do not put this form in the hero. Do not name Victor on the public contact copy.
+**Contact page (`/hire/`):** Headline is "Get in touch". Form (name, work email, company, engagement model including CITC Credential, message) POSTs via FormSubmit to **victor@mozentai.com** and also writes a document to Firestore `inquiries`. Mailto fallback on the same page. Do not put this form in the hero. Do not name Victor on the public contact copy.
+
+**Manager inbox (`/login/`):** Added 2026-09-19. Unlisted. Visitors see the same 404 copy ("Got lost on the way home?"). Click the wordmark, sign in with Google as spacemany2k38@gmail.com or victor@mozentai.com (verified email). After sign-in, the page checks the visitor IP against Firestore `config/allow.ips`. If the IP is not listed, it stays a 404. If it matches, it lists contact-form requests. Do not link `/login/` from the public footer or nav. Allowed IP is stored in Firestore, never in the public git repo. If Victor's IP changes, update `config/allow.ips`. Cloud Functions (true edge IP lock before any page JS) need the Firebase Blaze plan, which was not enabled.
+
+Firebase project: `mozentai-com`. Inquiries are PII, they live in Firestore, never in this repo.
 
 ## Company facts (from Victor, 2026-08-25)
 
-- Mozentai does auditing, hardening, security engineering outsourcing, and CITC credentials. Engineers are hands-on coders with cybersecurity as their background. Lead public pitch is the safety question, followed by engagement models (staff aug, dedicated team, project-based). Inspired by BairesDev/Inclusion Cloud/Avenue Code positioning but niche to security.
+- Mozentai is an engineering company. Public copy is generic toward software engineers, not only cybersecurity (Victor, 2026-09-19). It still offers auditing, hardening, embedded engineering, and CITC credentials. Lead public pitch is "Need engineers who actually ship?" Engagement models: staff aug, dedicated team, project-based. Inspired by BairesDev/Inclusion Cloud/Avenue Code. Tagline: Engineers @ Work.
 - **CITC** (Council of Information Technology & Computing), added 2026-09-19: a credential service for software engineers, analogous to CREA (engineering council) and CRM (medical council) in Brazil, but for computing. Public copy stays English and analogizes as "the councils that license engineers and physicians." Do not print CREA/CRM or Portuguese on the site. Do not invent exam, fee, legal-status, or issuance details Victor has not supplied.
 - Mozentai has been in the market for 10 years.
 - Specialists have 15+ years of hands-on security experience. Do not publish a 10+ band on the site; Victor corrected this to 15+ only on 2026-08-25.
@@ -137,6 +145,8 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-09-19 | Victor asked to be removed from the public site. Do not render the Leadership section, CEO photo, name, bio, or HTB link on mozentai.com. Keep `_data/leadership.yml` and `assets/team/victor-matos.jpg` off the live page. |
 | 2026-09-19 | New offering: CITC, Council of Information Technology & Computing. Credential service for software engineers, CREA/CRM analog for computing. Public copy in English only, no Portuguese council names. Do not invent exam/fee/legal details. Fourth service card, 2x2 grid. Form engagement option: CITC Credential. |
 | 2026-09-19 | Public CTA is "Get in touch", never "Hire a security engineer". Footer and /hire/ topbar use the same label. Contact copy does not name Victor. |
+| 2026-09-19 | Public positioning is generic toward software engineers, not only cybersecurity. Tagline: Engineers @ Work. Pitch: "Need engineers who actually ship?" Service card "Security Engineering" renamed Engineering. Testimonials dropped attacker/CISO-only framing and the 74% figure. |
+| 2026-09-19 | Manager inbox at /login/. Looks like 404. Click wordmark, Google sign-in as spacemany2k38@gmail.com or victor@mozentai.com. IP allowlist lives in Firestore config/allow.ips, not in git. Contact form writes Firestore inquiries plus FormSubmit email. Firebase project mozentai-com. Do not link /login from the public site. Cloud Functions need Blaze, so IP is enforced in the inbox page after sign-in, not at the CDN edge. |
 
 ## Self-update protocol
 

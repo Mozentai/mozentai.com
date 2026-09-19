@@ -1,0 +1,14 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Mozentai",
+        "supportEmail": "spacemany2k38@gmail.com",
+        "authorizedDomains": ["mozentai.com", "localhost"]
+      }
+    }
+  }
+}

@@ -43,8 +43,10 @@ bundle exec jekyll build
 
 - `default.html` does NOT render `{{ content }}` (landing is self-contained)
 - `inner.html` is used by `/hire/` and `/hire/sent/`
+- `inbox.html` is used by `/login/`
 - `error.html` is used only by `404.md`
-- Contact form POSTs to FormSubmit at victor@mozentai.com, then redirects to `/hire/sent/`
+- Contact form POSTs to FormSubmit at victor@mozentai.com, then redirects to `/hire/sent/`, and also writes Firestore `inquiries`
 - Public CTA label is "Get in touch" on the homepage, footer, and inner topbar
+- `/login/` is unlisted. Do not add it to the footer.
 - `html lang` from `_config.yml` (`en-US`)
 - `notranslate` meta prevents browser auto-translation to Portuguese

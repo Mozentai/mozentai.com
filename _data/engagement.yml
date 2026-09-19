@@ -3,13 +3,13 @@ lead: Flexible engagement models built for how your team actually operates.
 
 models:
   - name: Staff Augmentation
-    description: Our security engineers integrate directly into your existing team. Same standups, same sprints, same codebase. They bring the attacker mindset your stack is missing.
+    description: Our engineers integrate directly into your existing team. Same standups, same sprints, same codebase.
     icon: "&#x276F;"
 
   - name: Dedicated Team
-    description: A full security engineering squad assigned to your product. From secure code review to infrastructure hardening, they own your security posture end to end.
+    description: A full engineering squad assigned to your product. They own delivery end to end, from review to production.
     icon: "&#x2726;"
 
   - name: Project-Based
-    description: Scoped engagements with clear deliverables. Audits, penetration tests, compliance sprints, or architecture reviews, delivered on a fixed timeline.
+    description: Scoped engagements with clear deliverables. Audits, architecture reviews, or build sprints, delivered on a fixed timeline.
     icon: "&#x25A0;"
