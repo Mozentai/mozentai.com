@@ -945,7 +945,7 @@ exams:
         hours: 14
     questions: []
 
-  - code: SEX
+  - code: SSX
     title: Software Engineering Specialist
     level: Specialist
     hours: 500
