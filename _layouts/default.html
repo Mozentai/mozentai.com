@@ -95,15 +95,6 @@
         animation: fadeUp 1s ease 1.2s both;
         z-index: 1;
       }
-      .scroll-hint span {
-        font-family: var(--mono);
-        font-size: 10px;
-        font-weight: 500;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: var(--muted);
-        opacity: 0.6;
-      }
       .scroll-chevron {
         width: 18px;
         height: 18px;
@@ -117,41 +108,9 @@
       .below {
         max-width: 960px;
         margin: 0 auto;
-        padding: 80px 40px 80px;
-        display: flex;
-        flex-direction: column;
-        gap: 112px;
+        padding: 40px 40px 80px;
       }
       .section { margin-bottom: 0; }
-      .section-title {
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 28px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-      }
-      .pitch-question {
-        font-family: var(--sans);
-        font-size: 34px;
-        font-weight: 600;
-        color: var(--text);
-        line-height: 1.25;
-        letter-spacing: -0.4px;
-        max-width: 720px;
-        margin-bottom: 20px;
-      }
-      .pitch-body {
-        font-size: 16px;
-        line-height: 1.75;
-        color: var(--muted);
-        max-width: 640px;
-        margin-bottom: 14px;
-      }
-      .pitch-body:last-child { margin-bottom: 0; }
       .marquee-wrap {
         position: relative;
         width: 100vw;
@@ -205,27 +164,6 @@
         from { transform: translateX(0); }
         to   { transform: translateX(-50%); }
       }
-      .btn {
-        display: inline-block;
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--bg);
-        background: var(--accent);
-        padding: 14px 28px;
-        border-radius: 8px;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        margin-top: 8px;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-      .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
-      }
       .site-footer {
         display: flex;
         flex-direction: column;
@@ -266,15 +204,13 @@
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
         .marquee-track { gap: 48px; animation-duration: 28s; }
         .marquee-fade { width: 64px; }
-        .pitch-question { font-size: 26px; }
         .hero-nav { gap: 20px; }
       }
       @media (max-width: 600px) {
-        .below { padding: 60px 24px 48px; gap: 80px; }
+        .below { padding: 24px 24px 48px; }
         .wordmark { letter-spacing: 6px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .marquee-logo { height: 26px; }
-        .pitch-question { font-size: 24px; }
         .hero-nav { gap: 16px; }
         .hero-nav a { font-size: 9px; letter-spacing: 2px; }
       }
@@ -310,16 +246,13 @@
           <a href="/hire/">Get in touch</a>
         </nav>
       </div>
-      <a class="scroll-hint" href="#pitch" aria-label="Scroll to pitch">
-        <span>Explore</span>
+      <a class="scroll-hint" href="#clients" aria-label="Scroll to clients">
         <div class="scroll-chevron"></div>
       </a>
     </section>
 
     <div class="below">
-      {% include pitch.html %}
       {% include clients.html %}
-      {% include hire-cta.html %}
     </div>
 
     <footer class="site-footer">
