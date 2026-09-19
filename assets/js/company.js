@@ -10,14 +10,16 @@ import {
   getFirestore,
   doc,
   getDoc,
+  collection,
+  getDocs,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 var gate = document.getElementById("gate");
 var dash = document.getElementById("dash");
 var dashName = document.getElementById("dash-name");
 var dashHex = document.getElementById("dash-hex");
-var certList = document.getElementById("cert-list");
-var dashEmpty = document.getElementById("dash-empty");
 var signInBtn = document.getElementById("sign-in-btn");
 var signOutBtn = document.getElementById("sign-out");
 
@@ -28,6 +30,10 @@ var subLabel = document.getElementById("sub-label");
 var subManage = document.getElementById("sub-manage");
 var subscribeBtn = document.getElementById("subscribe-btn");
 
+var engLookup = document.getElementById("eng-lookup");
+var engList = document.getElementById("eng-list");
+var engEmpty = document.getElementById("eng-empty");
+
 var stripe = window.MOZENTAI_STRIPE || {};
 
 var app = initializeApp(window.MOZENTAI_FIREBASE);
@@ -35,8 +41,7 @@ var auth = getAuth(app);
 var db = getFirestore(app);
 var provider = new GoogleAuthProvider();
 
-var FRESHNESS_MS = 6 * 30 * 24 * 60 * 60 * 1000;
-var EXPIRING_MS = 30 * 24 * 60 * 60 * 1000;
+var engineers = [];
 
 function showGate() {
   dash.classList.remove("is-visible");
@@ -48,49 +53,11 @@ function showDash() {
   dash.classList.add("is-visible");
 }
 
-function freshnessStatus(cert) {
-  var base = cert.renewedAt || cert.grantedAt;
-  if (!base) return { status: "stale", label: "No date" };
-  var ts = base.toDate ? base.toDate() : new Date(base);
-  var expiry = new Date(ts.getTime() + FRESHNESS_MS);
-  var now = new Date();
-  var remaining = expiry.getTime() - now.getTime();
-  var dateStr = expiry.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  if (remaining <= 0) return { status: "stale", label: "Stale since " + dateStr };
-  if (remaining <= EXPIRING_MS) return { status: "expiring", label: "Expiring " + dateStr };
-  return { status: "fresh", label: "Fresh until " + dateStr };
-}
-
-function renderCerts(certs) {
-  certList.innerHTML = "";
-  if (!certs || Object.keys(certs).length === 0) {
-    dashEmpty.hidden = false;
-    return;
-  }
-  dashEmpty.hidden = true;
-  var codes = Object.keys(certs).sort();
-  codes.forEach(function (code) {
-    var cert = certs[code];
-    var f = freshnessStatus(cert);
-    var row = document.createElement("div");
-    row.className = "cert-row";
-    row.innerHTML =
-      '<span class="cert-dot cert-dot--' + f.status + '"></span>' +
-      '<span class="cert-code"><a href="/titles/' + code.toLowerCase() + '/">' + code + "</a></span>" +
-      '<span class="cert-freshness cert-freshness--' + f.status + '">' + f.label + "</span>";
-    certList.appendChild(row);
-  });
-}
-
 function renderSubscription(sub) {
   if (!sub || sub.status !== "active") {
     subGate.hidden = false;
     subActive.hidden = true;
-    return;
+    return false;
   }
 
   subGate.hidden = true;
@@ -98,7 +65,7 @@ function renderSubscription(sub) {
 
   subDot.className = "sub-dot sub-dot--active";
   subLabel.className = "sub-label sub-label--active";
-  subLabel.textContent = "CREA active";
+  subLabel.textContent = "Plan active";
 
   if (sub.currentPeriodEnd) {
     var end = sub.currentPeriodEnd.toDate
@@ -112,39 +79,112 @@ function renderSubscription(sub) {
   }
 
   subManage.href = stripe.portal || "#";
+  return true;
 }
 
-async function loadEngineer(user) {
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderEngineers(list) {
+  engList.innerHTML = "";
+  if (!list.length) {
+    engEmpty.hidden = false;
+    return;
+  }
+  engEmpty.hidden = true;
+  list.forEach(function (eng) {
+    var row = document.createElement("div");
+    row.className = "eng-row";
+    var titles = eng.titles && eng.titles.length
+      ? eng.titles.join(", ")
+      : "Registered";
+    row.innerHTML =
+      '<span class="eng-name">' + escapeHtml(eng.name) + "</span>" +
+      '<span class="eng-hex">' + escapeHtml(eng.smarthex) + "</span>" +
+      '<span class="eng-titles">' + escapeHtml(titles) + "</span>";
+    engList.appendChild(row);
+  });
+}
+
+function filterEngineers(term) {
+  if (!term) {
+    renderEngineers([]);
+    engEmpty.hidden = true;
+    return;
+  }
+  var lower = term.toLowerCase();
+  var filtered = engineers.filter(function (eng) {
+    if ((eng.name || "").toLowerCase().indexOf(lower) !== -1) return true;
+    if ((eng.smarthex || "").toLowerCase().indexOf(lower) !== -1) return true;
+    if (eng.titles) {
+      for (var i = 0; i < eng.titles.length; i++) {
+        if (eng.titles[i].toLowerCase().indexOf(lower) !== -1) return true;
+      }
+    }
+    return false;
+  });
+  renderEngineers(filtered);
+}
+
+async function loadEngineers(companyData) {
   try {
-    var snap = await getDoc(doc(db, "engineers", user.uid));
+    var group = companyData.group;
+    var q;
+    if (group) {
+      q = query(collection(db, "engineers"), where("group", "==", group));
+    } else {
+      q = query(collection(db, "engineers"));
+    }
+    var snap = await getDocs(q);
+    engineers = snap.docs.map(function (d) {
+      var data = d.data();
+      return {
+        name: data.name || "",
+        smarthex: data.smarthex || "",
+        titles: data.titles || [],
+      };
+    });
+  } catch (err) {
+    engineers = [];
+  }
+}
+
+async function loadCompany(user) {
+  try {
+    var snap = await getDoc(doc(db, "companies", user.uid));
     if (!snap.exists()) {
       dashName.textContent = user.displayName || user.email;
-      dashHex.textContent = "Not registered";
+      dashHex.textContent = "";
       renderSubscription(null);
-      dashEmpty.hidden = false;
       return;
     }
     var data = snap.data();
     dashName.textContent = data.name || user.displayName || user.email;
     dashHex.textContent = data.smarthex || "";
-    renderSubscription(data.subscription || null);
-    renderCerts(data.certs || {});
+
+    var isActive = renderSubscription(data.subscription || null);
+    if (isActive) {
+      await loadEngineers(data);
+    }
   } catch (err) {
     dashName.textContent = user.displayName || user.email;
     dashHex.textContent = "";
     renderSubscription(null);
-    dashEmpty.textContent = "Could not load your data.";
-    dashEmpty.hidden = false;
   }
 }
 
 onAuthStateChanged(auth, function (user) {
   if (user) {
     showDash();
-    loadEngineer(user);
+    loadCompany(user);
 
     subscribeBtn.onclick = function () {
-      var link = stripe.engineer_link;
+      var link = stripe.company_link;
       if (!link || link.indexOf("REPLACE") !== -1) return;
       var url = link +
         "?client_reference_id=" + encodeURIComponent(user.uid) +
@@ -162,4 +202,8 @@ signInBtn.addEventListener("click", function () {
 
 signOutBtn.addEventListener("click", function () {
   signOut(auth);
+});
+
+engLookup.addEventListener("input", function () {
+  filterEngineers(engLookup.value.trim());
 });

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" content="notranslate">
-    <title>Account · {{ site.title }}</title>
+    <title>Company · {{ site.title }}</title>
     {% seo %}
     <link rel="icon" type="image/png" href="/logo.png">
     <link rel="apple-touch-icon" href="/logo.png">
@@ -19,7 +19,6 @@
         --muted: #5a6b82;
         --text: #c9d1d9;
         --fresh: #00e5a0;
-        --expiring: #e5a000;
         --stale: #e55050;
         --mono: 'JetBrains Mono', monospace;
         --sans: 'Inter', -apple-system, sans-serif;
@@ -109,14 +108,6 @@
         transform: translateY(-1px);
         box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
       }
-      .btn--outline {
-        background: transparent;
-        color: var(--accent);
-        border: 1px solid var(--accent);
-      }
-      .btn--outline:hover {
-        background: rgba(0, 229, 160, 0.08);
-      }
 
       .dash { display: none; }
       .dash.is-visible { display: block; }
@@ -192,7 +183,7 @@
         font-size: 13px;
         color: var(--muted);
         line-height: 1.6;
-        max-width: 400px;
+        max-width: 420px;
         margin: 0 auto 24px;
       }
 
@@ -250,50 +241,57 @@
         color: var(--muted);
         padding: 16px 0;
       }
-      .cert-list {
+
+      .lookup-wrap {
+        margin-bottom: 32px;
+      }
+      .lookup-input {
+        width: 100%;
+        max-width: 400px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 12px;
+        padding: 10px 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .lookup-input:focus { border-color: var(--accent); }
+      .lookup-input::placeholder { color: var(--muted); }
+      .eng-list {
         display: flex;
         flex-direction: column;
       }
-      .cert-row {
+      .eng-row {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: 1fr 1fr auto;
         gap: 16px;
         padding: 14px 0;
         border-bottom: 1px solid var(--border);
         align-items: center;
       }
-      .cert-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-      .cert-dot--fresh { background: var(--fresh); }
-      .cert-dot--expiring { background: var(--expiring); }
-      .cert-dot--stale { background: var(--stale); }
-      .cert-code {
+      .eng-name {
         font-family: var(--mono);
         font-size: 14px;
         font-weight: 700;
         color: var(--text);
         letter-spacing: 0.5px;
       }
-      .cert-code a {
-        color: inherit;
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.2s;
+      .eng-hex {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: 1px;
       }
-      .cert-code a:hover { border-bottom-color: var(--accent); }
-      .cert-freshness {
+      .eng-titles {
         font-family: var(--mono);
         font-size: 11px;
-        letter-spacing: 0.5px;
+        color: var(--muted);
         text-align: right;
+        letter-spacing: 0.5px;
       }
-      .cert-freshness--fresh { color: var(--fresh); }
-      .cert-freshness--expiring { color: var(--expiring); }
-      .cert-freshness--stale { color: var(--stale); }
 
       .site-footer {
         display: flex;
@@ -314,8 +312,8 @@
         .page { padding: 12px 24px 64px; }
         .topbar-nav { gap: 14px; }
         .topbar-link { font-size: 9px; letter-spacing: 2px; }
-        .cert-row { grid-template-columns: auto 1fr; }
-        .cert-freshness { grid-column: 2; text-align: left; }
+        .eng-row { grid-template-columns: 1fr; gap: 4px; }
+        .eng-titles { text-align: left; }
         .sub-status { flex-wrap: wrap; }
       }
     </style>
@@ -332,7 +330,7 @@
 
     <main class="page">
       <div class="gate" id="gate">
-        <p class="gate-msg">Sign in to view your CITC standing.</p>
+        <p class="gate-msg">Company access to the Career Wall.</p>
         <button class="btn" id="sign-in-btn" type="button">Sign in with Google</button>
       </div>
 
@@ -347,11 +345,11 @@
 
         <div id="sub-gate" hidden>
           <div class="sub-card">
-            <div class="sub-card-title">CITC CREA</div>
-            <div class="sub-card-price">$20</div>
+            <div class="sub-card-title">Company Plan</div>
+            <div class="sub-card-price">$1,000</div>
             <div class="sub-card-period">per month</div>
             <div class="sub-card-desc">
-              Keep your professional standing active. Your CREA stays live while your subscription is active.
+              Access the Career Wall. Look up registered engineers, verify CITC credentials, and skip the screening.
             </div>
             <button class="btn" id="subscribe-btn" type="button">Subscribe</button>
           </div>
@@ -363,11 +361,20 @@
             <span class="sub-label" id="sub-label"></span>
             <a class="sub-manage" id="sub-manage" href="#" target="_blank" rel="noopener">Manage</a>
           </div>
-        </div>
 
-        <h2 class="dash-section-title">Certifications</h2>
-        <div class="cert-list" id="cert-list"></div>
-        <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
+          <h2 class="dash-section-title">Engineers</h2>
+          <div class="lookup-wrap">
+            <input
+              class="lookup-input"
+              id="eng-lookup"
+              type="search"
+              placeholder="Search by name, CITC number, or title"
+              autocomplete="off"
+            >
+          </div>
+          <div class="eng-list" id="eng-list"></div>
+          <p class="dash-empty" id="eng-empty" hidden>No engineers found.</p>
+        </div>
       </div>
     </main>
 
@@ -382,6 +389,6 @@
     <script>
       window.MOZENTAI_STRIPE = {{ site.data.stripe | jsonify }};
     </script>
-    <script type="module" src="/assets/js/account.js"></script>
+    <script type="module" src="/assets/js/company.js"></script>
   </body>
 </html>
