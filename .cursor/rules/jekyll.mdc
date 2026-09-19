@@ -13,7 +13,8 @@ alwaysApply: false
 - Content driven by `_data/*.yml` + Liquid includes
 - Team photos live in `assets/team/` (CEO: `victor-matos.jpg`). Do not render the Leadership section on the public site.
 - Hacker emblem: `assets/glider.gif` (animated) and `assets/glider.png` (static), footer only
-- Services grid: four cards use `.cards.cards-2` (2x2). Engagement stays `.cards` (3 columns).
+- Services grid: four cards use `.cards.cards-2` (2x2). Engagement stays `.cards` (3 columns). Career Wall people grid is `.wall-grid`. Title ladder uses `.cards`.
+- Engineer portraits: `assets/engineers/`. CSS forces grayscale plus mint wash. No photographic color on the wall.
 
 ## Adding a new section
 

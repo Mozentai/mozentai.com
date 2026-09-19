@@ -1,7 +1,7 @@
 email: victor@mozentai.com
 headline: Get in touch
 question: Need engineers who write production code?
-body: Tell us what you need. Staff augmentation, a dedicated squad, a scoped project, or a CITC credential. Your message goes to Mozentai.
+body: We prepare the professionals for the companies. Tell us what you need. Staff augmentation, a dedicated squad, a scoped project, or a CITC standing. Your message goes to Mozentai.
 cta: Send message
 direct: Prefer email? Write us directly
 submit: Send message
@@ -22,5 +22,5 @@ engagements:
   - Not sure yet
 cta_home:
   headline: Get in touch
-  body: Embed Mozentai engineers in your standups, start a scoped project, or apply for a CITC credential. Same people who ship.
+  body: We prepare the professionals. Skip the screening, embed a team, or apply for a CITC standing.
   button: Start a conversation

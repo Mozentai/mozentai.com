@@ -187,6 +187,126 @@
       .pitch-body:last-child {
         margin-bottom: 0;
       }
+      .wall-lookup-label {
+        display: block;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .wall-lookup {
+        width: 100%;
+        max-width: 480px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 15px;
+        padding: 14px 16px;
+        outline: none;
+        margin-bottom: 32px;
+      }
+      .wall-lookup:focus { border-color: var(--accent); }
+      .wall-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .wall-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        transition: border-color 0.3s, transform 0.3s;
+      }
+      .wall-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-3px);
+      }
+      .wall-photo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .wall-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1) contrast(1.15) brightness(0.82);
+        mix-blend-mode: luminosity;
+      }
+      .wall-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        mix-blend-mode: color;
+        opacity: 0.28;
+        pointer-events: none;
+      }
+      .wall-photo--mark {
+        background:
+          linear-gradient(var(--border), var(--border)) padding-box,
+          linear-gradient(135deg, var(--bg), var(--surface) 55%, var(--accent)) border-box;
+        border: 1px solid var(--border);
+      }
+      .wall-photo--mark::after { opacity: 0.18; }
+      .wall-hex {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: var(--accent);
+        margin-bottom: 6px;
+      }
+      .wall-name {
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+      .wall-titles {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .wall-titles li {
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.3px;
+      }
+      .wall-empty {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .wall-empty.is-hidden,
+      .wall-card[hidden],
+      #wall-titles .card[hidden] { display: none; }
+      .wall-id-hint {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 40px;
+      }
+      .wall-subhead {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 8px 0 12px;
+      }
       .stats {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -468,6 +588,7 @@
         .certifications { grid-template-columns: repeat(2, 1fr); }
         .pitch-question { font-size: 26px; }
         .cards-2 { grid-template-columns: 1fr; }
+        .wall-grid { grid-template-columns: 1fr; }
       }
       @media (max-width: 600px) {
         .below { padding: 60px 24px 48px; gap: 80px; }
@@ -518,6 +639,7 @@
       {% include pitch.html %}
       {% include stats.html %}
       {% include services.html %}
+      {% include career.html %}
       {% include engagement.html %}
       {% include clients.html %}
       {% include certifications.html %}
@@ -607,5 +729,6 @@
         statObserver.observe(el);
       });
     </script>
+    <script src="/assets/js/career.js"></script>
   </body>
 </html>

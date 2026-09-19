@@ -1,0 +1,4 @@
+# Registered CITC professionals. Add a person here only after they hold a CREA.
+# Portraits live in assets/engineers/ as PNG or JPEG. The wall CSS forces site colors
+# (no photographic color). Do not invent people. Do not put Victor on this wall.
+people: []

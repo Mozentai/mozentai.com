@@ -21,7 +21,9 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 | `_includes/hire-cta.html` | Homepage closer: Get in touch |
 | `_includes/pitch.html` | Below-fold hook: "Need engineers who actually ship?" |
 | `_includes/stats.html` | 10 years in market, 15+ years experience |
-| `_includes/services.html` | Auditing, Hardening, Engineering, and CITC cards (2x2) |
+| `_includes/career.html` | Career Wall lookup, registered engineers, title ladder |
+| `_data/career.yml` | Career Wall copy and title ladder (Python Engineer I, II, III) |
+| `_data/engineers.yml` | Registered CITC professionals. Empty until someone holds a CREA. Do not invent people. |
 | `_includes/engagement.html` | Engagement models: Staff Augmentation, Dedicated Team, Project-Based |
 | `_includes/clients.html` | Axonius-style client logo marquee |
 | `_includes/certifications.html` | ISO/SOC/PCI badge grid |
@@ -67,10 +69,11 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 ## Page sections (top to bottom)
 
 1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold.
-2. **Pitch** — "Need engineers who actually ship?" plus 10-year market / 15+ years experience copy
+2. **Pitch** — "Stop wasting time on screening." We prepare the professionals for the companies.
 3. **Stats** — 10 years in the market, 15+ years of experience
 4. **Services** — Auditing, Hardening, Engineering (embed), CITC (credential service). Four cards in a 2x2 grid.
-4b. **Engagement** — How We Work: Staff Augmentation, Dedicated Team, Project-Based
+4b. **Career Wall** — Lookup by name, CITC number, or title. Registered engineers appear here. Title ladder (Python Engineer I, II, III) is what engineers look up to. Portraits use site colors only. Do not print $20, $200, or the five-title cap on this page.
+4c. **Engagement** — How We Work: Staff Augmentation, Dedicated Team, Project-Based
 5. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos
 6. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
 7. **Testimonials** — client quotes (EU/US fictional brands plus the rest of `_data/testimonials.yml`)
@@ -87,8 +90,20 @@ Firebase project: `mozentai-com`. Inquiries are PII, they live in Firestore, nev
 
 ## Company facts (from Victor, 2026-08-25)
 
-- Mozentai is an engineering company. Public copy is generic toward software engineers, not only cybersecurity (Victor, 2026-09-19). It still offers auditing, hardening, embedded engineering, and CITC credentials. Lead public pitch is "Need engineers who actually ship?" Engagement models: staff aug, dedicated team, project-based. Inspired by BairesDev/Inclusion Cloud/Avenue Code. Tagline: Engineers @ Work.
-- **CITC** (Council of Information Technology & Computing), added 2026-09-19: a credential service for software engineers, analogous to CREA (engineering council) and CRM (medical council) in Brazil, but for computing. Public copy stays English and analogizes as "the councils that license engineers and physicians." Do not print CREA/CRM or Portuguese on the site. Do not invent exam, fee, legal-status, or issuance details Victor has not supplied.
+- Mozentai is an engineering company. Public copy is generic toward software engineers. Lead public pitch (2026-09-19): "Stop wasting time on screening." We prepare the professionals for the companies so they do not waste time on screening. Look them up on the Career Wall. Engagement models: staff aug, dedicated team, project-based. Tagline: Engineers @ Work.
+- **CITC** (Council of Information Technology & Computing): professional standing for software engineers, CREA/CRM analog. Public copy stays English. Do not print CREA/CRM, CPF, $20, $200, or "five titles" on the site. Mechanics below are real and must be followed in product work.
+
+### CITC mechanics (Victor, 2026-09-19, not for the public page)
+
+- **Identifier:** Each registered engineer (and each company) holds a SmartHex-16 number, the CITC CREA analog of CPF/CREA. Package: PyPI `smarthex` 0.2.2 by Victor Matos (contact@byteram.co), repo Byteram/SmartHex16. 16 hex chars: 14 random + 2 checksum. Generate/validate via `from smarthex import generate, validate`. Local checkout: `~/github/pypi-env/smarthex`. Example valid IDs generated 2026-09-19: `3f3ed5d05b617d16`, `529532bed881a1c9`, `331023a6abff6ed1`. Display on the wall as "CITC number", not "SmartHex".
+- **Stripe is the source of standing.** CREA keep-alive and company plans are Stripe Billing. Title exams are Stripe one-time Checkout. Verify every webhook with the `Stripe-Signature` header. A CREA is live only while the keep-alive subscription is active. A title is granted only after the exam payment (and Mozentai's own pass/fail). Companies are likewise Stripe customers. Do not treat a SmartHex as valid without a matching signed Stripe event.
+- **Engineer keep-alive:** USD 20 per month to keep the CREA. Stripe Checkout `mode: 'subscription'`. One Product named CITC CREA with one recurring Price $20/month. Do not put other tiers on that Product. Never pass `payment_method_types`. Latest Stripe API `2026-07-29.dahlia`. Restricted key (`rk_`) not `sk_`. Customer Portal for cancel/update. If charging US or EU, Stripe Tax needs an active registration before `automatic_tax`.
+- **Title exam:** USD 200 to take the test for a given title. Stripe Checkout `mode: 'payment'`, one-time. One Product per title (Python Engineer I, Python Engineer II, Python Engineer III, and later titles) each with a $200 Price so Checkout line items show the real title name. Cap: **5 titles per CREA**. An engineer cannot hold everything under the sun.
+- **Public title catalog on 2026-09-19:** 1. Python Engineer I  2. Python Engineer II  3. Python Engineer III. Requirements (exigencias) come only from Mozentai. Engineers look those titles up as what they want to become. They do not get a menu of outside credentials.
+- **Career Wall:** Once registered, the engineer appears on the wall and can be looked up (name, CITC number, title). Do not invent people. Do not put Victor on the wall. Photos in `assets/engineers/`. Portraits must use site colors only (`--bg`, `--surface`, `--accent`, `--muted`, `--text`). No photographic color. CSS grayscale + mint color wash.
+- **Company access:** Companies do not get the whole roster. Stripe plan determines which engineer group they can access. Public wall is lookup/display. Hiring access is plan-gated.
+- **Engineer access:** Engineers see their own CREA and Mozentai titles/exigencias. They look up what they want to be. They do not browse every other engineer.
+- **Public site:** Know the mechanics. Do not print prices, the five-title cap, Stripe, SmartHex, CPF, CREA, or CRM on mozentai.com.
 - Mozentai has been in the market for 10 years.
 - Specialists have 15+ years of hands-on security experience. Do not publish a 10+ band on the site; Victor corrected this to 15+ only on 2026-08-25.
 - **CEO:** Victor Matos (professional name; full name Victor Vinicius Reis de Matos). Photo: `assets/team/victor-matos.jpg`.
@@ -147,6 +162,7 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-09-19 | Public CTA is "Get in touch", never "Hire a security engineer". Footer and /hire/ topbar use the same label. Contact copy does not name Victor. |
 | 2026-09-19 | Public positioning is generic toward software engineers, not only cybersecurity. Tagline: Engineers @ Work. Pitch: "Need engineers who actually ship?" Service card "Security Engineering" renamed Engineering. Testimonials dropped attacker/CISO-only framing and the 74% figure. |
 | 2026-09-19 | Manager inbox at /login/. Looks like 404. Click wordmark, Google sign-in as spacemany2k38@gmail.com or victor@mozentai.com. IP allowlist lives in Firestore config/allow.ips, not in git. Contact form writes Firestore inquiries plus FormSubmit email. Firebase project mozentai-com. Do not link /login from the public site. Cloud Functions need Blaze, so IP is enforced in the inbox page after sign-in, not at the CDN edge. |
+| 2026-09-19 | CITC is the professional standing. Pitch: we prepare the professionals so companies skip screening. Career Wall lookup on the homepage. Engineers hold a SmartHex-16 CITC number (PyPI smarthex 0.2.2). $20/month Stripe subscription keeps the CREA. $200 Stripe one-time exam per title. Max 5 titles per CREA. Public catalog starts with Python Engineer I, II, III. Requirements from Mozentai only. Stripe-Signature is source of standing for engineers and companies. Company plans gate which engineer group they can access. Do not print those prices, the cap, SmartHex, CPF, or CREA on the public page. Portraits on the wall use site colors only. Do not invent registered people. |
 
 ## Self-update protocol
 
