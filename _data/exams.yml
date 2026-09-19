@@ -975,3 +975,617 @@ exams:
       - topic: Industry engagement, standards, working groups
         hours: 48
     questions: []
+
+  # ─────────────────────────────────────────────
+  # AWS
+  # ─────────────────────────────────────────────
+
+  - code: AW1
+    title: AWS Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: AWS fundamentals, regions, availability zones, global infrastructure
+        hours: 8
+      - topic: IAM, users, roles, policies, least privilege
+        hours: 8
+      - topic: EC2, instances, AMIs, security groups, key pairs
+        hours: 8
+      - topic: S3, buckets, policies, versioning, lifecycle rules
+        hours: 6
+      - topic: VPC, subnets, route tables, NACLs, internet gateways
+        hours: 8
+      - topic: RDS, database engines, backups, multi-AZ
+        hours: 6
+      - topic: CloudWatch, metrics, alarms, basic monitoring
+        hours: 4
+      - topic: CLI and SDK fundamentals, boto3, AWS CLI
+        hours: 6
+      - topic: Cost management, billing, free tier, budgets
+        hours: 6
+    questions: []
+
+  - code: AW2
+    title: AWS Engineer II
+    level: Medium
+    hours: 130
+    curriculum:
+      - topic: Advanced networking, VPC peering, Transit Gateway, PrivateLink
+        hours: 12
+      - topic: ECS and EKS, container orchestration, Fargate, task definitions
+        hours: 14
+      - topic: Lambda, serverless architecture, API Gateway, Step Functions
+        hours: 14
+      - topic: DynamoDB, design patterns, GSI, LSI, capacity modes
+        hours: 10
+      - topic: CloudFormation, IaC, stacks, nested stacks, drift detection
+        hours: 12
+      - topic: CI/CD, CodePipeline, CodeBuild, CodeDeploy
+        hours: 10
+      - topic: Security, KMS, Secrets Manager, WAF, Shield, GuardDuty
+        hours: 12
+      - topic: SNS, SQS, EventBridge, decoupled architectures
+        hours: 10
+      - topic: ELB, Auto Scaling, health checks, target groups
+        hours: 8
+      - topic: Route 53, DNS routing policies, health checks
+        hours: 6
+      - topic: CloudTrail, Config, compliance, audit logging
+        hours: 8
+      - topic: Monitoring, X-Ray, CloudWatch Logs Insights, dashboards
+        hours: 8
+      - topic: Cost optimization, Reserved Instances, Savings Plans, right-sizing
+        hours: 6
+    questions: []
+
+  - code: AW3
+    title: AWS Engineer III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: Multi-account strategy, Organizations, SCPs, Control Tower
+        hours: 16
+      - topic: Advanced networking, Direct Connect, VPN, Global Accelerator
+        hours: 16
+      - topic: Advanced security, IAM Access Analyzer, permission boundaries, cross-account
+        hours: 16
+      - topic: Advanced serverless, Lambda@Edge, custom runtimes, SAM
+        hours: 14
+      - topic: Data engineering, Kinesis, Glue, Athena, Lake Formation
+        hours: 16
+      - topic: Advanced containers, EKS networking, service mesh, Fargate Spot
+        hours: 14
+      - topic: Disaster recovery, multi-region, pilot light, warm standby
+        hours: 14
+      - topic: Advanced databases, Aurora, ElastiCache, Redshift, Neptune
+        hours: 14
+      - topic: Machine learning, SageMaker, Bedrock, inference endpoints
+        hours: 14
+      - topic: Migration, Application Discovery, DMS, Snow Family
+        hours: 12
+      - topic: Well-Architected Framework, reviews, trade-offs
+        hours: 12
+      - topic: Advanced observability, custom metrics, anomaly detection, AIOps
+        hours: 12
+      - topic: Architecture capstone, multi-region fault-tolerant design
+        hours: 24
+      - topic: Technical documentation, architecture decision records
+        hours: 16
+    questions: []
+
+  - code: AWX
+    title: AWS Specialist
+    level: Specialist
+    hours: 480
+    curriculum:
+      - topic: Enterprise landing zones, account vending, guardrails at scale
+        hours: 36
+      - topic: Advanced networking, Transit Gateway inter-region, DNS architectures
+        hours: 36
+      - topic: Security architecture, zero trust on AWS, compliance automation
+        hours: 40
+      - topic: Platform engineering, self-service infrastructure, CDK constructs
+        hours: 40
+      - topic: Cost engineering, FinOps, tagging strategies, chargeback
+        hours: 28
+      - topic: Advanced data, real-time analytics, streaming at scale
+        hours: 36
+      - topic: ML infrastructure, training pipelines, model management
+        hours: 36
+      - topic: Hybrid cloud, Outposts, EKS Anywhere, VMware Cloud
+        hours: 28
+      - topic: Chaos engineering, fault injection, game days
+        hours: 24
+      - topic: Mentoring, curriculum design, technical writing
+        hours: 24
+      - topic: Research project, original architecture or tooling
+        hours: 56
+      - topic: Comprehensive practical assessment with instructor
+        hours: 48
+      - topic: Technical publication or case study
+        hours: 48
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # GCP
+  # ─────────────────────────────────────────────
+
+  - code: GC1
+    title: GCP Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: GCP fundamentals, projects, regions, zones, resource hierarchy
+        hours: 8
+      - topic: IAM, roles, service accounts, organization policies
+        hours: 8
+      - topic: Compute Engine, instances, images, instance groups
+        hours: 8
+      - topic: Cloud Storage, buckets, ACLs, lifecycle, transfer
+        hours: 6
+      - topic: VPC, subnets, firewall rules, Cloud NAT, Cloud DNS
+        hours: 8
+      - topic: Cloud SQL, AlloyDB basics, backups, high availability
+        hours: 6
+      - topic: Cloud Monitoring, Cloud Logging, alerting
+        hours: 6
+      - topic: gcloud CLI, Cloud Shell, SDK fundamentals
+        hours: 6
+      - topic: Billing, budgets, export, cost management
+        hours: 4
+    questions: []
+
+  - code: GC2
+    title: GCP Engineer II
+    level: Medium
+    hours: 130
+    curriculum:
+      - topic: GKE, cluster management, node pools, workload identity
+        hours: 14
+      - topic: Cloud Functions, Cloud Run, serverless patterns
+        hours: 12
+      - topic: Pub/Sub, event-driven architecture, push and pull subscriptions
+        hours: 10
+      - topic: Firestore, Bigtable, Spanner, database selection
+        hours: 12
+      - topic: Terraform on GCP, modules, state management
+        hours: 12
+      - topic: Cloud Build, Artifact Registry, CI/CD pipelines
+        hours: 10
+      - topic: Security, Secret Manager, VPC Service Controls, Cloud Armor
+        hours: 12
+      - topic: Load balancing, Cloud CDN, traffic management
+        hours: 8
+      - topic: Networking, Cloud Interconnect, Shared VPC, peering
+        hours: 10
+      - topic: BigQuery fundamentals, datasets, queries, partitioning
+        hours: 10
+      - topic: Monitoring, Trace, Profiler, Error Reporting, SLOs
+        hours: 8
+      - topic: Cost optimization, committed use, preemptible VMs
+        hours: 6
+      - topic: Operations, incident management, runbooks
+        hours: 6
+    questions: []
+
+  - code: GC3
+    title: GCP Engineer III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: Multi-project architecture, folders, org policies at scale
+        hours: 16
+      - topic: Advanced GKE, multi-cluster, Anthos, service mesh
+        hours: 18
+      - topic: Advanced networking, Private Google Access, HA VPN, NCC
+        hours: 16
+      - topic: Data engineering, Dataflow, Dataproc, Composer
+        hours: 16
+      - topic: Advanced BigQuery, materialized views, BI Engine, ML
+        hours: 14
+      - topic: ML platform, Vertex AI, pipelines, model serving
+        hours: 16
+      - topic: Advanced security, BeyondCorp, DLP, CSPM
+        hours: 14
+      - topic: Disaster recovery, multi-region, backup strategies
+        hours: 12
+      - topic: Migration, Migrate for Compute, database migration
+        hours: 12
+      - topic: Hybrid cloud, Anthos on-prem, Edge
+        hours: 12
+      - topic: Reliability engineering, error budgets, SLI/SLO
+        hours: 12
+      - topic: Architecture capstone, enterprise design
+        hours: 24
+      - topic: Technical documentation
+        hours: 12
+    questions: []
+
+  - code: GCX
+    title: GCP Specialist
+    level: Specialist
+    hours: 480
+    curriculum:
+      - topic: Enterprise architecture, landing zone automation
+        hours: 40
+      - topic: Platform engineering, GKE fleet management, Config Connector
+        hours: 40
+      - topic: Advanced data, streaming analytics, real-time ML
+        hours: 40
+      - topic: Security architecture, org-wide policies, compliance
+        hours: 36
+      - topic: Networking at scale, global load balancing, CDN architecture
+        hours: 32
+      - topic: Cost engineering, FinOps, BigQuery optimization
+        hours: 28
+      - topic: Advanced ML, custom training, TPU, AutoML
+        hours: 36
+      - topic: Hybrid and multi-cloud, Anthos fleet
+        hours: 28
+      - topic: Mentoring, curriculum design
+        hours: 24
+      - topic: Research project, original tooling or architecture
+        hours: 56
+      - topic: Comprehensive assessment with instructor
+        hours: 48
+      - topic: Technical publication
+        hours: 48
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # AZURE
+  # ─────────────────────────────────────────────
+
+  - code: AZ1
+    title: Azure Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: Azure fundamentals, subscriptions, resource groups, regions
+        hours: 8
+      - topic: Entra ID, users, groups, RBAC, managed identities
+        hours: 8
+      - topic: Virtual Machines, images, availability sets, scale sets
+        hours: 8
+      - topic: Blob Storage, containers, tiers, lifecycle management
+        hours: 6
+      - topic: Virtual Networks, subnets, NSGs, peering, DNS
+        hours: 8
+      - topic: Azure SQL, Cosmos DB basics, backups
+        hours: 6
+      - topic: Monitor, Log Analytics, alerts, dashboards
+        hours: 6
+      - topic: Azure CLI, PowerShell, Cloud Shell
+        hours: 6
+      - topic: Cost Management, budgets, advisor recommendations
+        hours: 4
+    questions: []
+
+  - code: AZ2
+    title: Azure Engineer II
+    level: Medium
+    hours: 130
+    curriculum:
+      - topic: AKS, cluster management, ingress, workload identity
+        hours: 14
+      - topic: Azure Functions, Logic Apps, serverless patterns
+        hours: 12
+      - topic: Service Bus, Event Grid, Event Hubs, messaging
+        hours: 10
+      - topic: Cosmos DB, partitioning, consistency levels, global distribution
+        hours: 12
+      - topic: ARM templates, Bicep, infrastructure as code
+        hours: 12
+      - topic: Azure DevOps, pipelines, repos, artifacts
+        hours: 10
+      - topic: Security, Key Vault, Defender for Cloud, Sentinel basics
+        hours: 12
+      - topic: Application Gateway, Front Door, Traffic Manager
+        hours: 8
+      - topic: Networking, ExpressRoute, VPN Gateway, Private Link
+        hours: 10
+      - topic: Data, Synapse Analytics, Data Factory basics
+        hours: 8
+      - topic: Monitoring, Application Insights, distributed tracing
+        hours: 8
+      - topic: Governance, Policy, Blueprints, Management Groups
+        hours: 8
+      - topic: Cost optimization, reserved capacity, spot VMs
+        hours: 6
+    questions: []
+
+  - code: AZ3
+    title: Azure Engineer III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: Landing zones, CAF, enterprise-scale architecture
+        hours: 16
+      - topic: Advanced AKS, multi-cluster, GitOps, service mesh
+        hours: 16
+      - topic: Advanced networking, hub-spoke, Virtual WAN, NVAs
+        hours: 16
+      - topic: Data engineering, Synapse, Databricks, streaming
+        hours: 16
+      - topic: Advanced security, Sentinel SIEM, zero trust, Confidential Computing
+        hours: 16
+      - topic: ML platform, Azure ML, model deployment, MLOps
+        hours: 14
+      - topic: Disaster recovery, Azure Site Recovery, multi-region
+        hours: 12
+      - topic: Migration, Azure Migrate, database migration
+        hours: 12
+      - topic: Hybrid, Azure Arc, Stack HCI
+        hours: 12
+      - topic: Reliability, SRE practices, chaos engineering
+        hours: 12
+      - topic: Architecture capstone, enterprise design
+        hours: 24
+      - topic: Technical documentation
+        hours: 16
+    questions: []
+
+  - code: AZX
+    title: Azure Specialist
+    level: Specialist
+    hours: 480
+    curriculum:
+      - topic: Enterprise architecture, CAF at scale, governance automation
+        hours: 40
+      - topic: Platform engineering, developer self-service, Bicep modules
+        hours: 36
+      - topic: Advanced security, Sentinel automation, compliance at scale
+        hours: 40
+      - topic: Advanced data, real-time analytics, Fabric
+        hours: 36
+      - topic: Networking at scale, global WAN, peering strategies
+        hours: 32
+      - topic: Cost engineering, FinOps, Azure Advisor automation
+        hours: 28
+      - topic: ML infrastructure, distributed training, model management
+        hours: 32
+      - topic: Hybrid and multi-cloud, Arc fleet management
+        hours: 28
+      - topic: Mentoring, curriculum design
+        hours: 24
+      - topic: Research project, original tooling
+        hours: 56
+      - topic: Comprehensive assessment with instructor
+        hours: 48
+      - topic: Technical publication
+        hours: 48
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # HEROKU
+  # ─────────────────────────────────────────────
+
+  - code: HK1
+    title: Heroku Engineer I
+    level: Basic
+    hours: 40
+    curriculum:
+      - topic: Heroku fundamentals, dynos, buildpacks, Procfile
+        hours: 6
+      - topic: Deployment, Git push, pipelines, review apps
+        hours: 6
+      - topic: Add-ons, Heroku Postgres, Redis, marketplace
+        hours: 6
+      - topic: Configuration, config vars, environments
+        hours: 4
+      - topic: Logging, Logplex, drain configuration
+        hours: 4
+      - topic: Scaling, dyno types, autoscaling, performance
+        hours: 6
+      - topic: CLI, app management, maintenance mode
+        hours: 4
+      - topic: Security, SSL, private spaces basics, SSO
+        hours: 4
+    questions: []
+
+  - code: HK2
+    title: Heroku Engineer II
+    level: Medium
+    hours: 90
+    curriculum:
+      - topic: Advanced Postgres, connection pooling, followers, credentials
+        hours: 10
+      - topic: Heroku Connect, Salesforce data sync
+        hours: 8
+      - topic: Private Spaces, VPN, peering, compliance
+        hours: 10
+      - topic: CI/CD, Heroku CI, pipeline promotion, release phase
+        hours: 10
+      - topic: Container Registry, Docker deploys, multi-process
+        hours: 10
+      - topic: Performance, metrics, New Relic, APM
+        hours: 8
+      - topic: Background jobs, worker dynos, queues, scheduler
+        hours: 8
+      - topic: Multi-environment, staging, production, config management
+        hours: 8
+      - topic: Security, Shield, compliance, HIPAA considerations
+        hours: 8
+      - topic: Cost management, dyno optimization, add-on tiers
+        hours: 6
+      - topic: Troubleshooting, H-codes, memory, timeout errors
+        hours: 4
+    questions: []
+
+  - code: HK3
+    title: Heroku Engineer III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: Enterprise architecture, Heroku Enterprise, teams, permissions
+        hours: 14
+      - topic: Advanced networking, Private Spaces VPN, TLS termination
+        hours: 12
+      - topic: Multi-region deployment, DNS-based routing
+        hours: 12
+      - topic: Advanced data, Kafka on Heroku, streaming
+        hours: 14
+      - topic: Buildpack authoring, custom buildpacks, multi-buildpack
+        hours: 12
+      - topic: Advanced CI/CD, release automation, feature flags
+        hours: 10
+      - topic: Migration strategies, Heroku to/from other platforms
+        hours: 12
+      - topic: Observability, custom drains, structured logging
+        hours: 10
+      - topic: Security hardening, penetration testing, compliance audits
+        hours: 10
+      - topic: Platform limits, workarounds, architectural trade-offs
+        hours: 10
+      - topic: Capstone, enterprise deployment architecture
+        hours: 20
+      - topic: Documentation and runbooks
+        hours: 12
+    questions: []
+
+  - code: HKX
+    title: Heroku Specialist
+    level: Specialist
+    hours: 360
+    curriculum:
+      - topic: Platform internals, Cedar stack, routing mesh, HTTP cache
+        hours: 32
+      - topic: Enterprise platform engineering, self-service teams
+        hours: 32
+      - topic: Advanced security, Shield compliance, SOC 2 on Heroku
+        hours: 28
+      - topic: Migration architecture, large-scale platform moves
+        hours: 28
+      - topic: Custom buildpack ecosystem, language support
+        hours: 24
+      - topic: Advanced data architectures, Postgres at scale
+        hours: 28
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Research project, tooling or methodology
+        hours: 48
+      - topic: Comprehensive assessment with instructor
+        hours: 40
+      - topic: Technical publication
+        hours: 40
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # FIREBASE
+  # ─────────────────────────────────────────────
+
+  - code: FB1
+    title: Firebase Engineer I
+    level: Basic
+    hours: 40
+    curriculum:
+      - topic: Firebase fundamentals, project setup, console, CLI
+        hours: 6
+      - topic: Authentication, providers, email/password, Google, anonymous
+        hours: 6
+      - topic: Firestore, documents, collections, queries, real-time
+        hours: 8
+      - topic: Hosting, deploy, custom domains, caching
+        hours: 4
+      - topic: Storage, upload, download, security rules
+        hours: 4
+      - topic: Security rules, Firestore and Storage, testing
+        hours: 6
+      - topic: Cloud Messaging, notifications, topics
+        hours: 3
+      - topic: Analytics, events, user properties, dashboards
+        hours: 3
+    questions: []
+
+  - code: FB2
+    title: Firebase Engineer II
+    level: Medium
+    hours: 90
+    curriculum:
+      - topic: Cloud Functions, triggers, HTTP functions, scheduling
+        hours: 12
+      - topic: Advanced Firestore, composite indexes, transactions, batches
+        hours: 10
+      - topic: Advanced Authentication, custom claims, multi-tenancy, linking
+        hours: 10
+      - topic: Remote Config, feature flags, A/B testing
+        hours: 8
+      - topic: Performance Monitoring, custom traces, network monitoring
+        hours: 6
+      - topic: Crashlytics, crash reporting, analysis, alerts
+        hours: 6
+      - topic: Extensions, marketplace, custom extensions
+        hours: 6
+      - topic: Emulator Suite, local development, testing
+        hours: 8
+      - topic: Security, advanced rules, audit logging, IAM
+        hours: 10
+      - topic: CI/CD, GitHub Actions, preview channels
+        hours: 6
+      - topic: Cost management, billing, usage optimization
+        hours: 4
+      - topic: App Check, attestation, abuse prevention
+        hours: 4
+    questions: []
+
+  - code: FB3
+    title: Firebase Engineer III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: Advanced Cloud Functions, v2, Cloud Run integration, concurrency
+        hours: 14
+      - topic: Data modeling at scale, denormalization, aggregation, sharding
+        hours: 14
+      - topic: Advanced security rules, unit testing, simulation
+        hours: 12
+      - topic: Firebase and GCP integration, BigQuery export, Pub/Sub
+        hours: 12
+      - topic: Server-side rendering, App Hosting, Next.js/Angular
+        hours: 12
+      - topic: Real-time architecture, presence, live cursors, sync
+        hours: 12
+      - topic: Migration, Firestore to/from other databases
+        hours: 10
+      - topic: Multi-project architecture, cross-project access
+        hours: 10
+      - topic: Advanced analytics, BigQuery ML, funnel analysis
+        hours: 10
+      - topic: Offline support, persistence, conflict resolution
+        hours: 8
+      - topic: Load testing, performance at scale, Firestore limits
+        hours: 10
+      - topic: Capstone, full-stack Firebase application
+        hours: 20
+      - topic: Documentation
+        hours: 8
+    questions: []
+
+  - code: FBX
+    title: Firebase Specialist
+    level: Specialist
+    hours: 360
+    curriculum:
+      - topic: Firebase architecture at scale, multi-region, global apps
+        hours: 32
+      - topic: Advanced Cloud Functions, custom runtimes, optimization
+        hours: 28
+      - topic: Enterprise Firebase, organization-wide patterns
+        hours: 28
+      - topic: Advanced security architecture, compliance, audit
+        hours: 28
+      - topic: Data pipeline engineering, real-time + batch
+        hours: 28
+      - topic: Platform engineering, shared libraries, internal tooling
+        hours: 24
+      - topic: Migration architecture, large-scale data moves
+        hours: 24
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Research project, tooling or methodology
+        hours: 48
+      - topic: Comprehensive assessment with instructor
+        hours: 40
+      - topic: Technical publication
+        hours: 40
+    questions: []

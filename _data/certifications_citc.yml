@@ -170,3 +170,108 @@ certifications:
     name: CITC Certified Software Engineering Specialist
     abbr: CITC CSES
     description: Holders demonstrate specialist-level mastery of software engineering. They can architect hyperscale systems, lead engineering organizations, and contribute original methodologies.
+
+  # AWS
+  - code: AW1
+    name: CITC Certified AWS Engineer I
+    abbr: CITC CAE-I
+    description: Holders demonstrate foundational competency in AWS. They can deploy and manage EC2, S3, VPC, RDS, and IAM with proper security and cost awareness.
+
+  - code: AW2
+    name: CITC Certified AWS Engineer II
+    abbr: CITC CAE-II
+    description: Holders demonstrate intermediate competency in AWS. They can architect serverless, containerized, and event-driven systems with IaC, CI/CD, and security best practices.
+
+  - code: AW3
+    name: CITC Certified AWS Engineer III
+    abbr: CITC CAE-III
+    description: Holders demonstrate advanced competency in AWS. They can design multi-account, multi-region architectures with disaster recovery, data engineering, and ML platforms.
+
+  - code: AWX
+    name: CITC Certified AWS Specialist
+    abbr: CITC CAS
+    description: Holders demonstrate specialist-level mastery of AWS. They can engineer enterprise landing zones, FinOps, hybrid cloud, and platform self-service at scale.
+
+  # GCP
+  - code: GC1
+    name: CITC Certified GCP Engineer I
+    abbr: CITC CGC-I
+    description: Holders demonstrate foundational competency in GCP. They can deploy and manage Compute Engine, Cloud Storage, VPC, Cloud SQL, and IAM.
+
+  - code: GC2
+    name: CITC Certified GCP Engineer II
+    abbr: CITC CGC-II
+    description: Holders demonstrate intermediate competency in GCP. They can architect with GKE, serverless, Pub/Sub, Terraform, and BigQuery.
+
+  - code: GC3
+    name: CITC Certified GCP Engineer III
+    abbr: CITC CGC-III
+    description: Holders demonstrate advanced competency in GCP. They can design multi-project enterprise architectures with Anthos, data pipelines, and ML platforms.
+
+  - code: GCX
+    name: CITC Certified GCP Specialist
+    abbr: CITC GCPS
+    description: Holders demonstrate specialist-level mastery of GCP. They can engineer enterprise platforms, fleet management, and global-scale analytics.
+
+  # Azure
+  - code: AZ1
+    name: CITC Certified Azure Engineer I
+    abbr: CITC CAZ-I
+    description: Holders demonstrate foundational competency in Azure. They can deploy and manage VMs, Blob Storage, VNets, Azure SQL, and Entra ID.
+
+  - code: AZ2
+    name: CITC Certified Azure Engineer II
+    abbr: CITC CAZ-II
+    description: Holders demonstrate intermediate competency in Azure. They can architect with AKS, serverless, Cosmos DB, Bicep, and DevOps pipelines.
+
+  - code: AZ3
+    name: CITC Certified Azure Engineer III
+    abbr: CITC CAZ-III
+    description: Holders demonstrate advanced competency in Azure. They can design enterprise landing zones, data platforms, and multi-region architectures with CAF.
+
+  - code: AZX
+    name: CITC Certified Azure Specialist
+    abbr: CITC CAZS
+    description: Holders demonstrate specialist-level mastery of Azure. They can engineer enterprise governance, hybrid with Arc, and platform automation at scale.
+
+  # Heroku
+  - code: HK1
+    name: CITC Certified Heroku Engineer I
+    abbr: CITC CHE-I
+    description: Holders demonstrate foundational competency in Heroku. They can deploy, scale, and manage applications with dynos, add-ons, and pipelines.
+
+  - code: HK2
+    name: CITC Certified Heroku Engineer II
+    abbr: CITC CHE-II
+    description: Holders demonstrate intermediate competency in Heroku. They can manage Private Spaces, container deploys, CI/CD, and performance optimization.
+
+  - code: HK3
+    name: CITC Certified Heroku Engineer III
+    abbr: CITC CHE-III
+    description: Holders demonstrate advanced competency in Heroku. They can architect enterprise deployments, custom buildpacks, and multi-region strategies.
+
+  - code: HKX
+    name: CITC Certified Heroku Specialist
+    abbr: CITC CHS
+    description: Holders demonstrate specialist-level mastery of Heroku. They can engineer enterprise platforms, compliance architectures, and large-scale migrations.
+
+  # Firebase
+  - code: FB1
+    name: CITC Certified Firebase Engineer I
+    abbr: CITC CFE-I
+    description: Holders demonstrate foundational competency in Firebase. They can build apps with Authentication, Firestore, Hosting, Storage, and security rules.
+
+  - code: FB2
+    name: CITC Certified Firebase Engineer II
+    abbr: CITC CFE-II
+    description: Holders demonstrate intermediate competency in Firebase. They can build with Cloud Functions, advanced rules, Remote Config, and the Emulator Suite.
+
+  - code: FB3
+    name: CITC Certified Firebase Engineer III
+    abbr: CITC CFE-III
+    description: Holders demonstrate advanced competency in Firebase. They can design data models at scale, integrate with GCP, and build real-time multi-user systems.
+
+  - code: FBX
+    name: CITC Certified Firebase Specialist
+    abbr: CITC CFS
+    description: Holders demonstrate specialist-level mastery of Firebase. They can architect global-scale applications, enterprise patterns, and data pipeline engineering.

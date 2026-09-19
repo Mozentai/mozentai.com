@@ -113,3 +113,73 @@ titles:
   - name: Software Engineering Specialist
     exam: SSX
     hours: 500
+
+  # AWS
+  - name: AWS Engineer I
+    exam: AW1
+    hours: 60
+  - name: AWS Engineer II
+    exam: AW2
+    hours: 130
+  - name: AWS Engineer III
+    exam: AW3
+    hours: 220
+  - name: AWS Specialist
+    exam: AWX
+    hours: 480
+
+  # GCP
+  - name: GCP Engineer I
+    exam: GC1
+    hours: 60
+  - name: GCP Engineer II
+    exam: GC2
+    hours: 130
+  - name: GCP Engineer III
+    exam: GC3
+    hours: 220
+  - name: GCP Specialist
+    exam: GCX
+    hours: 480
+
+  # Azure
+  - name: Azure Engineer I
+    exam: AZ1
+    hours: 60
+  - name: Azure Engineer II
+    exam: AZ2
+    hours: 130
+  - name: Azure Engineer III
+    exam: AZ3
+    hours: 220
+  - name: Azure Specialist
+    exam: AZX
+    hours: 480
+
+  # Heroku
+  - name: Heroku Engineer I
+    exam: HK1
+    hours: 40
+  - name: Heroku Engineer II
+    exam: HK2
+    hours: 90
+  - name: Heroku Engineer III
+    exam: HK3
+    hours: 160
+  - name: Heroku Specialist
+    exam: HKX
+    hours: 360
+
+  # Firebase
+  - name: Firebase Engineer I
+    exam: FB1
+    hours: 40
+  - name: Firebase Engineer II
+    exam: FB2
+    hours: 90
+  - name: Firebase Engineer III
+    exam: FB3
+    hours: 160
+  - name: Firebase Specialist
+    exam: FBX
+    hours: 360
