@@ -10,37 +10,34 @@
     >
   </div>
 
-  {% if site.data.engineers.people.size > 0 %}
-  <div class="wall-list" id="wall-people">
+  <div class="wall-results" id="wall-results">
     {% for person in site.data.engineers.people %}
-    <div
-      class="wall-row"
+    <a
+      class="wall-row wall-row--person"
+      href="#{{ person.smarthex }}"
       data-name="{{ person.name | downcase | escape }}"
       data-hex="{{ person.smarthex | downcase | escape }}"
       data-titles="{{ person.titles | join: ' ' | downcase | escape }}"
+      hidden
     >
-      <span class="wall-row-name">{{ person.name }}</span>
+      <span class="wall-row-label">{{ person.name }}</span>
       <span class="wall-row-hex">{{ person.smarthex }}</span>
-      <span class="wall-row-titles">{% if person.titles.size > 0 %}{{ person.titles | join: ', ' }}{% else %}&mdash;{% endif %}</span>
-    </div>
+      <span class="wall-row-meta">{% if person.titles.size > 0 %}{{ person.titles | join: ', ' }}{% else %}Registered{% endif %}</span>
+    </a>
+    {% endfor %}
+    {% for title in site.data.career.titles %}
+    <a
+      class="wall-row wall-row--title"
+      href="#{{ title.exam }}"
+      data-title="{{ title.name | downcase | escape }}"
+      data-exam="{{ title.exam | downcase | escape }}"
+      hidden
+    >
+      <span class="wall-row-label">{{ title.name }}</span>
+      <span class="wall-row-hex">{{ title.exam }}</span>
+      <span class="wall-row-meta">Title</span>
+    </a>
     {% endfor %}
   </div>
-  {% endif %}
-  <p class="wall-empty{% if site.data.engineers.people.size > 0 %} is-hidden{% endif %}" id="wall-empty">No results.</p>
-
-  <div class="wall-ladder">
-    <h3 class="wall-subhead">{{ site.data.career.titles_kicker }}</h3>
-    <div class="ladder-grid" id="wall-titles">
-      {% for title in site.data.career.titles %}
-      <div
-        class="ladder-item"
-        data-title="{{ title.name | downcase | escape }}"
-        data-exam="{{ title.exam | downcase | escape }}"
-      >
-        <span class="ladder-code">{{ title.exam }}</span>
-        <span class="ladder-name">{{ title.name }}</span>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
+  <p class="wall-hint" id="wall-hint">Search by name, CITC number, or title.</p>
 </section>

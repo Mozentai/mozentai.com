@@ -1,6 +1,5 @@
 headline: Career Wall
-lookup_placeholder: Name, CITC number, title, or exam
-titles_kicker: Title ladder
+lookup_placeholder: Search professionals or titles
 
 titles:
   - name: Python Engineer I
