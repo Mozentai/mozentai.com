@@ -217,6 +217,7 @@ async function loadEngineer(user) {
     renderCerts(data.certs || {});
     if (isAdmin) showAdminPanel(data);
   } catch (err) {
+    console.error("loadEngineer", err);
     dashName.textContent = user.displayName || user.email;
     dashHex.textContent = "";
     renderSubscription(null);

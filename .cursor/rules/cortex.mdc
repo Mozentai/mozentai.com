@@ -90,7 +90,7 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 ### About page (`/about/`)
 
-Topbar nav (About active, Professionals, Get in touch). Contains:
+Topbar nav (About active, Professionals, Get in touch). Problem-first copy, professional tone. Headline: "Technical interviews are broken." Do not use slang ("crap"), quality guarantees, or punchy contrast lines. Then:
 - Pitch + stats (10 years, 15+)
 - Services (Auditing, Hardening, Engineering, CITC). 2x2 grid.
 - Certifications (ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF)
@@ -195,7 +195,8 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-09-19 | Added Git (GT1/GT2/GT3/GTX), GitHub (GH1/GH2/GH3/GHX), and GitLab (GL1/GL2/GL3/GLX) certification tracks to the CITC title catalog. Same I/II/III + Specialist pattern. Exam codes: GT for Git, GH for GitHub, GL for GitLab. Each has full curriculum in `_data/exams.yml`. |
 | 2026-09-19 | Added engineer login at `/account/` ($20/month CREA keep-alive) and company login at `/company/` ($1,000/month plan). Both use Firebase Auth (Google sign-in) and Stripe Payment Links for subscriptions. Engineers see CITC standing, certifications, freshness. Companies get Career Wall access and engineer lookup. Firestore collections: `engineers/{uid}` and `companies/{uid}`. Stripe webhooks (backend) write subscription status to Firestore. Payment Link URLs in `_data/stripe.yml` need real Stripe URLs. Stripe Customer Portal URL also in that file. |
 | 2026-09-19 | CITC titles have two categories: **engineering disciplines** and **tools**. Engineering disciplines use "X Engineer I/II/III" + "X Specialist" naming (Python Engineer I, Java Engineer III, etc.). Tools use plain "X I/II/III/X" naming without "Engineer" (Git I, GitHub II, GitLab X). Tools get a `category: tool` field in `_data/career.yml` and a ◉ seal icon on the Career Wall. AWS/GCP/Azure/Heroku/Firebase are platforms (currently named as "Engineer" but could be reclassified if Victor asks). Git, GitHub, GitLab are tools. |
-| 2026-09-19 | About page is about the PROBLEM we solve, not a generic company blurb. Lead: "Technical interviews are a poor signal." Tone must stay professional and measured. Do not use "cut the crap", "through and through", "we guarantee quality", "whiteboard riddle", or "never waste another round". Mozentai assesses engineers before they join a team. Career Wall standing is live, certifications have freshness, green means current. 10 years in market, 15+ years experience. CITC exists so companies can look people up and skip the screening round. |
+| 2026-09-19 | About page is about the PROBLEM we solve, not a generic company blurb. Lead: "Technical interviews are broken." Victor likes that headline. Tone must stay professional and measured after it. Do not use "cut the crap", "through and through", "we guarantee quality", "whiteboard riddle", or "never waste another round". Do not revert the lead to "poor signal". Mozentai assesses engineers before they join a team. Career Wall standing is live, certifications have freshness, green means current. 10 years in market, 15+ years experience. CITC exists so companies can look people up and skip the screening round. |
+| 2026-09-19 | Account and Company sign-in gates use `.gate { display: flex }`. That author rule overrides the HTML `hidden` attribute, so "Sign in with Google" stayed on screen after Google auth. Pair every `.gate` flex rule with `.gate[hidden] { display: none !important; }`. Same bug on `/login/` inbox. |
 
 ## Self-update protocol
 
