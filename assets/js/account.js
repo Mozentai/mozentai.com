@@ -32,8 +32,6 @@ var subDot = document.getElementById("sub-dot");
 var subLabel = document.getElementById("sub-label");
 var subManage = document.getElementById("sub-manage");
 var subscribeBtn = document.getElementById("subscribe-btn");
-var cpfInput = document.getElementById("cpf-input");
-var cpfErr = document.getElementById("cpf-err");
 
 var adminPanel = document.getElementById("admin-panel");
 var adminLookup = document.getElementById("admin-lookup");
@@ -63,48 +61,6 @@ var FRESHNESS_MS = 6 * 30 * 24 * 60 * 60 * 1000;
 var EXPIRING_MS = 30 * 24 * 60 * 60 * 1000;
 
 var editingUid = null;
-
-function validateCPF(raw) {
-  var cpf = raw.replace(/\D/g, "");
-  if (cpf.length !== 11) return false;
-  if (/^(\d)\1{10}$/.test(cpf)) return false;
-  var sum = 0;
-  for (var i = 0; i < 9; i++) sum += parseInt(cpf[i], 10) * (10 - i);
-  var d1 = 11 - (sum % 11);
-  if (d1 >= 10) d1 = 0;
-  if (parseInt(cpf[9], 10) !== d1) return false;
-  sum = 0;
-  for (var i = 0; i < 10; i++) sum += parseInt(cpf[i], 10) * (11 - i);
-  var d2 = 11 - (sum % 11);
-  if (d2 >= 10) d2 = 0;
-  if (parseInt(cpf[10], 10) !== d2) return false;
-  return true;
-}
-
-function formatCPF(raw) {
-  var digits = raw.replace(/\D/g, "").slice(0, 11);
-  if (digits.length <= 3) return digits;
-  if (digits.length <= 6) return digits.slice(0, 3) + "." + digits.slice(3);
-  if (digits.length <= 9) return digits.slice(0, 3) + "." + digits.slice(3, 6) + "." + digits.slice(6);
-  return digits.slice(0, 3) + "." + digits.slice(3, 6) + "." + digits.slice(6, 9) + "-" + digits.slice(9);
-}
-
-cpfInput.addEventListener("input", function () {
-  var pos = cpfInput.selectionStart;
-  var before = cpfInput.value.length;
-  cpfInput.value = formatCPF(cpfInput.value);
-  var after = cpfInput.value.length;
-  var newPos = pos + (after - before);
-  cpfInput.setSelectionRange(newPos, newPos);
-  cpfInput.classList.remove("is-invalid");
-  cpfErr.classList.remove("is-visible");
-});
-
-function showCpfError(msg) {
-  cpfErr.textContent = msg;
-  cpfErr.classList.add("is-visible");
-  cpfInput.classList.add("is-invalid");
-}
 
 function showAdminError(msg) {
   adminErr.textContent = msg;
@@ -183,18 +139,16 @@ function renderSubscription(sub) {
   subManage.href = stripe.portal || "#";
 }
 
-async function isCpfTaken(cpfDigits, currentUid) {
-  try {
-    var snap = await getDoc(doc(db, "cpf_index", cpfDigits));
-    if (!snap.exists()) return false;
-    return snap.data().uid !== currentUid;
-  } catch (err) {
-    return false;
-  }
-}
-
-async function claimCpf(cpfDigits, uid) {
-  await setDoc(doc(db, "cpf_index", cpfDigits), { uid: uid });
+function highlightCatalog(titles) {
+  document.querySelectorAll(".catalog-item").forEach(function (el) {
+    el.classList.remove("catalog-item--held");
+  });
+  if (!titles || !titles.length) return;
+  var held = titles.map(function (t) { return t.toUpperCase(); });
+  document.querySelectorAll(".catalog-item").forEach(function (el) {
+    var code = (el.getAttribute("data-exam") || "").toUpperCase();
+    if (held.indexOf(code) !== -1) el.classList.add("catalog-item--held");
+  });
 }
 
 function checkManager(user) {
@@ -214,12 +168,9 @@ async function loadEngineer(user) {
     var data = snap.data();
     dashName.textContent = data.name || user.displayName || user.email;
     dashHex.textContent = data.smarthex || "";
-    if (data.cpf) {
-      cpfInput.value = formatCPF(data.cpf);
-      cpfInput.disabled = true;
-    }
     renderSubscription(data.subscription || null);
     renderCerts(data.certs || {});
+    highlightCatalog(data.titles || []);
   } catch (err) {
     dashName.textContent = user.displayName || user.email;
     dashHex.textContent = "";
@@ -266,37 +217,15 @@ onAuthStateChanged(auth, function (user) {
     }
 
     subscribeBtn.onclick = async function () {
-      cpfErr.classList.remove("is-visible");
-      cpfInput.classList.remove("is-invalid");
-
-      var raw = cpfInput.value;
-      if (!validateCPF(raw)) {
-        showCpfError("Invalid CPF");
-        return;
-      }
-
-      var cpfDigits = raw.replace(/\D/g, "");
-
       subscribeBtn.disabled = true;
-      subscribeBtn.textContent = "Checking...";
-
-      var taken = await isCpfTaken(cpfDigits, user.uid);
-      if (taken) {
-        showCpfError("This CPF is already registered");
-        subscribeBtn.disabled = false;
-        subscribeBtn.textContent = "Subscribe";
-        return;
-      }
+      subscribeBtn.textContent = "Redirecting...";
 
       try {
-        await claimCpf(cpfDigits, user.uid);
         await setDoc(doc(db, "engineers", user.uid), {
-          cpf: cpfDigits,
           name: user.displayName || "",
           email: user.email || "",
         }, { merge: true });
       } catch (err) {
-        showCpfError("Could not save. Try again.");
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = "Subscribe";
         return;

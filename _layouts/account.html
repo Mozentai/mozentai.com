@@ -197,38 +197,55 @@
         max-width: 400px;
         margin: 0 auto 24px;
       }
-      .cpf-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 24px;
+      .catalog-group {
+        margin-bottom: 32px;
       }
-      .cpf-input {
-        width: 220px;
-        background: transparent;
+      .catalog-group-name {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+      }
+      .catalog-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 6px;
-        color: var(--text);
-        font-family: var(--mono);
-        font-size: 14px;
-        padding: 10px 14px;
-        text-align: center;
-        letter-spacing: 2px;
-        outline: none;
         transition: border-color 0.2s;
       }
-      .cpf-input:focus { border-color: var(--accent); }
-      .cpf-input::placeholder { color: var(--muted); letter-spacing: 1px; }
-      .cpf-input.is-invalid { border-color: var(--stale); }
-      .cpf-err {
+      .catalog-item:hover { border-color: var(--accent); }
+      .catalog-item--held { border-color: var(--fresh); }
+      .catalog-exam {
         font-family: var(--mono);
-        font-size: 11px;
-        color: var(--stale);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
         letter-spacing: 0.5px;
-        display: none;
+        min-width: 32px;
       }
-      .cpf-err.is-visible { display: block; }
+      .catalog-item--held .catalog-exam { color: var(--fresh); }
+      .catalog-name {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .catalog-item--held .catalog-name { color: var(--text); }
+      .catalog-seal {
+        font-size: 12px;
+        margin-left: auto;
+        color: var(--muted);
+      }
+      .catalog-item--held .catalog-seal { color: var(--fresh); }
 
       .sub-status {
         display: flex;
@@ -445,11 +462,7 @@
             <div class="sub-card-price">$20</div>
             <div class="sub-card-period">per month</div>
             <div class="sub-card-desc">
-              Your professional standing. One per person, tied to your CPF. Once issued, your CITC number is permanent.
-            </div>
-            <div class="cpf-wrap">
-              <input class="cpf-input" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
-              <p class="cpf-err" id="cpf-err"></p>
+              Your professional standing. Once issued, your CITC number is permanent.
             </div>
             <button class="btn" id="subscribe-btn" type="button">Subscribe</button>
           </div>
@@ -466,6 +479,56 @@
         <h2 class="dash-section-title">Certifications</h2>
         <div class="cert-list" id="cert-list"></div>
         <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
+
+        <div style="margin-top:48px;">
+          <h2 class="dash-section-title">Title Catalog</h2>
+          {% assign grouped = site.data.career.titles | group_by_exp: "t", "t.name | split: ' ' | pop | join: ' '" %}
+          {% assign disciplines = "" | split: "" %}
+          {% assign current_disc = "" %}
+          {% for t in site.data.career.titles %}
+            {% if t.category == "tool" %}
+              {% assign parts = t.name | split: " " %}
+              {% assign disc = parts | pop | join: " " %}
+            {% else %}
+              {% assign words = t.name | split: " " %}
+              {% if words.last == "Specialist" %}
+                {% assign disc = words | pop | join: " " %}
+              {% else %}
+                {% assign disc = words | pop | pop | join: " " %}
+              {% endif %}
+            {% endif %}
+            {% unless disciplines contains disc %}
+              {% assign disciplines = disciplines | push: disc %}
+            {% endunless %}
+          {% endfor %}
+          {% for disc in disciplines %}
+          <div class="catalog-group">
+            <div class="catalog-group-name">{{ disc }}</div>
+            <div class="catalog-grid">
+              {% for t in site.data.career.titles %}
+                {% if t.category == "tool" %}
+                  {% assign parts = t.name | split: " " %}
+                  {% assign tdisc = parts | pop | join: " " %}
+                {% else %}
+                  {% assign words = t.name | split: " " %}
+                  {% if words.last == "Specialist" %}
+                    {% assign tdisc = words | pop | join: " " %}
+                  {% else %}
+                    {% assign tdisc = words | pop | pop | join: " " %}
+                  {% endif %}
+                {% endif %}
+                {% if tdisc == disc %}
+              <div class="catalog-item" data-exam="{{ t.exam }}">
+                <span class="catalog-exam">{{ t.exam }}</span>
+                <span class="catalog-name">{{ t.name }}</span>
+                {% if t.category == "tool" %}<span class="catalog-seal">&#x25C9;</span>{% endif %}
+              </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
 
         <div class="admin-panel" id="admin-panel">
           <h2 class="dash-section-title">Manage Engineers</h2>
