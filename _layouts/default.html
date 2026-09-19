@@ -50,6 +50,7 @@
       .wordmark {
         font-family: var(--mono);
         font-weight: 700;
+        font-size: clamp(48px, 9vw, 88px);
         letter-spacing: 10px;
         color: var(--accent);
         text-transform: uppercase;
@@ -592,7 +593,7 @@
       }
       @media (max-width: 600px) {
         .below { padding: 60px 24px 48px; gap: 80px; }
-        .wordmark { font-size: 30px; letter-spacing: 5px; }
+        .wordmark { letter-spacing: 6px; }
         .tagline  { font-size: 10px; letter-spacing: 2px; }
         .marquee-logo { height: 26px; }
         .certifications { grid-template-columns: 1fr; }
@@ -659,20 +660,35 @@
     </footer>
 
     <script>
-      document.fonts.ready.then(function () {
+      function fitHeroLockup() {
         var wm  = document.querySelector('.wordmark');
         var tag = document.querySelector('.tagline');
-        var target = tag.offsetWidth;
-        var size = 40;
+        if (!wm || !tag) return;
+        var target = Math.min(window.innerWidth * 0.86, 560);
+        var size = 24;
         wm.style.fontSize = size + 'px';
-        while (wm.offsetWidth < target && size < 300) {
+        while (wm.offsetWidth < target && size < 160) {
           size += 0.5;
           wm.style.fontSize = size + 'px';
         }
-        while (wm.offsetWidth > target && size > 10) {
+        while (wm.offsetWidth > target && size > 24) {
           size -= 0.5;
           wm.style.fontSize = size + 'px';
         }
+        var tracking = 2;
+        tag.style.letterSpacing = tracking + 'px';
+        while (tag.offsetWidth < wm.offsetWidth && tracking < 40) {
+          tracking += 0.25;
+          tag.style.letterSpacing = tracking + 'px';
+        }
+        while (tag.offsetWidth > wm.offsetWidth && tracking > 1) {
+          tracking -= 0.25;
+          tag.style.letterSpacing = tracking + 'px';
+        }
+      }
+      document.fonts.ready.then(function () {
+        fitHeroLockup();
+        window.addEventListener('resize', fitHeroLockup);
       });
 
       var observer = new IntersectionObserver(function (entries) {

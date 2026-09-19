@@ -69,7 +69,7 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 ## Page sections (top to bottom)
 
-1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold.
+1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold. The mark is sized to a viewport lockup (up to 560px wide). The tagline letter-spacing stretches to the mark. Never size MOZENT△I down to a short tagline. "Engineers @ Work" is shorter than the old "CyberSec Specialists, Hackers @ Work" line, and fitting the mark to that width made the letters ~23px. That was a bug.
 2. **Pitch** — "Stop wasting time on screening." We prepare the professionals for the companies.
 3. **Stats** — 10 years in the market, 15+ years of experience
 4. **Services** — Auditing, Hardening, Engineering (embed), CITC (credential service). Four cards in a 2x2 grid.
@@ -169,6 +169,7 @@ Canonical rules also live at `~/github/context/mozentai/rules/`. When updating `
 | 2026-09-19 | Manager inbox at /login/. Looks like 404. Click wordmark, Google sign-in as spacemany2k38@gmail.com or victor@mozentai.com. IP allowlist lives in Firestore config/allow.ips, not in git. Contact form writes Firestore inquiries plus FormSubmit email. Firebase project mozentai-com. Do not link /login from the public site. Cloud Functions need Blaze, so IP is enforced in the inbox page after sign-in, not at the CDN edge. |
 | 2026-09-19 | CITC is the professional standing. Pitch: we prepare the professionals so companies skip screening. Career Wall lookup on the homepage. Engineers hold a SmartHex-16 CITC number (PyPI smarthex 0.2.2). $20/month Stripe subscription keeps the CREA. $200 Stripe one-time exam per title. Max 5 titles per CREA. Public catalog starts with Python Engineer I, II, III. Requirements from Mozentai only. Stripe-Signature is source of standing for engineers and companies. Company plans gate which engineer group they can access. Do not print those prices, the cap, SmartHex, CPF, or CREA on the public page. Portraits on the wall use site colors only. Do not invent registered people. |
 | 2026-09-19 | Each CITC title has its own question group and a named exam. Python: P1, P2, P3. Any exam code ending in X is specialist (PX). Two modes: regular questionnaire, and a scheduled sitting with an instructor (the tester). HTB-like in spirit, but candidates book the instructor session. After the sitting, generate a performance type from the test score. Do not invent questions, score bands, or a PX title on the public page. Public wall shows P1/P2/P3 and the two modes only. Question banks live in `_data/exams.yml` and stay unpublished. |
+| 2026-09-19 | Hero wordmark must stay large. The old script sized MOZENT△I to the tagline width. After the tagline became "Engineers @ Work", the letters dropped to ~23px. Size the mark to the viewport lockup (cap 560px) and stretch tagline tracking under it. Do not restore the 30px mobile wordmark override. |
 
 ## Self-update protocol
 

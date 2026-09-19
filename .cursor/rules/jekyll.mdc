@@ -44,6 +44,7 @@ bundle exec jekyll build
 ## Layout notes
 
 - `default.html` does NOT render `{{ content }}` (landing is self-contained)
+- Hero lockup: `fitHeroLockup()` sizes `.wordmark` to min(86vw, 560px), then stretches `.tagline` letter-spacing to match. Do not size the mark to the tagline.
 - `inner.html` is used by `/hire/` and `/hire/sent/`
 - `inbox.html` is used by `/login/`
 - `error.html` is used only by `404.md`
