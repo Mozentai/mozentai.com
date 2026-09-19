@@ -15,7 +15,9 @@
       " " +
       (el.getAttribute("data-titles") || "") +
       " " +
-      (el.getAttribute("data-title") || "")
+      (el.getAttribute("data-title") || "") +
+      " " +
+      (el.getAttribute("data-exam") || "")
     ).replace(/\s+/g, " ").trim();
   }
 

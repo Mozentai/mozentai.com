@@ -1,0 +1,28 @@
+# CITC exams. Author the question group for each exam code here.
+# Do not render these questions on the public site.
+# Performance type is generated from the sitting score in product code, not here.
+# Do not invent score bands. Do not invent a PX title until Victor names it.
+
+modes:
+  - id: questionnaire
+    label: Questionnaire
+  - id: instructor
+    label: Instructor
+    note: Candidate schedules the sitting and takes it with a tester.
+
+naming:
+  python: P
+  specialist: X
+
+exams:
+  - code: P1
+    title: Python Engineer I
+    questions: []
+
+  - code: P2
+    title: Python Engineer II
+    questions: []
+
+  - code: P3
+    title: Python Engineer III
+    questions: []

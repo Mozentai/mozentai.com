@@ -1,21 +1,21 @@
 headline: Career Wall
 lead: We prepare the professionals. Companies look them up and skip the screening.
 lookup_label: Look up
-lookup_placeholder: Name, CITC number, or title
+lookup_placeholder: Name, CITC number, title, or exam
 empty: Registered engineers appear here.
 titles_kicker: What to become
-titles_lead: Engineers look up the standing they want. Requirements come from Mozentai.
+titles_lead: Each standing has its own exam. Sit the questionnaire, or schedule a session with an instructor. Requirements come from Mozentai.
 id_hint: Each registered professional holds a CITC number.
 
 titles:
   - name: Python Engineer I
-    level: I
+    exam: P1
     summary: First standing. Requirements are set by Mozentai.
 
   - name: Python Engineer II
-    level: II
+    exam: P2
     summary: Next standing. Requirements are set by Mozentai.
 
   - name: Python Engineer III
-    level: III
+    exam: P3
     summary: Senior standing. Requirements are set by Mozentai.

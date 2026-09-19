@@ -33,10 +33,10 @@ Never skip deploy when site content or assets changed.
 ## Content rules
 
 - **Hero:** full viewport, wordmark + tagline only. Do not clutter above the fold.
-- **Below fold:** Pitch ("Stop wasting time on screening."), stats, Services (Auditing, Hardening, Engineering, CITC), Career Wall (lookup + Python Engineer I/II/III), Engagement, Clients, Certifications, Testimonials, Get in touch CTA, footer Conway glider. No Leadership / CEO photo on the public site.
+- **Below fold:** Pitch ("Stop wasting time on screening."), stats, Services (Auditing, Hardening, Engineering, CITC), Career Wall (lookup + Python Engineer I/II/III as exams P1/P2/P3), Engagement, Clients, Certifications, Testimonials, Get in touch CTA, footer Conway glider. No Leadership / CEO photo on the public site.
 - **Get in touch:** dedicated `/hire/` page, headline "Get in touch" (never "Hire a security engineer"). Form delivers to victor@mozentai.com and writes Firestore inquiries. Keep the hero wordmark-only.
 - **CITC:** Council of Information Technology & Computing. We prepare professionals. Companies look them up and skip screening. Public page does not print prices, Stripe, SmartHex, CPF, CREA, or the five-title cap. Mechanics live in cortex.
-- **Career Wall:** Registered engineers only. Site-color portraits. Lookup by name, CITC number, or title. Do not invent people.
+- **Career Wall:** Registered engineers only. Site-color portraits. Lookup by name, CITC number, title, or exam. Cards show P1, P2, P3. Public copy may mention the questionnaire or scheduling with an instructor. Do not print HTB, PX, scores, or the question bank. Do not invent people.
 - **Manager inbox:** `/login/` is unlisted. 404 until Victor signs in with Google from an IP in Firestore `config/allow.ips`. Do not link it from the public site.
 - **Clients:** Axonius-style infinite horizontal logo marquee (EU, US, and Brazil logos).
 - **404:** dedicated `error` layout, message "Got lost on the way home?"

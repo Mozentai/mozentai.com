@@ -15,6 +15,7 @@ alwaysApply: false
 - Hacker emblem: `assets/glider.gif` (animated) and `assets/glider.png` (static), footer only
 - Services grid: four cards use `.cards.cards-2` (2x2). Engagement stays `.cards` (3 columns). Career Wall people grid is `.wall-grid`. Title ladder uses `.cards`.
 - Engineer portraits: `assets/engineers/`. CSS forces grayscale plus mint wash. No photographic color on the wall.
+- Title exams: `_data/exams.yml` holds per-code question groups (`questions: []` until authored). Career Wall cards read exam codes from `_data/career.yml` (P1, P2, P3). Never loop exam questions onto the public page.
 
 ## Adding a new section
 

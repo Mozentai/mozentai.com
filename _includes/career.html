@@ -46,8 +46,9 @@
       class="card reveal"
       style="--delay: {{ forloop.index0 | times: 100 }}ms"
       data-title="{{ title.name | downcase | escape }}"
+      data-exam="{{ title.exam | downcase | escape }}"
     >
-      <p class="card-icon">{{ title.level }}</p>
+      <p class="card-icon">{{ title.exam }}</p>
       <h3 class="card-title">{{ title.name }}</h3>
       <p class="card-desc">{{ title.summary }}</p>
     </article>
