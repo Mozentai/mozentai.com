@@ -184,44 +184,56 @@ titles:
     exam: FBX
     hours: 360
 
-  # Git
-  - name: Git Engineer I
+  # Git (tool)
+  - name: Git I
     exam: GT1
     hours: 40
-  - name: Git Engineer II
+    category: tool
+  - name: Git II
     exam: GT2
     hours: 90
-  - name: Git Engineer III
+    category: tool
+  - name: Git III
     exam: GT3
     hours: 160
-  - name: Git Specialist
+    category: tool
+  - name: Git X
     exam: GTX
     hours: 360
+    category: tool
 
-  # GitHub
-  - name: GitHub Engineer I
+  # GitHub (tool)
+  - name: GitHub I
     exam: GH1
     hours: 40
-  - name: GitHub Engineer II
+    category: tool
+  - name: GitHub II
     exam: GH2
     hours: 90
-  - name: GitHub Engineer III
+    category: tool
+  - name: GitHub III
     exam: GH3
     hours: 160
-  - name: GitHub Specialist
+    category: tool
+  - name: GitHub X
     exam: GHX
     hours: 360
+    category: tool
 
-  # GitLab
-  - name: GitLab Engineer I
+  # GitLab (tool)
+  - name: GitLab I
     exam: GL1
     hours: 40
-  - name: GitLab Engineer II
+    category: tool
+  - name: GitLab II
     exam: GL2
     hours: 90
-  - name: GitLab Engineer III
+    category: tool
+  - name: GitLab III
     exam: GL3
     hours: 160
-  - name: GitLab Specialist
+    category: tool
+  - name: GitLab X
     exam: GLX
     hours: 360
+    category: tool

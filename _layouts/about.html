@@ -72,13 +72,26 @@
         padding: 48px 40px 80px;
         flex: 1;
       }
-      .about-line {
+      .about-headline {
+        font-family: var(--mono);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.5;
+        margin-bottom: 32px;
+        letter-spacing: 0.3px;
+      }
+      .about-headline em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .about-body {
         font-size: 15px;
-        line-height: 1.8;
+        line-height: 1.9;
         color: var(--muted);
         margin-bottom: 48px;
       }
-      .about-line strong {
+      .about-body strong {
         color: var(--text);
         font-weight: 600;
       }
@@ -135,6 +148,7 @@
         .page { padding: 24px 24px 64px; }
         .topbar-nav { gap: 14px; }
         .topbar-link { font-size: 9px; letter-spacing: 2px; }
+        .about-headline { font-size: 18px; }
       }
     </style>
   </head>
@@ -149,9 +163,24 @@
     </header>
 
     <main class="page">
-      <p class="about-line">
-        <strong>10 years in the market.</strong> Specialists with 15+ years of experience.
-        We prepare the professionals for the companies.
+      <h1 class="about-headline">
+        Technical interviews are <em>broken</em>.
+      </h1>
+
+      <p class="about-body">
+        Companies burn weeks on screening rounds that prove nothing. Candidates rehearse trivia. Hiring managers guess. Everyone loses time.
+      </p>
+
+      <p class="about-body">
+        <strong>We cut the crap.</strong> Mozentai proves engineers through and through, before they ever walk into your door. Every professional on the Career Wall has been tested, graded, and certified against real engineering standards. Not a resume keyword. Not a whiteboard riddle. Actual, verified competence.
+      </p>
+
+      <p class="about-body">
+        <strong>We guarantee quality.</strong> When you look up an engineer on the Career Wall, you know exactly what they can do. Their standing is live. Their certifications have freshness. If it shows green, that engineer is current.
+      </p>
+
+      <p class="about-body">
+        10 years in the market. Specialists with 15+ years of experience. We built the CITC so you never have to waste another round on screening.
       </p>
 
       <div class="services-grid">

@@ -27,13 +27,13 @@
     {% endfor %}
     {% for title in site.data.career.titles %}
     <a
-      class="wall-row wall-row--title"
+      class="wall-row wall-row--title{% if title.category == 'tool' %} wall-row--tool{% endif %}"
       href="/titles/{{ title.exam | downcase }}/"
       data-title="{{ title.name | downcase | escape }}"
       data-exam="{{ title.exam | downcase | escape }}"
       hidden
     >
-      <span class="wall-row-label">{{ title.name }}</span>
+      <span class="wall-row-label">{% if title.category == 'tool' %}<span class="tool-seal" aria-label="Tool">&#x25C9;</span> {% endif %}{{ title.name }}</span>
       <span class="wall-row-hex">{{ title.exam }}</span>
       <span class="wall-row-meta">{{ title.hours }}h</span>
     </a>

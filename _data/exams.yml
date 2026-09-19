@@ -1598,7 +1598,7 @@ exams:
   # ─────────────────────────────────────────────
 
   - code: GT1
-    title: Git Engineer I
+    title: Git I
     level: Basic
     hours: 40
     curriculum:
@@ -1623,7 +1623,7 @@ exams:
     questions: []
 
   - code: GT2
-    title: Git Engineer II
+    title: Git II
     level: Medium
     hours: 90
     curriculum:
@@ -1656,7 +1656,7 @@ exams:
     questions: []
 
   - code: GT3
-    title: Git Engineer III
+    title: Git III
     level: Advanced
     hours: 160
     curriculum:
@@ -1691,7 +1691,7 @@ exams:
     questions: []
 
   - code: GTX
-    title: Git Specialist
+    title: Git X
     level: Specialist
     hours: 360
     curriculum:
@@ -1724,7 +1724,7 @@ exams:
   # ─────────────────────────────────────────────
 
   - code: GH1
-    title: GitHub Engineer I
+    title: GitHub I
     level: Basic
     hours: 40
     curriculum:
@@ -1747,7 +1747,7 @@ exams:
     questions: []
 
   - code: GH2
-    title: GitHub Engineer II
+    title: GitHub II
     level: Medium
     hours: 90
     curriculum:
@@ -1780,7 +1780,7 @@ exams:
     questions: []
 
   - code: GH3
-    title: GitHub Engineer III
+    title: GitHub III
     level: Advanced
     hours: 160
     curriculum:
@@ -1813,7 +1813,7 @@ exams:
     questions: []
 
   - code: GHX
-    title: GitHub Specialist
+    title: GitHub X
     level: Specialist
     hours: 360
     curriculum:
@@ -1846,7 +1846,7 @@ exams:
   # ─────────────────────────────────────────────
 
   - code: GL1
-    title: GitLab Engineer I
+    title: GitLab I
     level: Basic
     hours: 40
     curriculum:
@@ -1871,7 +1871,7 @@ exams:
     questions: []
 
   - code: GL2
-    title: GitLab Engineer II
+    title: GitLab II
     level: Medium
     hours: 90
     curriculum:
@@ -1904,7 +1904,7 @@ exams:
     questions: []
 
   - code: GL3
-    title: GitLab Engineer III
+    title: GitLab III
     level: Advanced
     hours: 160
     curriculum:
@@ -1937,7 +1937,7 @@ exams:
     questions: []
 
   - code: GLX
-    title: GitLab Specialist
+    title: GitLab X
     level: Specialist
     hours: 360
     curriculum:
