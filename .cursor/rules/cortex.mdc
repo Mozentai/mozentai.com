@@ -15,8 +15,10 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 | Path | Purpose |
 |------|---------|
-| `_layouts/default.html` | Main layout: hero, CSS, scroll animations, includes |
-| `_layouts/inner.html` | Inner pages (contact form). Compact top bar, no full-viewport hero |
+| `_layouts/default.html` | Landing page: hero with nav, pitch, clients marquee, CTA, footer |
+| `_layouts/inner.html` | Inner pages (contact form). Compact top bar with nav, no full-viewport hero |
+| `_layouts/about.html` | About page: pitch, stats, services, certifications |
+| `_layouts/professionals.html` | Professionals page: Career Wall lookup, title ladder |
 | `_layouts/inbox.html` | `/login/` manager inbox. Looks like the 404 page until Victor is signed in from an allowed IP |
 | `_includes/hire-cta.html` | Homepage closer: Get in touch |
 | `_includes/pitch.html` | Below-fold hook: "Need engineers who actually ship?" |
@@ -40,6 +42,8 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 | `assets/team/victor-matos.jpg` | CEO photo on disk, not displayed on the public site as of 2026-09-19. |
 | `assets/glider.gif` | Animated Conway glider (hacker emblem), recolored to mint on `--bg` from Victor's `~/github/glider.gif` |
 | `assets/glider.png` | Static first frame of the glider for `prefers-reduced-motion` |
+| `about/index.md` | About page at `/about/` |
+| `professionals/index.md` | Professionals page at `/professionals/` |
 | `_data/hire.yml` | Contact page copy, form labels, destination email victor@mozentai.com |
 | `hire/index.md` | Contact page at `/hire/` |
 | `hire/sent.md` | Post-submit thank you at `/hire/sent/` |
@@ -69,15 +73,25 @@ Static **Jekyll 4.3** landing page for Mozentai, deployed to **GitHub Pages** at
 
 ## Page sections (top to bottom)
 
-1. **Hero** — MOZENT△I wordmark, tagline only. Do not put the audit pitch above the fold. The mark is sized to a viewport lockup (up to 560px wide). The tagline letter-spacing stretches to the mark. Never size MOZENT△I down to a short tagline. "Engineers @ Work" is shorter than the old "CyberSec Specialists, Hackers @ Work" line, and fitting the mark to that width made the letters ~23px. That was a bug.
-2. **Pitch** — "Stop wasting time on screening." We prepare the professionals for the companies.
-3. **Stats** — 10 years in the market, 15+ years of experience
-4. **Services** — Auditing, Hardening, Engineering (embed), CITC (credential service). Four cards in a 2x2 grid.
-4b. **Career Wall** — Lookup by name, CITC number, title, or exam (P1, P2, P3). Registered engineers appear here. Title ladder (Python Engineer I, II, III) is what engineers look up to. Cards show exam names P1, P2, P3. Public copy: questionnaire or schedule with an instructor. Portraits use site colors only. Do not print $20, $200, the five-title cap, PX, HTB, score bands, or question banks on this page.
-5. **Clients** — infinite horizontal marquee with EU, US, and Brazil client logos. Keep this section.
-6. **Certifications** — ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF
-7. **Get in touch CTA** — "Get in touch" button to `/hire/`. Not in the hero. Never use the old headline "Hire a security engineer".
-8. **Footer** — Conway glider only (hacker emblem). No Get in touch link and no victor@mozentai.com in the footer. Not in the hero. A previous MITM packet animation was removed from the hero on 2026-06-28; keep the wordmark clean.
+### Landing page (`/`)
+
+1. **Hero** — MOZENT△I wordmark, tagline, nav links (About, Professionals, Get in touch). Mark sized to viewport lockup (up to 560px). Do not shrink to the tagline.
+2. **Pitch** — "Stop wasting time on screening."
+3. **Clients** — infinite horizontal marquee (EU, US, Brazil). Keep this section.
+4. **Get in touch CTA** — button to `/hire/`.
+5. **Footer** — Conway glider only.
+
+### About page (`/about/`)
+
+Topbar nav (About active, Professionals, Get in touch). Contains:
+- Pitch + stats (10 years, 15+)
+- Services (Auditing, Hardening, Engineering, CITC). 2x2 grid.
+- Certifications (ISO 27001/27017/27018/9001/27701, SOC 2, PCI DSS, NIST CSF)
+
+### Professionals page (`/professionals/`)
+
+Topbar nav (About, Professionals active, Get in touch). Contains:
+- Career Wall lookup by name, CITC number, title, or exam (P1, P2, P3). Registered engineers appear here. Title ladder: Python Engineer I, II, III. Cards show exam names. Public copy: questionnaire or schedule with an instructor. Portraits use site colors only. Do not print $20, $200, the five-title cap, PX, HTB, score bands, or question banks.
 
 Do **not** put a Leadership / CEO photo section on the public site. Victor asked to be removed on 2026-09-19.
 Do **not** put Testimonials or the How We Work engagement cards on the public site. Victor asked to remove the generic stuff on 2026-09-19 and keep the client companies.

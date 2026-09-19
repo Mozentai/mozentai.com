@@ -49,6 +49,10 @@
         text-transform: uppercase;
         text-decoration: none;
       }
+      .topbar-nav {
+        display: flex;
+        gap: 24px;
+      }
       .topbar-link {
         font-family: var(--mono);
         font-size: 11px;
@@ -195,7 +199,11 @@
   <body>
     <header class="topbar">
       <a class="topbar-mark" href="/">MOZENT&#x25B3;I</a>
-      <a class="topbar-link{% if page.form %} is-active{% endif %}" href="/hire/">Get in touch</a>
+      <nav class="topbar-nav">
+        <a class="topbar-link{% if page.nav == 'about' %} is-active{% endif %}" href="/about/">About</a>
+        <a class="topbar-link{% if page.nav == 'professionals' %} is-active{% endif %}" href="/professionals/">Professionals</a>
+        <a class="topbar-link{% if page.form %} is-active{% endif %}" href="/hire/">Get in touch</a>
+      </nav>
     </header>
 
     <main class="page">
