@@ -7,10 +7,11 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import {
-  getFirestore,
+  initializeFirestore,
   doc,
   getDoc,
   setDoc,
+  updateDoc,
   collection,
   query,
   where,
@@ -78,7 +79,7 @@ var stripe = window.MOZENTAI_STRIPE || {};
 var examsCatalog = window.MOZENTAI_EXAMS || {};
 var app = initializeApp(window.MOZENTAI_FIREBASE);
 var auth = getAuth(app);
-var db = getFirestore(app);
+var db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
 var provider = new GoogleAuthProvider();
 
 var FRESHNESS_MS = 6 * 30 * 24 * 60 * 60 * 1000;
@@ -308,6 +309,62 @@ function checkManager(user) {
   return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
 }
 
+function authEmail(user) {
+  if (!user) return "";
+  if (user.email) return user.email;
+  if (user.providerData && user.providerData[0] && user.providerData[0].email) {
+    return user.providerData[0].email;
+  }
+  return "";
+}
+
+function flashProfile(msg, ok) {
+  profileOk.textContent = msg;
+  profileOk.style.color = ok ? "" : "var(--stale)";
+  profileOk.classList.add("is-visible");
+  setTimeout(function () {
+    profileOk.classList.remove("is-visible");
+    profileOk.textContent = "Saved";
+    profileOk.style.color = "";
+  }, ok ? 2000 : 4000);
+}
+
+async function saveOwnProfile() {
+  var user = auth.currentUser;
+  if (!user) return;
+
+  var name = profileName.value.trim();
+  var email = authEmail(user);
+  if (!name) {
+    flashProfile("Name is required", false);
+    return;
+  }
+
+  profileOk.classList.remove("is-visible");
+  profileSave.disabled = true;
+  profileSave.textContent = "Saving...";
+
+  var update = { name: name, email: email };
+  var ref = doc(db, "engineers", user.uid);
+
+  try {
+    var snap = await getDoc(ref);
+    if (snap.exists()) {
+      await updateDoc(ref, update);
+    } else {
+      await setDoc(ref, update);
+    }
+    dashName.textContent = name;
+    flashProfile("Saved", true);
+  } catch (err) {
+    console.error("profile save", err);
+    flashProfile("Save failed", false);
+  }
+
+  profileSave.disabled = false;
+  profileSave.textContent = "Save";
+}
+
 function populateProfile(user, data) {
   var name = (data && data.name) || user.displayName || "";
   var email = user.email || "";
@@ -318,13 +375,9 @@ function populateProfile(user, data) {
   dashName.textContent = name || email;
   setCitcNumber(hex);
   profileName.value = name;
-  profileEmail.value = email;
+  profileEmail.value = authEmail(user);
   profileTitles.value = titles.join(", ");
-
-  if (checkManager(user)) {
-    profileTitles.removeAttribute("readonly");
-    profileTitles.placeholder = "P1, C1, AW1, GH1";
-  }
+  profileTitles.setAttribute("readonly", "");
 }
 
 async function loadEngineer(user) {
@@ -419,44 +472,6 @@ onAuthStateChanged(auth, function (user) {
         "?client_reference_id=" + encodeURIComponent(user.uid) +
         "&prefilled_email=" + encodeURIComponent(user.email);
     };
-
-    profileSave.onclick = async function () {
-      profileOk.classList.remove("is-visible");
-      profileSave.disabled = true;
-      profileSave.textContent = "Saving...";
-
-      var update = {
-        name: profileName.value.trim(),
-        email: user.email || "",
-      };
-
-      if (checkManager(user)) {
-        var titleStr = profileTitles.value.trim();
-        update.titles = titleStr
-          ? titleStr.split(",").map(function (t) { return t.trim().toUpperCase(); }).filter(Boolean)
-          : [];
-      }
-
-      try {
-        await setDoc(doc(db, "engineers", user.uid), update, { merge: true });
-        dashName.textContent = update.name || user.email;
-        if (update.titles) highlightCatalog(update.titles);
-        profileOk.classList.add("is-visible");
-        setTimeout(function () { profileOk.classList.remove("is-visible"); }, 2000);
-      } catch (err) {
-        profileOk.textContent = "Save failed";
-        profileOk.style.color = "var(--stale)";
-        profileOk.classList.add("is-visible");
-        setTimeout(function () {
-          profileOk.classList.remove("is-visible");
-          profileOk.textContent = "Saved";
-          profileOk.style.color = "";
-        }, 3000);
-      }
-
-      profileSave.disabled = false;
-      profileSave.textContent = "Save";
-    };
   } else {
     showGate();
   }
@@ -535,6 +550,16 @@ if (location.hash === "#exams") {
   var examsEl = document.getElementById("exams");
   if (examsEl) examsEl.scrollIntoView();
 }
+
+profileSave.addEventListener("click", function () {
+  saveOwnProfile();
+});
+profileName.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    saveOwnProfile();
+  }
+});
 
 profileHex.addEventListener("click", function () {
   copyHex(issuedHex(), profileHexHint);
