@@ -69,6 +69,11 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /engineers/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if isManager();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

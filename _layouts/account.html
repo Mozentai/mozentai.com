@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+    <title>Account · {{ site.title }}</title>
+    {% seo %}
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #21262d;
+        --accent: #00e5a0;
+        --muted: #5a6b82;
+        --text: #c9d1d9;
+        --fresh: #00e5a0;
+        --expiring: #e5a000;
+        --stale: #e55050;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Inter', -apple-system, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: var(--bg);
+        font-family: var(--sans);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 40px;
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .topbar-mark {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 6px;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .topbar-nav { display: flex; gap: 24px; }
+      .topbar-link {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .topbar-link:hover,
+      .topbar-link.is-active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      .page {
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 24px 40px 80px;
+        flex: 1;
+      }
+
+      /* Sign-in gate */
+      .gate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 40px;
+        text-align: center;
+      }
+      .gate-msg {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      .btn {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
+      }
+
+      /* Dashboard */
+      .dash { display: none; }
+      .dash.is-visible { display: block; }
+      .dash-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 48px;
+      }
+      .dash-name {
+        font-family: var(--mono);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.5px;
+      }
+      .dash-hex {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: 1px;
+        margin-top: 4px;
+      }
+      .sign-out {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .sign-out:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .dash-section-title {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .dash-empty {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 16px 0;
+      }
+      .cert-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .cert-row {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        align-items: center;
+      }
+      .cert-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .cert-dot--fresh { background: var(--fresh); }
+      .cert-dot--expiring { background: var(--expiring); }
+      .cert-dot--stale { background: var(--stale); }
+      .cert-code {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.5px;
+      }
+      .cert-code a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .cert-code a:hover { border-bottom-color: var(--accent); }
+      .cert-freshness {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-align: right;
+      }
+      .cert-freshness--fresh { color: var(--fresh); }
+      .cert-freshness--expiring { color: var(--expiring); }
+      .cert-freshness--stale { color: var(--stale); }
+
+      .site-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 64px;
+      }
+      .glider {
+        width: 56px;
+        height: 56px;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        opacity: 0.9;
+      }
+
+      @media (max-width: 600px) {
+        .topbar { padding: 24px; }
+        .page { padding: 12px 24px 64px; }
+        .topbar-nav { gap: 14px; }
+        .topbar-link { font-size: 9px; letter-spacing: 2px; }
+        .cert-row { grid-template-columns: auto 1fr; }
+        .cert-freshness { grid-column: 2; text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="topbar-mark" href="/">MOZENT&#x25B3;I</a>
+      <nav class="topbar-nav">
+        <a class="topbar-link" href="/about/">About</a>
+        <a class="topbar-link" href="/professionals/">Professionals</a>
+        <a class="topbar-link" href="/hire/">Get in touch</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <div class="gate" id="gate">
+        <p class="gate-msg">Sign in to view your CITC standing.</p>
+        <button class="btn" id="sign-in-btn" type="button">Sign in with Google</button>
+      </div>
+
+      <div class="dash" id="dash">
+        <div class="dash-header">
+          <div>
+            <div class="dash-name" id="dash-name"></div>
+            <div class="dash-hex" id="dash-hex"></div>
+          </div>
+          <button class="sign-out" id="sign-out" type="button">Sign out</button>
+        </div>
+
+        <h2 class="dash-section-title">Certifications</h2>
+        <div class="cert-list" id="cert-list"></div>
+        <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <picture>
+        <source srcset="/assets/glider.png" media="(prefers-reduced-motion: reduce)">
+        <img class="glider" src="/assets/glider.gif" alt="Conway glider, the hacker emblem" width="56" height="56">
+      </picture>
+    </footer>
+
+    <script src="/assets/js/firebase-config.js"></script>
+    <script type="module" src="/assets/js/account.js"></script>
+  </body>
+</html>

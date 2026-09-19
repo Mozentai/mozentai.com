@@ -22,7 +22,6 @@
         --sans: 'Inter', -apple-system, sans-serif;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
       body {
         background: var(--bg);
         font-family: var(--sans);
@@ -67,85 +66,56 @@
         border-bottom-color: var(--accent);
       }
       .page {
-        max-width: 960px;
+        max-width: 640px;
         width: 100%;
         margin: 0 auto;
-        padding: 24px 40px 80px;
+        padding: 48px 40px 80px;
         flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 64px;
       }
-      .section-title {
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 4px;
-        text-transform: uppercase;
+      .about-line {
+        font-size: 15px;
+        line-height: 1.8;
         color: var(--muted);
-        margin-bottom: 20px;
+        margin-bottom: 48px;
       }
-      .stats {
+      .about-line strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 48px;
+      }
+      .services-grid a {
         display: flex;
-        gap: 48px;
-      }
-      .stat-value {
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: var(--surface);
         font-family: var(--mono);
-        font-size: 32px;
-        font-weight: 700;
-        color: var(--accent);
-        line-height: 1;
-      }
-      .stat-label {
-        font-size: 12px;
-        color: var(--muted);
-        letter-spacing: 1px;
-        margin-top: 6px;
-      }
-      .services-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-      .service-row {
-        display: flex;
-        align-items: baseline;
-        gap: 16px;
-        padding: 14px 0;
-        border-bottom: 1px solid var(--border);
-      }
-      .service-name {
-        font-family: var(--mono);
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         color: var(--text);
-        letter-spacing: 0.5px;
-        min-width: 140px;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: color 0.2s, background 0.2s;
       }
-      .service-desc {
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.5;
+      .services-grid a:hover {
+        color: var(--accent);
+        background: var(--bg);
       }
-      .certs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .cert-tag {
+      .certs-line {
         font-family: var(--mono);
         font-size: 11px;
-        font-weight: 700;
         color: var(--muted);
         letter-spacing: 0.5px;
-        padding: 8px 14px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        transition: color 0.2s, border-color 0.2s;
-      }
-      .cert-tag:hover {
-        color: var(--accent);
-        border-color: var(--accent);
+        line-height: 1.8;
       }
       .site-footer {
         display: flex;
@@ -160,14 +130,9 @@
         image-rendering: crisp-edges;
         opacity: 0.9;
       }
-
-      @media (max-width: 700px) {
-        .stats { flex-direction: column; gap: 24px; }
-        .service-row { flex-direction: column; gap: 4px; }
-      }
       @media (max-width: 600px) {
         .topbar { padding: 24px; }
-        .page { padding: 12px 24px 64px; gap: 48px; }
+        .page { padding: 24px 24px 64px; }
         .topbar-nav { gap: 14px; }
         .topbar-link { font-size: 9px; letter-spacing: 2px; }
       }
@@ -184,37 +149,20 @@
     </header>
 
     <main class="page">
-      <section>
-        <div class="stats">
-          {% for stat in site.data.stats %}
-          <div>
-            <div class="stat-value">{{ stat.target }}{{ stat.suffix }}</div>
-            <div class="stat-label">{{ stat.label }}</div>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+      <p class="about-line">
+        <strong>10 years in the market.</strong> Specialists with 15+ years of experience.
+        We prepare the professionals for the companies.
+      </p>
 
-      <section>
-        <h2 class="section-title">Services</h2>
-        <div class="services-list">
-          {% for service in site.data.services %}
-          <div class="service-row">
-            <span class="service-name">{{ service.name }}</span>
-            <span class="service-desc">{{ service.description }}</span>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+      <div class="services-grid">
+        {% for service in site.data.services %}
+        <a href="/hire/">{{ service.name }}</a>
+        {% endfor %}
+      </div>
 
-      <section>
-        <h2 class="section-title">Certifications</h2>
-        <div class="certs">
-          {% for cert in site.data.certifications %}
-          <span class="cert-tag">{{ cert.name }}</span>
-          {% endfor %}
-        </div>
-      </section>
+      <p class="certs-line">
+        {% for cert in site.data.certifications %}{{ cert.name }}{% unless forloop.last %} · {% endunless %}{% endfor %}
+      </p>
     </main>
 
     <footer class="site-footer">
