@@ -36,6 +36,8 @@ var subscribeBtn = document.getElementById("subscribe-btn");
 var profileName = document.getElementById("profile-name");
 var profileEmail = document.getElementById("profile-email");
 var profileHex = document.getElementById("profile-hex");
+var profileHexValue = document.getElementById("profile-hex-value");
+var profileHexHint = document.getElementById("profile-hex-hint");
 var profileTitles = document.getElementById("profile-titles");
 var profileSave = document.getElementById("profile-save");
 var profileOk = document.getElementById("profile-ok");
@@ -47,6 +49,8 @@ var adminEditor = document.getElementById("admin-editor");
 var adminUid = document.getElementById("admin-uid");
 var adminName = document.getElementById("admin-name");
 var adminHex = document.getElementById("admin-hex");
+var adminHexValue = document.getElementById("admin-hex-value");
+var adminHexHint = document.getElementById("admin-hex-hint");
 var adminTitles = document.getElementById("admin-titles");
 var adminSave = document.getElementById("admin-save");
 var adminOk = document.getElementById("admin-ok");
@@ -107,6 +111,48 @@ function validateSmartHex(id) {
   return id.slice(14) === smarthexChecksum(id.slice(0, 14));
 }
 
+function issuedHex() {
+  var hex = (profileHexValue && profileHexValue.textContent || "").trim();
+  return validateSmartHex(hex) ? hex : "";
+}
+
+function flashCopied(hintEl) {
+  if (!hintEl) return;
+  hintEl.textContent = "Copied";
+  setTimeout(function () { hintEl.textContent = "Copy"; }, 1500);
+}
+
+function fallbackCopy(hex, done) {
+  var ta = document.createElement("textarea");
+  ta.value = hex;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "absolute";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+function copyHex(hex, hintEl) {
+  if (!validateSmartHex(hex)) return;
+  function done() { flashCopied(hintEl); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(hex).then(done).catch(function () { fallbackCopy(hex, done); });
+    return;
+  }
+  fallbackCopy(hex, done);
+}
+
+function setCitcNumber(hex) {
+  var value = validateSmartHex(hex) ? hex : "";
+  profileHexValue.textContent = value || "Not issued";
+  profileHex.disabled = !value;
+  profileHexHint.textContent = value ? "Copy" : "";
+  dashHex.textContent = value || "Not registered";
+  dashHex.classList.toggle("is-copyable", !!value);
+}
+
 function showAdminError(msg) {
   adminErr.textContent = msg;
   adminErr.style.display = msg ? "block" : "none";
@@ -126,7 +172,7 @@ function closeSit() {
 function openSit(code, name) {
   var examCode = (code || "").toUpperCase();
   if (heldTitles.indexOf(examCode) !== -1) return;
-  if (!profileHex.value) {
+  if (!issuedHex()) {
     var gateEl = document.getElementById("sub-gate");
     if (gateEl) gateEl.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
@@ -270,16 +316,12 @@ function populateProfile(user, data) {
   heldTitles = titles.map(function (t) { return String(t).toUpperCase(); });
 
   dashName.textContent = name || email;
-  dashHex.textContent = hex || "Not registered";
-
+  setCitcNumber(hex);
   profileName.value = name;
   profileEmail.value = email;
-  profileHex.value = hex;
   profileTitles.value = titles.join(", ");
 
   if (checkManager(user)) {
-    profileHex.removeAttribute("readonly");
-    profileHex.placeholder = "SmartHex-16";
     profileTitles.removeAttribute("readonly");
     profileTitles.placeholder = "P1, C1, AW1, GH1";
   }
@@ -329,7 +371,10 @@ async function findEngineer(term) {
   editingUid = d.id;
   adminUid.textContent = d.id;
   adminName.value = data.name || "";
-  adminHex.value = data.smarthex || "";
+  var foundHex = data.smarthex || "";
+  adminHexValue.textContent = foundHex || "Not issued";
+  adminHex.disabled = !validateSmartHex(foundHex);
+  adminHexHint.textContent = validateSmartHex(foundHex) ? "Copy" : "";
   adminTitles.value = (data.titles || []).join(", ");
   adminEditor.hidden = false;
 }
@@ -357,8 +402,7 @@ onAuthStateChanged(auth, function (user) {
           email: user.email || "",
           smarthex: hex,
         }, { merge: true });
-        profileHex.value = hex;
-        dashHex.textContent = hex;
+        setCitcNumber(hex);
       } catch (err) {
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = "Subscribe";
@@ -387,7 +431,6 @@ onAuthStateChanged(auth, function (user) {
       };
 
       if (checkManager(user)) {
-        update.smarthex = profileHex.value.trim();
         var titleStr = profileTitles.value.trim();
         update.titles = titleStr
           ? titleStr.split(",").map(function (t) { return t.trim().toUpperCase(); }).filter(Boolean)
@@ -397,7 +440,6 @@ onAuthStateChanged(auth, function (user) {
       try {
         await setDoc(doc(db, "engineers", user.uid), update, { merge: true });
         dashName.textContent = update.name || user.email;
-        if (update.smarthex !== undefined) dashHex.textContent = update.smarthex;
         if (update.titles) highlightCatalog(update.titles);
         profileOk.classList.add("is-visible");
         setTimeout(function () { profileOk.classList.remove("is-visible"); }, 2000);
@@ -457,7 +499,6 @@ adminSave.addEventListener("click", async function () {
 
   var update = {
     name: adminName.value.trim(),
-    smarthex: adminHex.value.trim(),
     titles: titles,
   };
 
@@ -494,3 +535,13 @@ if (location.hash === "#exams") {
   var examsEl = document.getElementById("exams");
   if (examsEl) examsEl.scrollIntoView();
 }
+
+profileHex.addEventListener("click", function () {
+  copyHex(issuedHex(), profileHexHint);
+});
+dashHex.addEventListener("click", function () {
+  copyHex(issuedHex(), profileHexHint);
+});
+adminHex.addEventListener("click", function () {
+  copyHex((adminHexValue.textContent || "").trim(), adminHexHint);
+});

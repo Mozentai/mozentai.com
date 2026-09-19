@@ -38,6 +38,8 @@ var engEmpty = document.getElementById("eng-empty");
 var profileName = document.getElementById("profile-name");
 var profileEmail = document.getElementById("profile-email");
 var profileHex = document.getElementById("profile-hex");
+var profileHexValue = document.getElementById("profile-hex-value");
+var profileHexHint = document.getElementById("profile-hex-hint");
 var profileSave = document.getElementById("profile-save");
 var profileOk = document.getElementById("profile-ok");
 
@@ -167,6 +169,52 @@ async function loadEngineers(companyData) {
   }
 }
 
+function isCitcNumber(id) {
+  return !!(id && id.length === 16 && /^[0-9a-f]{16}$/.test(id));
+}
+
+function issuedHex() {
+  var hex = (profileHexValue && profileHexValue.textContent || "").trim();
+  return isCitcNumber(hex) ? hex : "";
+}
+
+function flashCopied(hintEl) {
+  if (!hintEl) return;
+  hintEl.textContent = "Copied";
+  setTimeout(function () { hintEl.textContent = "Copy"; }, 1500);
+}
+
+function fallbackCopy(hex, done) {
+  var ta = document.createElement("textarea");
+  ta.value = hex;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "absolute";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+function copyHex(hex, hintEl) {
+  if (!isCitcNumber(hex)) return;
+  function done() { flashCopied(hintEl); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(hex).then(done).catch(function () { fallbackCopy(hex, done); });
+    return;
+  }
+  fallbackCopy(hex, done);
+}
+
+function setCitcNumber(hex) {
+  var value = isCitcNumber(hex) ? hex : "";
+  profileHexValue.textContent = value || "Not issued";
+  profileHex.disabled = !value;
+  profileHexHint.textContent = value ? "Copy" : "";
+  dashHex.textContent = value || "";
+  dashHex.classList.toggle("is-copyable", !!value);
+}
+
 function isManager(user) {
   return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
 }
@@ -177,16 +225,10 @@ function populateCompanyProfile(user, data) {
   var hex = (data && data.smarthex) || "";
 
   dashName.textContent = name || email;
-  dashHex.textContent = hex || "";
+  setCitcNumber(hex);
 
   profileName.value = name;
   profileEmail.value = email;
-  profileHex.value = hex;
-
-  if (isManager(user)) {
-    profileHex.removeAttribute("readonly");
-    profileHex.placeholder = "SmartHex-16";
-  }
 }
 
 async function loadCompany(user) {
@@ -234,14 +276,9 @@ onAuthStateChanged(auth, function (user) {
         email: user.email || "",
       };
 
-      if (isManager(user)) {
-        update.smarthex = profileHex.value.trim();
-      }
-
       try {
         await setDoc(doc(db, "companies", user.uid), update, { merge: true });
         dashName.textContent = update.name || user.email;
-        if (update.smarthex !== undefined) dashHex.textContent = update.smarthex;
         profileOk.classList.add("is-visible");
         setTimeout(function () { profileOk.classList.remove("is-visible"); }, 2000);
       } catch (err) {
@@ -273,4 +310,11 @@ signOutBtn.addEventListener("click", function () {
 
 engLookup.addEventListener("input", function () {
   filterEngineers(engLookup.value.trim());
+});
+
+profileHex.addEventListener("click", function () {
+  copyHex(issuedHex(), profileHexHint);
+});
+dashHex.addEventListener("click", function () {
+  copyHex(issuedHex(), profileHexHint);
 });

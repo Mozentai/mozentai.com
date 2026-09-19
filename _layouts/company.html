@@ -174,6 +174,38 @@
         opacity: 0.5;
         cursor: default;
       }
+      .hex-copy {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 13px;
+        padding: 10px 14px;
+        cursor: pointer;
+        text-align: left;
+        letter-spacing: 1px;
+      }
+      .hex-copy:hover { border-color: var(--accent); }
+      .hex-copy:disabled {
+        opacity: 0.5;
+        cursor: default;
+        color: var(--muted);
+      }
+      .hex-copy:disabled:hover { border-color: var(--border); }
+      .hex-copy-hint {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .dash-hex.is-copyable { cursor: pointer; }
       .profile-actions {
         display: flex;
         align-items: center;
@@ -428,8 +460,11 @@
               <input class="profile-input" id="profile-email" type="email" readonly>
             </div>
             <div class="profile-field">
-              <label class="profile-label" for="profile-hex">CITC Number</label>
-              <input class="profile-input" id="profile-hex" type="text" readonly placeholder="Assigned on registration" maxlength="16">
+              <span class="profile-label">CITC Number</span>
+              <button class="hex-copy" id="profile-hex" type="button" disabled>
+                <span id="profile-hex-value">Not issued</span>
+                <span class="hex-copy-hint" id="profile-hex-hint"></span>
+              </button>
             </div>
           </div>
           <div class="profile-actions">

@@ -47,7 +47,7 @@ bundle exec jekyll build
 - Hero lockup: `fitHeroLockup()` sizes `.wordmark` to min(86vw, 560px), then stretches `.tagline` letter-spacing to match. Do not size the mark to the tagline.
 - `inner.html` is used by `/hire/` and `/hire/sent/`
 - `inbox.html` is used by `/login/`
-- `account.html` is used by `/account/` (engineer login, $20/month CREA)
+- `account.html` is used by `/account/` (engineer login, $20/month CREA). CITC Number is a copy button (`#profile-hex`), never an input. Same on `/company/` and the admin editor. Do not collect CPF.
 - `company.html` is used by `/company/` (company login, $1,000/month plan)
 - Account, Company, and Inbox `.gate { display: flex }` must be paired with `.gate[hidden] { display: none !important; }`. Without that, Sign in with Google stays on screen after Google auth.
 - `error.html` is used only by `404.md`
