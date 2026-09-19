@@ -1,7 +1,7 @@
 ---
 layout: inner
-title: Hire
+title: Get in touch
 permalink: /hire/
-description: Hire Mozentai security engineers. Staff augmentation, dedicated teams, and project-based work. Messages go to Victor Matos.
+description: Get in touch with Mozentai. Staff augmentation, dedicated teams, project-based work, and CITC credentials.
 form: true
 ---

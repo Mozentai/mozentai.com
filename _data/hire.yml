@@ -1,12 +1,12 @@
 email: victor@mozentai.com
-headline: Hire a security engineer
+headline: Get in touch
 question: Need an engineer who writes code and thinks like an attacker?
-body: Tell us what you need. Staff augmentation, a dedicated squad, or a scoped project. Your message goes straight to Victor Matos.
+body: Tell us what you need. Staff augmentation, a dedicated squad, a scoped project, or a CITC credential. Your message goes to Mozentai.
 cta: Send message
-direct: Prefer email? Write Victor directly
+direct: Prefer email? Write us directly
 submit: Send message
 thanks_title: Message sent
-thanks_body: Victor has your note. He will get back to you.
+thanks_body: We have your note. We will get back to you.
 home: Back home
 fields:
   name: Name
@@ -18,8 +18,9 @@ engagements:
   - Staff Augmentation
   - Dedicated Team
   - Project-Based
+  - CITC Credential
   - Not sure yet
 cta_home:
-  headline: Hire a security engineer
-  body: Embed Mozentai engineers in your standups, or start with a scoped audit. Same people who hack, same people who ship.
+  headline: Get in touch
+  body: Embed Mozentai engineers in your standups, start with a scoped audit, or apply for a CITC credential. Same people who hack, same people who ship.
   button: Start a conversation

@@ -195,16 +195,17 @@
   <body>
     <header class="topbar">
       <a class="topbar-mark" href="/">MOZENT&#x25B3;I</a>
-      <a class="topbar-link{% if page.form %} is-active{% endif %}" href="/hire/">Hire</a>
+      <a class="topbar-link{% if page.form %} is-active{% endif %}" href="/hire/">Get in touch</a>
     </header>
 
     <main class="page">
       {% if page.form %}
-      <h1 class="pitch-question">{{ site.data.hire.question }}</h1>
+      <h1 class="pitch-question">{{ site.data.hire.headline }}</h1>
+      <p class="pitch-body">{{ site.data.hire.question }}</p>
       <p class="pitch-body">{{ site.data.hire.body }}</p>
       <p class="pitch-body">{{ site.data.hire.direct }} <a href="mailto:{{ site.data.hire.email }}">{{ site.data.hire.email }}</a></p>
       <form class="hire-form" action="https://formsubmit.co/{{ site.data.hire.email }}" method="POST">
-        <input type="hidden" name="_subject" value="Mozentai hire inquiry">
+        <input type="hidden" name="_subject" value="Mozentai inquiry">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="{{ site.url }}/hire/sent/">
         <input type="hidden" name="_captcha" value="true">

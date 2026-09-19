@@ -33,10 +33,12 @@ Never skip deploy when site content or assets changed.
 ## Content rules
 
 - **Hero:** full viewport, wordmark + tagline only. Do not clutter above the fold.
-- **Below fold:** Audit pitch ("Do you know if your company is safe enough?"), stats (10 years in market, 10+ / 15+ years expert experience), Services, Leadership (CEO Victor Matos with photo), Clients (marquee), Certifications.
+- **Below fold:** Audit pitch ("Do you know if your company is safe enough?"), stats (10 years in market, 15+ years experience), Services (Auditing, Hardening, Security Engineering, CITC), Engagement, Clients (marquee), Certifications, Testimonials, Get in touch CTA, footer Conway glider. No Leadership / CEO photo on the public site.
+- **Get in touch:** dedicated `/hire/` page, headline "Get in touch" (never "Hire a security engineer"). Form delivers to victor@mozentai.com. Keep the hero wordmark-only.
+- **CITC:** Council of Information Technology & Computing. Credential service for software engineers (CREA/CRM analog). English copy only.
 - **Clients:** Axonius-style infinite horizontal logo marquee (EU, US, and Brazil logos).
 - **404:** dedicated `error` layout, message "Got lost on the way home?"
-- **Logos:** SVG in `assets/clients/` for fictional brands. Use official artwork for real clients (SANEARES PNG).
+- **Logos:** PNG only in `assets/clients/`. Never ship SVG client logos. Use official artwork for real clients (SANEARES PNG).
 
 ## What belongs here
 

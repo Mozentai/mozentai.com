@@ -122,6 +122,9 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 28px;
       }
+      .cards-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .card {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -272,79 +275,6 @@
         font-weight: 500;
         color: var(--muted);
         letter-spacing: 1px;
-      }
-      .leader {
-        display: grid;
-        grid-template-columns: 200px 1fr;
-        gap: 40px;
-        align-items: center;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 32px;
-        transition: border-color 0.3s, box-shadow 0.3s;
-      }
-      .leader:hover {
-        border-color: rgba(0, 229, 160, 0.45);
-        box-shadow: 0 8px 32px rgba(0, 229, 160, 0.06);
-      }
-      .leader-photo {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center 18%;
-        border: 2px solid var(--accent);
-        display: block;
-      }
-      .leader-role {
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 8px;
-      }
-      .leader-name {
-        font-family: var(--mono);
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-      }
-      .leader-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 16px;
-        margin: 0 0 10px;
-      }
-      .leader-link {
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--accent);
-        text-decoration: none;
-        letter-spacing: 0.4px;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.2s;
-      }
-      .leader-link:hover {
-        border-bottom-color: var(--accent);
-      }
-      .leader-cred {
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--muted);
-        letter-spacing: 0.4px;
-        margin: 0 0 14px;
-      }
-      .leader-bio {
-        font-size: 14px;
-        line-height: 1.75;
-        color: var(--muted);
-        margin: 0;
       }
       .marquee-wrap {
         position: relative;
@@ -537,14 +467,7 @@
         .marquee-fade { width: 64px; }
         .certifications { grid-template-columns: repeat(2, 1fr); }
         .pitch-question { font-size: 26px; }
-        .leader {
-          grid-template-columns: 1fr;
-          justify-items: center;
-          text-align: center;
-          gap: 24px;
-          padding: 28px 24px;
-        }
-        .leader-links { justify-content: center; }
+        .cards-2 { grid-template-columns: 1fr; }
       }
       @media (max-width: 600px) {
         .below { padding: 60px 24px 48px; gap: 80px; }
@@ -554,7 +477,6 @@
         .certifications { grid-template-columns: 1fr; }
         .stats { grid-template-columns: 1fr; }
         .pitch-question { font-size: 24px; }
-        .leader-photo { width: 160px; height: 160px; }
       }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -597,7 +519,6 @@
       {% include stats.html %}
       {% include services.html %}
       {% include engagement.html %}
-      {% include leadership.html %}
       {% include clients.html %}
       {% include certifications.html %}
       {% include testimonials.html %}
@@ -606,7 +527,7 @@
 
     <footer class="site-footer">
       <nav class="footer-links" aria-label="Site">
-        <a href="/hire/">Hire</a>
+        <a href="/hire/">Get in touch</a>
         <a href="mailto:victor@mozentai.com">victor@mozentai.com</a>
       </nav>
       <picture>
