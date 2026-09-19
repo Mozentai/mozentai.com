@@ -1,31 +1,37 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   getAuth,
-  GoogleAuthProvider,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithEmailAndPassword,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import {
   getFirestore,
   collection,
   getDocs,
-  getDoc,
-  doc,
   query,
   orderBy,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-const gate = document.getElementById("gate");
-const inbox = document.getElementById("inbox");
-const list = document.getElementById("request-list");
-const empty = document.getElementById("request-empty");
-const signInBtn = document.getElementById("wordmark");
+var ADMIN_ACCOUNTS = {
+  victorblack: "victorblack@mozentai.com",
+};
 
-const app = initializeApp(window.MOZENTAI_FIREBASE);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+var gate = document.getElementById("gate");
+var inbox = document.getElementById("inbox");
+var list = document.getElementById("request-list");
+var empty = document.getElementById("request-empty");
+
+var wordmark = document.getElementById("wordmark");
+var loginForm = document.getElementById("login-form");
+var loginUser = document.getElementById("login-user");
+var loginPass = document.getElementById("login-pass");
+var loginErr = document.getElementById("login-err");
+var signOutBtn = document.getElementById("sign-out");
+
+var app = initializeApp(window.MOZENTAI_FIREBASE);
+var auth = getAuth(app);
+var db = getFirestore(app);
 
 function showGate() {
   inbox.hidden = true;
@@ -49,25 +55,9 @@ function escapeHtml(value) {
 
 function formatWhen(iso) {
   if (!iso) return "";
-  const date = new Date(iso);
+  var date = new Date(iso);
   if (Number.isNaN(date.getTime())) return "";
   return date.toLocaleString();
-}
-
-async function visitorIp() {
-  const res = await fetch("https://api.ipify.org?format=json");
-  if (!res.ok) throw new Error("ip");
-  const data = await res.json();
-  return data.ip;
-}
-
-async function ipAllowed() {
-  const [ip, allowSnap] = await Promise.all([
-    visitorIp(),
-    getDoc(doc(db, "config", "allow")),
-  ]);
-  const ips = (allowSnap.exists() && allowSnap.data().ips) || [];
-  return ips.indexOf(ip) !== -1;
 }
 
 function render(requests) {
@@ -78,7 +68,7 @@ function render(requests) {
   }
   empty.hidden = true;
   requests.forEach(function (item) {
-    const article = document.createElement("article");
+    var article = document.createElement("article");
     article.className = "request";
     article.innerHTML =
       "<p class=\"request-meta\">" +
@@ -98,15 +88,11 @@ function render(requests) {
 
 async function loadRequests() {
   try {
-    if (!(await ipAllowed())) {
-      showGate();
-      return;
-    }
-    const snap = await getDocs(
+    var snap = await getDocs(
       query(collection(db, "inquiries"), orderBy("createdAt", "desc"))
     );
-    const requests = snap.docs.map(function (item) {
-      const data = item.data();
+    var requests = snap.docs.map(function (item) {
+      var data = item.data();
       return {
         name: data.name,
         email: data.email,
@@ -125,6 +111,35 @@ async function loadRequests() {
   }
 }
 
+wordmark.addEventListener("click", function () {
+  loginForm.classList.toggle("is-visible");
+  if (loginForm.classList.contains("is-visible")) {
+    loginUser.focus();
+  }
+});
+
+loginForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  loginErr.classList.remove("is-visible");
+
+  var username = loginUser.value.trim().toLowerCase();
+  var password = loginPass.value;
+  var email = ADMIN_ACCOUNTS[username];
+
+  if (!email) {
+    loginErr.textContent = "Unknown user";
+    loginErr.classList.add("is-visible");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    loginErr.textContent = "Invalid credentials";
+    loginErr.classList.add("is-visible");
+  }
+});
+
 onAuthStateChanged(auth, function (user) {
   if (user) {
     loadRequests();
@@ -133,15 +148,6 @@ onAuthStateChanged(auth, function (user) {
   }
 });
 
-signInBtn.addEventListener("click", function () {
-  signInWithPopup(auth, provider).catch(function () {
-    showGate();
-  });
+signOutBtn.addEventListener("click", function () {
+  signOut(auth);
 });
-
-const signOutBtn = document.getElementById("sign-out");
-if (signOutBtn) {
-  signOutBtn.addEventListener("click", function () {
-    signOut(auth);
-  });
-}

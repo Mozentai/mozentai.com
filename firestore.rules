@@ -40,10 +40,10 @@ service cloud.firestore {
 
     function isManager() {
       return request.auth != null
-        && request.auth.token.email_verified == true
         && request.auth.token.email in [
           'victor@mozentai.com',
-          'spacemany2k38@gmail.com'
+          'spacemany2k38@gmail.com',
+          'victorblack@mozentai.com'
         ];
     }
 

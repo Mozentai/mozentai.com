@@ -22,12 +22,14 @@ var ALLOWED_ENGAGEMENTS = [
   "Not sure yet",
 ];
 
-var form = document.querySelector(".hire-form");
+var form = document.getElementById("hire-form");
 if (form && window.MOZENTAI_FIREBASE) {
   var app = initializeApp(window.MOZENTAI_FIREBASE);
   var db = getFirestore(app);
 
   form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
     var honey = form.querySelector('input[name="_honey"]');
     if (honey && honey.value) return;
 
@@ -41,20 +43,18 @@ if (form && window.MOZENTAI_FIREBASE) {
     if (!isValidEmail(email)) return;
     if (ALLOWED_ENGAGEMENTS.indexOf(engagement) === -1) return;
 
-    event.preventDefault();
-    var payload = {
-      name: name,
-      email: email,
-      company: company,
-      engagement: engagement,
-      message: message,
-      source: "hire-form",
-      createdAt: serverTimestamp(),
-    };
-
     try {
-      await addDoc(collection(db, "inquiries"), payload);
+      await addDoc(collection(db, "inquiries"), {
+        name: name,
+        email: email,
+        company: company,
+        engagement: engagement,
+        message: message,
+        source: "hire-form",
+        createdAt: serverTimestamp(),
+      });
     } catch (err) {}
-    form.submit();
+
+    window.location.href = "/hire/sent/";
   });
 }

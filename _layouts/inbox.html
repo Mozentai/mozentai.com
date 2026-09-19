@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" content="notranslate">
-    {% include head-security.html %}
     <meta name="robots" content="noindex, nofollow">
     <title>404</title>
     <link rel="icon" type="image/png" href="/logo.png">
@@ -19,6 +18,7 @@
         --accent: #00e5a0;
         --muted: #5a6b82;
         --text: #c9d1d9;
+        --err: #e55050;
         --mono: 'JetBrains Mono', monospace;
         --sans: 'Inter', -apple-system, sans-serif;
       }
@@ -78,6 +78,53 @@
         border-bottom: 1px solid transparent;
       }
       .home:hover { border-bottom-color: var(--accent); }
+      .login-form {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        width: 260px;
+        margin-top: 8px;
+      }
+      .login-form.is-visible { display: flex; }
+      .login-field {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 12px;
+        padding: 10px 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .login-field:focus { border-color: var(--accent); }
+      .login-field::placeholder { color: var(--muted); }
+      .login-btn {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        padding: 10px;
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
+      }
+      .login-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 229, 160, 0.18);
+      }
+      .login-err {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--err);
+        letter-spacing: 0.5px;
+        display: none;
+      }
+      .login-err.is-visible { display: block; }
       .inbox {
         max-width: 760px;
         margin: 0 auto;
@@ -155,6 +202,12 @@
         <button class="wordmark" id="wordmark" type="button">MOZENT<span style="font-size:1.18em;vertical-align:0.04em;">&#x25B3;</span>I</button>
         <p class="message" id="message">Got lost on the way home?</p>
         <a class="home" href="/">Back home</a>
+        <form class="login-form" id="login-form">
+          <input class="login-field" id="login-user" type="text" placeholder="Username" autocomplete="username" required>
+          <input class="login-field" id="login-pass" type="password" placeholder="Password" autocomplete="current-password" required>
+          <button class="login-btn" type="submit">Sign in</button>
+          <p class="login-err" id="login-err"></p>
+        </form>
       </div>
     </div>
 

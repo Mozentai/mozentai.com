@@ -213,11 +213,7 @@
       {% if page.form %}
       <h1 class="pitch-question">{{ site.data.hire.headline }}</h1>
       <p class="pitch-body">{{ site.data.hire.body }}</p>
-      <form class="hire-form" action="https://formsubmit.co/{{ site.data.hire.email }}" method="POST">
-        <input type="hidden" name="_subject" value="Mozentai inquiry">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="{{ site.url }}/hire/sent/">
-        <input type="hidden" name="_captcha" value="true">
+      <form class="hire-form" id="hire-form">
         <div class="honey" aria-hidden="true">
           <label>Leave blank<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
         </div>
