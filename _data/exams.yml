@@ -1,7 +1,7 @@
-# CITC exams. Author the question group for each exam code here.
-# Do not render these questions on the public site.
-# Performance type is generated from the sitting score in product code, not here.
-# Do not invent score bands. Do not invent a PX title until Victor names it.
+# CITC exams and base curriculums.
+# Do not render on the public site.
+# Performance type is generated from the sitting score in product code.
+# Hours are estimates. Specialist (X) requires cumulative mastery.
 
 modes:
   - id: questionnaire
@@ -12,17 +12,966 @@ modes:
 
 naming:
   python: P
+  cybersec: C
+  java: J
+  go: G
+  math: M
+  logic: L
+  cs: CS
+  se: SE
   specialist: X
+
+# ─────────────────────────────────────────────
+# PYTHON
+# ─────────────────────────────────────────────
 
 exams:
   - code: P1
     title: Python Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: Language fundamentals, syntax, REPL
+        hours: 8
+      - topic: Data types, strings, numbers, booleans
+        hours: 6
+      - topic: Control flow, conditionals, loops
+        hours: 6
+      - topic: Functions, scope, closures
+        hours: 8
+      - topic: Data structures, lists, dicts, sets, tuples
+        hours: 8
+      - topic: File I/O, reading, writing, CSV, JSON
+        hours: 6
+      - topic: Error handling, exceptions, debugging
+        hours: 6
+      - topic: OOP basics, classes, inheritance, polymorphism
+        hours: 8
+      - topic: Standard library essentials, os, sys, pathlib, datetime
+        hours: 4
     questions: []
 
   - code: P2
     title: Python Engineer II
+    level: Medium
+    hours: 120
+    curriculum:
+      - topic: Advanced OOP, metaclasses, descriptors, ABC
+        hours: 10
+      - topic: Decorators, context managers, generators, itertools
+        hours: 12
+      - topic: Type hints, mypy, static analysis
+        hours: 8
+      - topic: Testing, pytest, mocking, coverage, TDD
+        hours: 14
+      - topic: Concurrency, threading, multiprocessing, GIL
+        hours: 12
+      - topic: Async programming, asyncio, aiohttp
+        hours: 10
+      - topic: Packaging, pip, setuptools, pyproject.toml, PyPI
+        hours: 8
+      - topic: Database access, SQLAlchemy, migrations
+        hours: 10
+      - topic: Web frameworks, Flask or FastAPI fundamentals
+        hours: 12
+      - topic: REST API design, validation, serialization
+        hours: 10
+      - topic: Logging, profiling, debugging production code
+        hours: 8
+      - topic: Security basics, input validation, secrets management
+        hours: 6
     questions: []
 
   - code: P3
     title: Python Engineer III
+    level: Advanced
+    hours: 200
+    curriculum:
+      - topic: CPython internals, bytecode, dis module, compilation pipeline
+        hours: 16
+      - topic: Memory model, garbage collection, reference counting, weak references
+        hours: 12
+      - topic: C extensions, ctypes, cffi, Cython
+        hours: 16
+      - topic: Performance engineering, profiling, caching, algorithmic optimization
+        hours: 16
+      - topic: Distributed systems, Celery, message queues, task orchestration
+        hours: 20
+      - topic: Advanced async, event loops, protocols, transports
+        hours: 14
+      - topic: Systems programming, sockets, subprocess, signal handling
+        hours: 14
+      - topic: Architecture patterns, dependency injection, hexagonal, CQRS
+        hours: 16
+      - topic: Advanced testing, property-based testing, fuzzing, load testing
+        hours: 14
+      - topic: Observability, structured logging, metrics, tracing
+        hours: 12
+      - topic: Containerization, Docker, CI/CD pipelines for Python
+        hours: 14
+      - topic: Security hardening, SAST, dependency auditing, sandboxing
+        hours: 12
+      - topic: Open-source contribution, code review, release engineering
+        hours: 14
+      - topic: Capstone, end-to-end system design and implementation
+        hours: 20
+    questions: []
+
+  - code: PX
+    title: Python Specialist
+    level: Specialist
+    hours: 480
+    curriculum:
+      - topic: Language design, PEP process, grammar, parser internals
+        hours: 32
+      - topic: VM internals, frame objects, evaluation loop, JIT considerations
+        hours: 40
+      - topic: Extension modules, embedding Python, native interop at scale
+        hours: 36
+      - topic: Compiler tooling, AST transformation, code generation
+        hours: 32
+      - topic: Scientific computing, NumPy internals, vectorization, BLAS/LAPACK
+        hours: 40
+      - topic: Machine learning engineering, model serving, pipeline architecture
+        hours: 48
+      - topic: Large-scale systems, microservices, event-driven architecture
+        hours: 40
+      - topic: Performance at scale, profiling distributed systems, optimization
+        hours: 36
+      - topic: Security research, vulnerability analysis, exploit development in Python
+        hours: 40
+      - topic: Mentoring, curriculum design, technical writing
+        hours: 24
+      - topic: Research project, original contribution or tooling
+        hours: 56
+      - topic: Comprehensive practical assessment with instructor
+        hours: 56
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # CYBERSECURITY
+  # ─────────────────────────────────────────────
+
+  - code: C1
+    title: Cybersecurity Engineer I
+    level: Basic
+    hours: 80
+    curriculum:
+      - topic: Networking fundamentals, OSI model, TCP/IP, DNS, HTTP
+        hours: 10
+      - topic: Linux fundamentals, shell, file system, permissions, services
+        hours: 10
+      - topic: Windows fundamentals, CLI, PowerShell, Active Directory basics
+        hours: 10
+      - topic: Web application basics, HTTP methods, cookies, sessions
+        hours: 8
+      - topic: OWASP Top 10, common vulnerabilities, threat modeling
+        hours: 10
+      - topic: Cryptography basics, hashing, symmetric, asymmetric, TLS
+        hours: 8
+      - topic: Security tools, Nmap, Burp Suite, Wireshark fundamentals
+        hours: 10
+      - topic: Incident handling process, triage, containment, reporting
+        hours: 8
+      - topic: Security policies, compliance basics, risk assessment
+        hours: 6
+    questions: []
+
+  - code: C2
+    title: Cybersecurity Engineer II
+    level: Medium
+    hours: 160
+    curriculum:
+      - topic: Network enumeration, service fingerprinting, vulnerability scanning
+        hours: 14
+      - topic: Web exploitation, SQL injection, XSS, CSRF, SSRF
+        hours: 18
+      - topic: Authentication attacks, password cracking, brute forcing, credential stuffing
+        hours: 12
+      - topic: Shells, payloads, reverse shells, bind shells, web shells
+        hours: 12
+      - topic: Metasploit framework, modules, payloads, post-exploitation
+        hours: 14
+      - topic: Active Directory enumeration, Kerberos attacks, lateral movement
+        hours: 20
+      - topic: Linux privilege escalation, SUID, cron, kernel exploits
+        hours: 12
+      - topic: Windows privilege escalation, services, tokens, UAC bypass
+        hours: 14
+      - topic: Pivoting, tunneling, port forwarding, proxychains
+        hours: 12
+      - topic: Log analysis, SIEM fundamentals, detection engineering basics
+        hours: 10
+      - topic: Documentation, reporting, executive summary, technical findings
+        hours: 10
+      - topic: Legal and ethical frameworks, rules of engagement
+        hours: 6
+    questions: []
+
+  - code: C3
+    title: Cybersecurity Engineer III
+    level: Advanced
+    hours: 280
+    curriculum:
+      - topic: Advanced web exploitation, deserialization, SSTI, race conditions
+        hours: 20
+      - topic: Binary exploitation, buffer overflows, format strings, ROP
+        hours: 24
+      - topic: Reverse engineering, static analysis, dynamic analysis, IDA/Ghidra
+        hours: 24
+      - topic: Malware analysis, behavioral analysis, unpacking, anti-analysis
+        hours: 20
+      - topic: Advanced Active Directory, forest trusts, delegation attacks, ADCS
+        hours: 24
+      - topic: Red team operations, C2 frameworks, evasion, persistence
+        hours: 24
+      - topic: Cloud security, AWS/Azure/GCP attack paths, serverless exploitation
+        hours: 20
+      - topic: Container security, Docker/Kubernetes attacks, escape techniques
+        hours: 16
+      - topic: Wireless security, Wi-Fi attacks, Bluetooth, RF
+        hours: 12
+      - topic: Defensive operations, threat hunting, DFIR, forensic acquisition
+        hours: 20
+      - topic: Purple team exercises, detection vs evasion
+        hours: 16
+      - topic: Advanced reporting, risk quantification, remediation planning
+        hours: 12
+      - topic: Enterprise network penetration test capstone
+        hours: 28
+    questions: []
+
+  - code: CX
+    title: Cybersecurity Specialist
+    level: Specialist
+    hours: 560
+    curriculum:
+      - topic: Exploit development, shellcode, heap exploitation, kernel exploits
+        hours: 48
+      - topic: Zero-day research methodology, fuzzing, code auditing
+        hours: 48
+      - topic: Advanced reverse engineering, firmware, embedded systems
+        hours: 40
+      - topic: APT simulation, full-scope red team campaign
+        hours: 48
+      - topic: Custom tooling development, implant engineering, C2 design
+        hours: 40
+      - topic: Cryptanalysis, protocol weaknesses, implementation attacks
+        hours: 32
+      - topic: ICS/SCADA security, OT environments, physical security
+        hours: 32
+      - topic: Threat intelligence, attribution, campaign tracking
+        hours: 24
+      - topic: Security architecture review, secure design patterns at scale
+        hours: 32
+      - topic: Mentoring, knowledge transfer, team building
+        hours: 24
+      - topic: Original security research, CVE submission or tool release
+        hours: 64
+      - topic: Comprehensive practical assessment with instructor, multi-day engagement
+        hours: 72
+      - topic: Research paper or technical publication
+        hours: 56
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # JAVA
+  # ─────────────────────────────────────────────
+
+  - code: J1
+    title: Java Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: Language fundamentals, JDK, compilation, JVM basics
+        hours: 8
+      - topic: Data types, operators, control flow
+        hours: 6
+      - topic: OOP, classes, interfaces, abstract classes, enums
+        hours: 10
+      - topic: Collections framework, List, Map, Set, Queue
+        hours: 8
+      - topic: Exception handling, checked vs unchecked, custom exceptions
+        hours: 6
+      - topic: I/O streams, NIO, file handling, serialization
+        hours: 6
+      - topic: Generics, wildcards, type erasure
+        hours: 6
+      - topic: Functional programming, lambdas, streams API
+        hours: 6
+      - topic: Build tools, Maven or Gradle basics
+        hours: 4
+    questions: []
+
+  - code: J2
+    title: Java Engineer II
+    level: Medium
+    hours: 140
+    curriculum:
+      - topic: Concurrency, threads, executors, synchronized, locks
+        hours: 16
+      - topic: JVM internals, class loading, memory model, garbage collection
+        hours: 14
+      - topic: Spring Boot fundamentals, dependency injection, configuration
+        hours: 16
+      - topic: REST API development, Spring MVC, validation, error handling
+        hours: 14
+      - topic: Database access, JPA, Hibernate, transactions, connection pooling
+        hours: 14
+      - topic: Testing, JUnit 5, Mockito, integration testing, Testcontainers
+        hours: 12
+      - topic: Design patterns, GoF, SOLID principles in practice
+        hours: 10
+      - topic: Logging, monitoring, Micrometer, Actuator
+        hours: 8
+      - topic: Security, Spring Security, OAuth2, JWT
+        hours: 10
+      - topic: Reactive programming, Project Reactor, WebFlux basics
+        hours: 8
+      - topic: Containerization, Docker, CI/CD for Java
+        hours: 10
+      - topic: Code quality, static analysis, SonarQube, code review
+        hours: 8
+    questions: []
+
+  - code: J3
+    title: Java Engineer III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: Advanced JVM, JIT compilation, GC tuning, flight recorder
+        hours: 20
+      - topic: Advanced concurrency, virtual threads (Loom), structured concurrency
+        hours: 16
+      - topic: Microservices architecture, service mesh, event sourcing
+        hours: 20
+      - topic: Distributed systems, consensus, eventual consistency, sagas
+        hours: 20
+      - topic: Performance engineering, profiling, benchmarking (JMH), optimization
+        hours: 18
+      - topic: Advanced Spring, custom starters, auto-configuration, AOP
+        hours: 14
+      - topic: Message-driven systems, Kafka, RabbitMQ, event-driven architecture
+        hours: 16
+      - topic: Cloud-native Java, GraalVM, native images, serverless
+        hours: 14
+      - topic: Advanced security, penetration testing Java apps, secure coding
+        hours: 12
+      - topic: Observability at scale, distributed tracing, log aggregation
+        hours: 12
+      - topic: API design, GraphQL, gRPC, versioning, backward compatibility
+        hours: 12
+      - topic: Technical leadership, architecture decision records, RFC process
+        hours: 12
+      - topic: Capstone, distributed system design and implementation
+        hours: 24
+    questions: []
+
+  - code: JX
+    title: Java Specialist
+    level: Specialist
+    hours: 500
+    curriculum:
+      - topic: JVM specification, bytecode engineering, ASM/Javassist
+        hours: 40
+      - topic: Language evolution, JEPs, preview features, migration strategies
+        hours: 32
+      - topic: Custom runtime, Graal compiler, Truffle framework
+        hours: 40
+      - topic: Large-scale systems, multi-region architecture, chaos engineering
+        hours: 48
+      - topic: Framework internals, Spring source code, custom frameworks
+        hours: 40
+      - topic: Database internals, query optimization, connection pool tuning
+        hours: 32
+      - topic: Security at scale, threat modeling enterprise Java, supply chain
+        hours: 32
+      - topic: Performance research, JVM benchmarking, garbage collector design
+        hours: 40
+      - topic: Mentoring, curriculum design, technical writing
+        hours: 24
+      - topic: Research project, JVM tooling or framework contribution
+        hours: 56
+      - topic: Comprehensive practical assessment with instructor
+        hours: 56
+      - topic: Technical publication or conference presentation
+        hours: 60
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # GO
+  # ─────────────────────────────────────────────
+
+  - code: G1
+    title: Go Engineer I
+    level: Basic
+    hours: 50
+    curriculum:
+      - topic: Language fundamentals, packages, imports, go toolchain
+        hours: 8
+      - topic: Types, structs, interfaces, embedding, type assertions
+        hours: 8
+      - topic: Control flow, error handling, defer, panic, recover
+        hours: 6
+      - topic: Functions, methods, closures, variadic functions
+        hours: 6
+      - topic: Slices, maps, strings, standard library essentials
+        hours: 8
+      - topic: Goroutines, channels, select, basic concurrency patterns
+        hours: 8
+      - topic: Testing, table-driven tests, benchmarks, go test
+        hours: 6
+    questions: []
+
+  - code: G2
+    title: Go Engineer II
+    level: Medium
+    hours: 110
+    curriculum:
+      - topic: Advanced concurrency, sync package, context, errgroup
+        hours: 14
+      - topic: Networking, net/http, middleware, routing, HTTP clients
+        hours: 12
+      - topic: Database access, database/sql, sqlx, migrations
+        hours: 10
+      - topic: API design, JSON handling, validation, OpenAPI
+        hours: 10
+      - topic: Advanced testing, mocking, integration tests, fuzzing
+        hours: 10
+      - topic: Modules, versioning, dependency management, private modules
+        hours: 8
+      - topic: Error handling patterns, sentinel errors, wrapping, Is/As
+        hours: 8
+      - topic: Logging, observability, structured logging, pprof
+        hours: 8
+      - topic: Code generation, go generate, templates, stringer
+        hours: 8
+      - topic: Security, input validation, crypto package, secure defaults
+        hours: 8
+      - topic: Containerization, multi-stage builds, CI/CD for Go
+        hours: 8
+      - topic: CLI tooling, cobra, flags, configuration management
+        hours: 6
+    questions: []
+
+  - code: G3
+    title: Go Engineer III
+    level: Advanced
+    hours: 180
+    curriculum:
+      - topic: Runtime internals, scheduler, garbage collector, memory allocator
+        hours: 18
+      - topic: Advanced concurrency, lock-free structures, memory model
+        hours: 16
+      - topic: Systems programming, syscalls, unsafe, cgo
+        hours: 16
+      - topic: Distributed systems, consensus, Raft, etcd internals
+        hours: 20
+      - topic: Performance engineering, escape analysis, allocation optimization
+        hours: 16
+      - topic: Networking at scale, gRPC, connection pooling, load balancing
+        hours: 14
+      - topic: Cloud-native, Kubernetes operators, custom controllers
+        hours: 16
+      - topic: Advanced security, fuzzing, race detection, hardening
+        hours: 12
+      - topic: Compiler internals, SSA, optimization passes
+        hours: 14
+      - topic: Architecture, large codebase organization, internal packages
+        hours: 12
+      - topic: Capstone, distributed system or infrastructure tool
+        hours: 26
+    questions: []
+
+  - code: GX
+    title: Go Specialist
+    level: Specialist
+    hours: 440
+    curriculum:
+      - topic: Compiler and runtime contribution, upstream Go patches
+        hours: 48
+      - topic: Language design, proposals, generics advanced patterns
+        hours: 32
+      - topic: Infrastructure tooling, building Kubernetes-level systems
+        hours: 48
+      - topic: Network programming, custom protocols, high-throughput servers
+        hours: 40
+      - topic: Embedded and constrained systems, TinyGo, WASM
+        hours: 32
+      - topic: Security research, Go binary analysis, supply chain security
+        hours: 36
+      - topic: Performance at scale, fleet-wide optimization
+        hours: 32
+      - topic: Mentoring, curriculum design, technical writing
+        hours: 24
+      - topic: Research project, original tool or runtime contribution
+        hours: 56
+      - topic: Comprehensive practical assessment with instructor
+        hours: 48
+      - topic: Technical publication
+        hours: 44
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # MATHEMATICS
+  # ─────────────────────────────────────────────
+
+  - code: M1
+    title: Mathematics I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: Discrete mathematics, sets, relations, functions, combinatorics
+        hours: 10
+      - topic: Linear algebra, vectors, matrices, determinants, systems of equations
+        hours: 12
+      - topic: Probability fundamentals, distributions, Bayes theorem
+        hours: 10
+      - topic: Number theory, primes, modular arithmetic, GCD
+        hours: 8
+      - topic: Boolean algebra, logic gates, truth tables
+        hours: 6
+      - topic: Graph theory basics, paths, trees, connectivity
+        hours: 8
+      - topic: Mathematical proof techniques, induction, contradiction
+        hours: 6
+    questions: []
+
+  - code: M2
+    title: Mathematics II
+    level: Medium
+    hours: 120
+    curriculum:
+      - topic: Calculus, limits, derivatives, integrals, series
+        hours: 16
+      - topic: Multivariate calculus, partial derivatives, gradients, optimization
+        hours: 14
+      - topic: Statistics, hypothesis testing, confidence intervals, regression
+        hours: 14
+      - topic: Numerical methods, root finding, interpolation, numerical integration
+        hours: 12
+      - topic: Advanced linear algebra, eigenvalues, SVD, PCA
+        hours: 14
+      - topic: Advanced graph theory, flows, matching, coloring
+        hours: 10
+      - topic: Differential equations, first and second order, systems
+        hours: 12
+      - topic: Information theory, entropy, coding theory basics
+        hours: 8
+      - topic: Probability theory, random variables, Markov chains
+        hours: 12
+      - topic: Mathematical modeling and applications
+        hours: 8
+    questions: []
+
+  - code: M3
+    title: Mathematics III
+    level: Advanced
+    hours: 200
+    curriculum:
+      - topic: Abstract algebra, groups, rings, fields
+        hours: 20
+      - topic: Topology, metric spaces, continuity, compactness
+        hours: 18
+      - topic: Real analysis, measure theory, Lebesgue integration
+        hours: 18
+      - topic: Complex analysis, analytic functions, residues, conformal maps
+        hours: 16
+      - topic: Cryptographic mathematics, elliptic curves, lattices, pairings
+        hours: 18
+      - topic: Optimization theory, convex optimization, LP, semidefinite programming
+        hours: 16
+      - topic: Stochastic processes, martingales, Brownian motion
+        hours: 16
+      - topic: Computational complexity, P vs NP, reductions, approximation
+        hours: 14
+      - topic: Formal languages, automata theory, computability
+        hours: 14
+      - topic: Category theory basics, functors, natural transformations
+        hours: 12
+      - topic: Research methods, proofs, mathematical writing
+        hours: 14
+      - topic: Applied project
+        hours: 24
+    questions: []
+
+  - code: MX
+    title: Mathematics Specialist
+    level: Specialist
+    hours: 480
+    curriculum:
+      - topic: Advanced algebra, Galois theory, representation theory
+        hours: 40
+      - topic: Algebraic topology, homology, cohomology, homotopy
+        hours: 40
+      - topic: Functional analysis, Banach spaces, Hilbert spaces, operator theory
+        hours: 36
+      - topic: Advanced cryptography, post-quantum, zero-knowledge proofs
+        hours: 40
+      - topic: Advanced probability, stochastic calculus, SDEs
+        hours: 36
+      - topic: Machine learning theory, PAC learning, VC dimension, kernels
+        hours: 36
+      - topic: Numerical analysis at scale, PDE solvers, finite elements
+        hours: 32
+      - topic: Combinatorial optimization, matroids, approximation algorithms
+        hours: 28
+      - topic: Mentoring, curriculum design, exposition
+        hours: 24
+      - topic: Original research, theorem or algorithm contribution
+        hours: 72
+      - topic: Comprehensive assessment with instructor
+        hours: 48
+      - topic: Research paper
+        hours: 48
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # LOGIC
+  # ─────────────────────────────────────────────
+
+  - code: L1
+    title: Logic I
+    level: Basic
+    hours: 50
+    curriculum:
+      - topic: Propositional logic, connectives, truth tables, normal forms
+        hours: 8
+      - topic: Predicate logic, quantifiers, bound variables, interpretations
+        hours: 10
+      - topic: Proof techniques, natural deduction, sequent calculus basics
+        hours: 10
+      - topic: Set theory, axioms, ordinals, cardinals
+        hours: 8
+      - topic: Logical reasoning, fallacies, argument analysis
+        hours: 6
+      - topic: Introduction to formal systems, syntax vs semantics
+        hours: 8
+    questions: []
+
+  - code: L2
+    title: Logic II
+    level: Medium
+    hours: 100
+    curriculum:
+      - topic: Modal logic, Kripke semantics, necessity, possibility
+        hours: 14
+      - topic: Temporal logic, LTL, CTL, model checking basics
+        hours: 14
+      - topic: First-order logic completeness, compactness, Lowenheim-Skolem
+        hours: 12
+      - topic: Formal verification, Hoare logic, program correctness
+        hours: 14
+      - topic: Non-classical logics, intuitionistic logic, many-valued logic
+        hours: 10
+      - topic: Decision procedures, SAT solvers, SMT solvers
+        hours: 12
+      - topic: Inductive definitions, recursion theory basics
+        hours: 10
+      - topic: Automated reasoning, resolution, unification
+        hours: 8
+      - topic: Applications, specification languages, formal methods in industry
+        hours: 6
+    questions: []
+
+  - code: L3
+    title: Logic III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: Type theory, simply typed lambda calculus, polymorphism
+        hours: 18
+      - topic: Dependent type theory, Curry-Howard correspondence
+        hours: 18
+      - topic: Proof assistants, Coq or Lean fundamentals
+        hours: 18
+      - topic: Lambda calculus, Church-Rosser, normalization, evaluation strategies
+        hours: 14
+      - topic: Computability theory, Turing machines, halting problem, degrees
+        hours: 14
+      - topic: Advanced model theory, types, categoricity, stability
+        hours: 14
+      - topic: Fixed-point logics, descriptive complexity
+        hours: 12
+      - topic: Program analysis, abstract interpretation, type systems for safety
+        hours: 12
+      - topic: Concurrency theory, process algebras, bisimulation
+        hours: 10
+      - topic: Mechanized mathematics, formalization project
+        hours: 16
+      - topic: Capstone
+        hours: 14
+    questions: []
+
+  - code: LX
+    title: Logic Specialist
+    level: Specialist
+    hours: 400
+    curriculum:
+      - topic: Advanced type theory, HoTT, cubical type theory
+        hours: 40
+      - topic: Advanced proof assistants, large formalization projects
+        hours: 40
+      - topic: Set theory beyond ZFC, forcing, large cardinals
+        hours: 36
+      - topic: Advanced computability, higher recursion theory, reverse mathematics
+        hours: 32
+      - topic: Categorical logic, toposes, internal languages
+        hours: 32
+      - topic: Advanced formal methods, refinement types, session types
+        hours: 32
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Original research, proof or system contribution
+        hours: 64
+      - topic: Comprehensive assessment with instructor
+        hours: 48
+      - topic: Research paper
+        hours: 56
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # COMPUTER SCIENCE
+  # ─────────────────────────────────────────────
+
+  - code: CS1
+    title: Computer Science I
+    level: Basic
+    hours: 70
+    curriculum:
+      - topic: Data structures, arrays, linked lists, stacks, queues, trees, hash tables
+        hours: 12
+      - topic: Algorithms, sorting, searching, recursion, complexity analysis
+        hours: 12
+      - topic: Operating systems, processes, threads, memory, scheduling, file systems
+        hours: 10
+      - topic: Computer architecture, CPU, memory hierarchy, instruction sets
+        hours: 8
+      - topic: Networking, protocols, sockets, client-server model
+        hours: 8
+      - topic: Databases, relational model, SQL, normalization, indexing
+        hours: 10
+      - topic: Version control, Git fundamentals, branching, collaboration
+        hours: 4
+      - topic: Problem solving, competitive programming basics
+        hours: 6
+    questions: []
+
+  - code: CS2
+    title: Computer Science II
+    level: Medium
+    hours: 140
+    curriculum:
+      - topic: Advanced algorithms, dynamic programming, greedy, graph algorithms
+        hours: 16
+      - topic: Advanced data structures, B-trees, tries, segment trees, heaps
+        hours: 14
+      - topic: Database systems, query execution, transaction isolation, replication
+        hours: 14
+      - topic: Computer networks, TCP internals, routing, congestion control
+        hours: 12
+      - topic: Compilers, lexing, parsing, ASTs, code generation
+        hours: 14
+      - topic: Distributed systems basics, CAP, consistency models, RPC
+        hours: 14
+      - topic: Operating systems internals, virtual memory, I/O, concurrency
+        hours: 12
+      - topic: Automata and formal languages, regular expressions, CFGs
+        hours: 10
+      - topic: Software engineering practices, design patterns, testing
+        hours: 10
+      - topic: Systems programming, C fundamentals, pointers, memory management
+        hours: 12
+      - topic: Applied cryptography, symmetric, asymmetric, hashing, PKI
+        hours: 12
+    questions: []
+
+  - code: CS3
+    title: Computer Science III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: Advanced algorithms, randomized, approximation, online, streaming
+        hours: 20
+      - topic: Systems design, scalability, availability, partitioning
+        hours: 20
+      - topic: Distributed systems, consensus protocols, Paxos, Raft, BFT
+        hours: 20
+      - topic: Advanced databases, LSM trees, columnar stores, query optimization
+        hours: 16
+      - topic: Compiler optimization, SSA, register allocation, loop transformations
+        hours: 16
+      - topic: Parallel computing, GPU programming, MapReduce, Spark
+        hours: 16
+      - topic: Machine learning fundamentals, supervised, unsupervised, evaluation
+        hours: 16
+      - topic: Programming language theory, type systems, semantics
+        hours: 14
+      - topic: Advanced networking, SDN, BGP, anycast, CDN architecture
+        hours: 12
+      - topic: Advanced OS, microkernels, unikernels, eBPF
+        hours: 14
+      - topic: Research methods, paper reading, experiment design
+        hours: 12
+      - topic: Capstone, original system implementation
+        hours: 28
+      - topic: Technical writing and presentation
+        hours: 16
+    questions: []
+
+  - code: CSX
+    title: Computer Science Specialist
+    level: Specialist
+    hours: 520
+    curriculum:
+      - topic: Advanced theory, computational complexity, space complexity, circuit complexity
+        hours: 40
+      - topic: Advanced algorithms, parameterized complexity, fine-grained complexity
+        hours: 36
+      - topic: Distributed computing theory, lower bounds, impossibility results
+        hours: 36
+      - topic: Programming language research, type theory, verification
+        hours: 40
+      - topic: Systems research, OS, storage, networking, novel architectures
+        hours: 48
+      - topic: Database research, new data models, query languages, consistency
+        hours: 32
+      - topic: AI/ML research, deep learning theory, reinforcement learning
+        hours: 40
+      - topic: Quantum computing, qubits, gates, algorithms, error correction
+        hours: 32
+      - topic: Mentoring, curriculum design, technical writing
+        hours: 24
+      - topic: Original research, tool or system contribution
+        hours: 72
+      - topic: Comprehensive assessment with instructor
+        hours: 56
+      - topic: Research paper or thesis
+        hours: 64
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # SOFTWARE ENGINEERING
+  # ─────────────────────────────────────────────
+
+  - code: SE1
+    title: Software Engineer I
+    level: Basic
+    hours: 60
+    curriculum:
+      - topic: Version control, Git workflows, branching strategies, code review
+        hours: 8
+      - topic: Testing fundamentals, unit tests, integration tests, TDD
+        hours: 8
+      - topic: CI/CD, pipelines, automated builds, deployment basics
+        hours: 8
+      - topic: Agile practices, sprints, standups, retrospectives, kanban
+        hours: 6
+      - topic: Code quality, linting, formatting, static analysis
+        hours: 6
+      - topic: Documentation, READMEs, ADRs, runbooks
+        hours: 6
+      - topic: Debugging, logging, error tracking, root cause analysis
+        hours: 6
+      - topic: Basic architecture, monolith vs services, API design
+        hours: 6
+      - topic: Security basics, secrets management, dependency scanning
+        hours: 6
+    questions: []
+
+  - code: SE2
+    title: Software Engineer II
+    level: Medium
+    hours: 130
+    curriculum:
+      - topic: Architecture patterns, microservices, event-driven, hexagonal, CQRS
+        hours: 16
+      - topic: API design, REST, GraphQL, gRPC, versioning, contracts
+        hours: 14
+      - topic: Database design, schema evolution, migrations, multi-tenancy
+        hours: 12
+      - topic: Observability, metrics, logging, tracing, alerting, SLOs
+        hours: 12
+      - topic: Infrastructure as code, Terraform, Ansible, GitOps
+        hours: 12
+      - topic: Containerization, Docker, Kubernetes, Helm, service mesh
+        hours: 14
+      - topic: Security engineering, threat modeling, SAST/DAST, supply chain
+        hours: 10
+      - topic: Performance testing, load testing, profiling, capacity planning
+        hours: 10
+      - topic: Incident management, on-call, postmortems, runbooks
+        hours: 8
+      - topic: Feature flags, progressive delivery, A/B testing
+        hours: 6
+      - topic: Cross-team collaboration, technical specs, RFC process
+        hours: 8
+      - topic: Advanced testing, contract testing, chaos engineering basics
+        hours: 8
+    questions: []
+
+  - code: SE3
+    title: Software Engineer III
+    level: Advanced
+    hours: 220
+    curriculum:
+      - topic: System design at scale, global distribution, multi-region
+        hours: 20
+      - topic: Reliability engineering, SRE practices, error budgets, capacity
+        hours: 18
+      - topic: Platform engineering, developer platforms, internal tooling
+        hours: 16
+      - topic: Data engineering, pipelines, warehousing, streaming, batch
+        hours: 16
+      - topic: Advanced security, zero trust, identity systems, compliance automation
+        hours: 16
+      - topic: Advanced CI/CD, monorepo tooling, release engineering
+        hours: 14
+      - topic: Cost optimization, cloud economics, right-sizing, reserved capacity
+        hours: 10
+      - topic: Technical leadership, mentoring, hiring, architecture reviews
+        hours: 14
+      - topic: Legacy modernization, migration strategies, strangler fig
+        hours: 14
+      - topic: Advanced observability, distributed tracing at scale, anomaly detection
+        hours: 12
+      - topic: Chaos engineering, game days, failure injection
+        hours: 12
+      - topic: Open-source strategy, inner source, contribution models
+        hours: 10
+      - topic: Capstone, end-to-end platform design
+        hours: 24
+      - topic: Technical writing, architecture documentation
+        hours: 14
+    questions: []
+
+  - code: SEX
+    title: Software Engineering Specialist
+    level: Specialist
+    hours: 500
+    curriculum:
+      - topic: Architecture at hyperscale, global systems design
+        hours: 48
+      - topic: Platform research, developer experience, build systems, hermetic builds
+        hours: 40
+      - topic: Advanced reliability, multi-region failover, data consistency
+        hours: 40
+      - topic: Security architecture, threat modeling enterprise, compliance at scale
+        hours: 36
+      - topic: Engineering management, org design, tech strategy, OKRs
+        hours: 32
+      - topic: Data systems, real-time analytics, ML infrastructure
+        hours: 36
+      - topic: Supply chain security, SBOM, provenance, reproducible builds
+        hours: 28
+      - topic: Mentoring, curriculum design, conference speaking
+        hours: 24
+      - topic: Original contribution, tool, framework, or methodology
+        hours: 64
+      - topic: Comprehensive practical assessment with instructor
+        hours: 56
+      - topic: Technical publication or case study
+        hours: 48
+      - topic: Industry engagement, standards, working groups
+        hours: 48
     questions: []

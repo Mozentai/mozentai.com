@@ -2,11 +2,114 @@ headline: Career Wall
 lookup_placeholder: Search professionals or titles
 
 titles:
+  # Python
   - name: Python Engineer I
     exam: P1
-
+    hours: 60
   - name: Python Engineer II
     exam: P2
-
+    hours: 120
   - name: Python Engineer III
     exam: P3
+    hours: 200
+  - name: Python Specialist
+    exam: PX
+    hours: 480
+
+  # Cybersecurity
+  - name: Cybersecurity Engineer I
+    exam: C1
+    hours: 80
+  - name: Cybersecurity Engineer II
+    exam: C2
+    hours: 160
+  - name: Cybersecurity Engineer III
+    exam: C3
+    hours: 280
+  - name: Cybersecurity Specialist
+    exam: CX
+    hours: 560
+
+  # Java
+  - name: Java Engineer I
+    exam: J1
+    hours: 60
+  - name: Java Engineer II
+    exam: J2
+    hours: 140
+  - name: Java Engineer III
+    exam: J3
+    hours: 220
+  - name: Java Specialist
+    exam: JX
+    hours: 500
+
+  # Go
+  - name: Go Engineer I
+    exam: G1
+    hours: 50
+  - name: Go Engineer II
+    exam: G2
+    hours: 110
+  - name: Go Engineer III
+    exam: G3
+    hours: 180
+  - name: Go Specialist
+    exam: GX
+    hours: 440
+
+  # Mathematics
+  - name: Mathematics I
+    exam: M1
+    hours: 60
+  - name: Mathematics II
+    exam: M2
+    hours: 120
+  - name: Mathematics III
+    exam: M3
+    hours: 200
+  - name: Mathematics Specialist
+    exam: MX
+    hours: 480
+
+  # Logic
+  - name: Logic I
+    exam: L1
+    hours: 50
+  - name: Logic II
+    exam: L2
+    hours: 100
+  - name: Logic III
+    exam: L3
+    hours: 160
+  - name: Logic Specialist
+    exam: LX
+    hours: 400
+
+  # Computer Science
+  - name: Computer Science I
+    exam: CS1
+    hours: 70
+  - name: Computer Science II
+    exam: CS2
+    hours: 140
+  - name: Computer Science III
+    exam: CS3
+    hours: 220
+  - name: Computer Science Specialist
+    exam: CSX
+    hours: 520
+
+  # Software Engineering
+  - name: Software Engineer I
+    exam: SE1
+    hours: 60
+  - name: Software Engineer II
+    exam: SE2
+    hours: 130
+  - name: Software Engineer III
+    exam: SE3
+    hours: 220
+  - name: Software Engineering Specialist
+    exam: SEX
+    hours: 500
