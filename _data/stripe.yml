@@ -1,12 +1,7 @@
 # Stripe Payment Links and portal URL.
-# Create Products, Prices, and Payment Links in the Stripe Dashboard,
-# then paste the URLs here. Payment Links pass client_reference_id (Firebase UID)
-# and prefilled_email so the webhook can map Stripe customers to Firestore docs.
-#
-# A backend (Cloud Function or external) must handle checkout.session.completed
-# and customer.subscription.* webhooks to write subscription status back to
-# Firestore engineers/{uid} and companies/{uid}.
+# These are populated when Stripe Checkout is fully wired.
+# Do not commit real secret keys here. These are public Payment Link URLs only.
 
-engineer_link: https://buy.stripe.com/REPLACE_ME
-company_link: https://buy.stripe.com/REPLACE_ME
-portal: https://billing.stripe.com/p/login/REPLACE_ME
+engineer_link: ""
+company_link: ""
+portal: ""

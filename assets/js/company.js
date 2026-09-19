@@ -185,7 +185,7 @@ onAuthStateChanged(auth, function (user) {
 
     subscribeBtn.onclick = function () {
       var link = stripe.company_link;
-      if (!link || link.indexOf("REPLACE") !== -1) return;
+      if (!link || !link.startsWith("https://")) return;
       var url = link +
         "?client_reference_id=" + encodeURIComponent(user.uid) +
         "&prefilled_email=" + encodeURIComponent(user.email);

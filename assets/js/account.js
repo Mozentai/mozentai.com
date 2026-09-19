@@ -240,7 +240,7 @@ onAuthStateChanged(auth, function (user) {
       }
 
       var link = stripe.engineer_link;
-      if (!link || link.indexOf("REPLACE") !== -1) {
+      if (!link || !link.startsWith("https://")) {
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = "Subscribe";
         return;
