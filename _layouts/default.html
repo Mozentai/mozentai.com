@@ -344,59 +344,6 @@
         text-transform: uppercase;
         line-height: 1.4;
       }
-      .testimonials {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px;
-      }
-      .testimonial {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 28px;
-        margin: 0;
-        transition: border-color 0.3s, box-shadow 0.3s;
-      }
-      .testimonial:hover {
-        border-color: rgba(0, 229, 160, 0.35);
-        box-shadow: 0 8px 32px rgba(0, 229, 160, 0.06);
-      }
-      .testimonial-quote {
-        font-size: 14px;
-        line-height: 1.75;
-        color: var(--text);
-        margin: 0 0 20px;
-      }
-      .testimonial-quote::before {
-        content: "\201C";
-        font-family: Georgia, serif;
-        font-size: 28px;
-        color: var(--accent);
-        opacity: 0.5;
-        line-height: 0;
-        display: block;
-        margin-bottom: 12px;
-      }
-      .testimonial-author {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding-top: 16px;
-        border-top: 1px solid var(--border);
-      }
-      .testimonial-name {
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 0.5px;
-      }
-      .testimonial-role {
-        font-size: 11px;
-        font-weight: 500;
-        color: var(--muted);
-        letter-spacing: 1px;
-      }
       .marquee-wrap {
         position: relative;
         width: 100vw;
@@ -583,7 +530,6 @@
         .tagline { font-size: 1.8vw; letter-spacing: 0.5vw; }
         .cards { grid-template-columns: 1fr; }
         .stats { grid-template-columns: 1fr; }
-        .testimonials { grid-template-columns: 1fr; }
         .marquee-track { gap: 48px; animation-duration: 28s; }
         .marquee-fade { width: 64px; }
         .certifications { grid-template-columns: repeat(2, 1fr); }
@@ -641,10 +587,8 @@
       {% include stats.html %}
       {% include services.html %}
       {% include career.html %}
-      {% include engagement.html %}
       {% include clients.html %}
       {% include certifications.html %}
-      {% include testimonials.html %}
       {% include hire-cta.html %}
     </div>
 
