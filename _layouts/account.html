@@ -196,6 +196,38 @@
         max-width: 400px;
         margin: 0 auto 24px;
       }
+      .cpf-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .cpf-input {
+        width: 220px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 14px;
+        padding: 10px 14px;
+        text-align: center;
+        letter-spacing: 2px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .cpf-input:focus { border-color: var(--accent); }
+      .cpf-input::placeholder { color: var(--muted); letter-spacing: 1px; }
+      .cpf-input.is-invalid { border-color: var(--stale); }
+      .cpf-err {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--stale);
+        letter-spacing: 0.5px;
+        display: none;
+      }
+      .cpf-err.is-visible { display: block; }
 
       .sub-status {
         display: flex;
@@ -354,7 +386,11 @@
             <div class="sub-card-price">$20</div>
             <div class="sub-card-period">per month</div>
             <div class="sub-card-desc">
-              Keep your professional standing active. Your CREA stays live while your subscription is active.
+              Your professional standing. One per person, tied to your CPF. Once issued, your CITC number is permanent.
+            </div>
+            <div class="cpf-wrap">
+              <input class="cpf-input" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+              <p class="cpf-err" id="cpf-err"></p>
             </div>
             <button class="btn" id="subscribe-btn" type="button">Subscribe</button>
           </div>

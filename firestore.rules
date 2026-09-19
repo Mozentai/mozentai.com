@@ -1,50 +1,20 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // ===============================================================
-    // Data Model
-    // ===============================================================
-    //
-    // Collection: inquiries
-    // Document ID: auto-id
-    // Fields:
-    //   name: string, 1-200 chars, required
-    //   email: string, 3-320 chars, required
-    //   company: string, 0-200 chars, required key, may be empty
-    //   engagement: string, 1-80 chars, required
-    //   message: string, 1-8000 chars, required
-    //   source: string, must be 'hire-form'
-    //   createdAt: timestamp, must equal request.time (serverTimestamp)
-    //
-    // Collection: config
-    // Document: allow
-    // Fields:
-    //   ips: array of strings, manager public IPs allowed to open /login
-    //
-    // Collection: engineers
-    // Document ID: Firebase UID
-    // Fields:
-    //   name, smarthex, certs (map), subscription (map), group, titles (array)
-    //   Written by manager or webhook. Engineers read their own doc.
-    //
-    // Collection: companies
-    // Document ID: Firebase UID
-    // Fields:
-    //   name, smarthex, subscription (map), group
-    //   Written by manager or webhook. Company reads own doc.
-    //   Active companies can read engineers in their group.
-    //
-    // Public contact form may CREATE inquiries only.
-    // Reads of inquiries and of config/allow are manager-only.
-    // ===============================================================
 
     function isManager() {
       return request.auth != null
+        && request.auth.token.email_verified == true
         && request.auth.token.email in [
           'victor@mozentai.com',
-          'spacemany2k38@gmail.com',
-          'victorblack@mozentai.com'
+          'spacemany2k38@gmail.com'
         ];
+    }
+
+    function isActiveCompany() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/companies/$(request.auth.uid))
+        && get(/databases/$(database)/documents/companies/$(request.auth.uid)).data.subscription.status == 'active';
     }
 
     function isValidInquiry() {
@@ -81,23 +51,16 @@ service cloud.firestore {
     }
 
     match /engineers/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if (request.auth != null && request.auth.uid == uid)
+                  || isActiveCompany()
+                  || isManager();
       allow write: if isManager();
     }
 
     match /companies/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if (request.auth != null && request.auth.uid == uid)
+                  || isManager();
       allow write: if isManager();
-    }
-
-    function isActiveCompany() {
-      return request.auth != null
-        && exists(/databases/$(database)/documents/companies/$(request.auth.uid))
-        && get(/databases/$(database)/documents/companies/$(request.auth.uid)).data.subscription.status == 'active';
-    }
-
-    match /engineers/{uid} {
-      allow read: if isActiveCompany();
     }
 
     match /{document=**} {
