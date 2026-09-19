@@ -1,4 +1,10 @@
 rules_version = '2';
+// Assumed data model
+// engineers/{uid}: name string, email string, smarthex string (16 hex, immutable once set),
+//   titles list, certs map, subscription map (manager/Stripe only)
+// companies/{uid}: name, email, smarthex, subscription (manager/Stripe only)
+// inquiries/{id}: hire form fields, public create
+// config/allow: manager-only IP allowlist
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -50,6 +56,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    function isSmartHex(value) {
+      return value is string
+        && value.size() == 16
+        && value.matches('^[0-9a-f]{16}$');
+    }
+
     function isSelfProfileOnly() {
       let allowed = ['name', 'email'];
       return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed)
@@ -57,6 +69,24 @@ service cloud.firestore {
         && request.resource.data.name.size() <= 200
         && request.resource.data.email is string
         && request.resource.data.email.size() <= 320;
+    }
+
+    function hexAlreadyIssued() {
+      return 'smarthex' in resource.data
+        && resource.data.smarthex is string
+        && resource.data.smarthex.size() == 16;
+    }
+
+    function isValidEngineerSelfUpdate() {
+      let d = request.resource.data;
+      let changed = d.diff(resource.data).affectedKeys();
+      return changed.hasOnly(['name', 'email', 'smarthex'])
+        && d.name is string
+        && d.name.size() <= 200
+        && d.email is string
+        && d.email.size() <= 320
+        && (!changed.hasAny(['smarthex']) || (!hexAlreadyIssued() && isSmartHex(d.smarthex)))
+        && (!hexAlreadyIssued() || d.smarthex == resource.data.smarthex);
     }
 
     function isValidSelfCreate() {
@@ -68,13 +98,23 @@ service cloud.firestore {
         && d.email.size() <= 320;
     }
 
+    function isValidEngineerSelfCreate() {
+      let d = request.resource.data;
+      let base = d.name is string
+        && d.name.size() <= 200
+        && d.email is string
+        && d.email.size() <= 320;
+      return (d.keys().hasOnly(['name', 'email']) && base)
+        || (d.keys().hasOnly(['name', 'email', 'smarthex']) && base && isSmartHex(d.smarthex));
+    }
+
     match /engineers/{uid} {
       allow read: if (request.auth != null && request.auth.uid == uid)
                   || isActiveCompany()
                   || isManager();
-      allow create: if (request.auth != null && request.auth.uid == uid && isValidSelfCreate())
+      allow create: if (request.auth != null && request.auth.uid == uid && isValidEngineerSelfCreate())
                     || isManager();
-      allow update: if (request.auth != null && request.auth.uid == uid && isSelfProfileOnly())
+      allow update: if (request.auth != null && request.auth.uid == uid && isValidEngineerSelfUpdate())
                     || isManager();
       allow delete: if isManager();
     }

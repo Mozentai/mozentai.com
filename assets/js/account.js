@@ -69,6 +69,31 @@ var EXPIRING_MS = 30 * 24 * 60 * 60 * 1000;
 
 var editingUid = null;
 
+function smarthexChecksum(base) {
+  var total = 0;
+  for (var i = 0; i < 14; i++) {
+    total += parseInt(base.charAt(i), 16) * (i + 1);
+  }
+  var hex = (total % 256).toString(16);
+  return hex.length < 2 ? "0" + hex : hex;
+}
+
+function generateSmartHex() {
+  var bytes = new Uint8Array(7);
+  crypto.getRandomValues(bytes);
+  var base = "";
+  for (var i = 0; i < bytes.length; i++) {
+    var h = bytes[i].toString(16);
+    base += h.length < 2 ? "0" + h : h;
+  }
+  return base + smarthexChecksum(base);
+}
+
+function validateSmartHex(id) {
+  if (!id || id.length !== 16 || !/^[0-9a-f]{16}$/.test(id)) return false;
+  return id.slice(14) === smarthexChecksum(id.slice(0, 14));
+}
+
 function showAdminError(msg) {
   adminErr.textContent = msg;
   adminErr.style.display = msg ? "block" : "none";
@@ -247,10 +272,17 @@ onAuthStateChanged(auth, function (user) {
       subscribeBtn.textContent = "Redirecting...";
 
       try {
+        var snap = await getDoc(doc(db, "engineers", user.uid));
+        var current = snap.exists() ? snap.data() : {};
+        var hex = current.smarthex;
+        if (!validateSmartHex(hex)) hex = generateSmartHex();
         await setDoc(doc(db, "engineers", user.uid), {
-          name: user.displayName || "",
+          name: current.name || user.displayName || "",
           email: user.email || "",
+          smarthex: hex,
         }, { merge: true });
+        profileHex.value = hex;
+        dashHex.textContent = hex;
       } catch (err) {
         subscribeBtn.disabled = false;
         subscribeBtn.textContent = "Subscribe";
