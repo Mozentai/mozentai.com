@@ -10,6 +10,7 @@ import {
   getFirestore,
   doc,
   getDoc,
+  setDoc,
   collection,
   getDocs,
   query,
@@ -33,6 +34,18 @@ var subscribeBtn = document.getElementById("subscribe-btn");
 var engLookup = document.getElementById("eng-lookup");
 var engList = document.getElementById("eng-list");
 var engEmpty = document.getElementById("eng-empty");
+
+var profileName = document.getElementById("profile-name");
+var profileEmail = document.getElementById("profile-email");
+var profileHex = document.getElementById("profile-hex");
+var profileSave = document.getElementById("profile-save");
+var profileOk = document.getElementById("profile-ok");
+
+var MANAGER_EMAILS = [
+  "victor@mozentai.com",
+  "spacemany2k38@gmail.com",
+  "victorblack@mozentai.com",
+];
 
 var stripe = window.MOZENTAI_STRIPE || {};
 
@@ -154,26 +167,45 @@ async function loadEngineers(companyData) {
   }
 }
 
+function isManager(user) {
+  return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
+}
+
+function populateCompanyProfile(user, data) {
+  var name = (data && data.name) || user.displayName || "";
+  var email = user.email || "";
+  var hex = (data && data.smarthex) || "";
+
+  dashName.textContent = name || email;
+  dashHex.textContent = hex || "";
+
+  profileName.value = name;
+  profileEmail.value = email;
+  profileHex.value = hex;
+
+  if (isManager(user)) {
+    profileHex.removeAttribute("readonly");
+    profileHex.placeholder = "SmartHex-16";
+  }
+}
+
 async function loadCompany(user) {
   try {
     var snap = await getDoc(doc(db, "companies", user.uid));
     if (!snap.exists()) {
-      dashName.textContent = user.displayName || user.email;
-      dashHex.textContent = "";
+      populateCompanyProfile(user, null);
       renderSubscription(null);
       return;
     }
     var data = snap.data();
-    dashName.textContent = data.name || user.displayName || user.email;
-    dashHex.textContent = data.smarthex || "";
+    populateCompanyProfile(user, data);
 
     var isActive = renderSubscription(data.subscription || null);
     if (isActive) {
       await loadEngineers(data);
     }
   } catch (err) {
-    dashName.textContent = user.displayName || user.email;
-    dashHex.textContent = "";
+    populateCompanyProfile(user, null);
     renderSubscription(null);
   }
 }
@@ -190,6 +222,41 @@ onAuthStateChanged(auth, function (user) {
         "?client_reference_id=" + encodeURIComponent(user.uid) +
         "&prefilled_email=" + encodeURIComponent(user.email);
       window.location.href = url;
+    };
+
+    profileSave.onclick = async function () {
+      profileOk.classList.remove("is-visible");
+      profileSave.disabled = true;
+      profileSave.textContent = "Saving...";
+
+      var update = {
+        name: profileName.value.trim(),
+        email: user.email || "",
+      };
+
+      if (isManager(user)) {
+        update.smarthex = profileHex.value.trim();
+      }
+
+      try {
+        await setDoc(doc(db, "companies", user.uid), update, { merge: true });
+        dashName.textContent = update.name || user.email;
+        if (update.smarthex !== undefined) dashHex.textContent = update.smarthex;
+        profileOk.classList.add("is-visible");
+        setTimeout(function () { profileOk.classList.remove("is-visible"); }, 2000);
+      } catch (err) {
+        profileOk.textContent = "Save failed";
+        profileOk.style.color = "var(--stale)";
+        profileOk.classList.add("is-visible");
+        setTimeout(function () {
+          profileOk.classList.remove("is-visible");
+          profileOk.textContent = "Saved";
+          profileOk.style.color = "";
+        }, 3000);
+      }
+
+      profileSave.disabled = false;
+      profileSave.textContent = "Save";
     };
   } else {
     showGate();

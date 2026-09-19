@@ -50,17 +50,43 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    function isSelfProfileOnly() {
+      let allowed = ['name', 'email'];
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed)
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 320;
+    }
+
+    function isValidSelfCreate() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['name', 'email'])
+        && d.name is string
+        && d.name.size() <= 200
+        && d.email is string
+        && d.email.size() <= 320;
+    }
+
     match /engineers/{uid} {
       allow read: if (request.auth != null && request.auth.uid == uid)
                   || isActiveCompany()
                   || isManager();
-      allow write: if isManager();
+      allow create: if (request.auth != null && request.auth.uid == uid && isValidSelfCreate())
+                    || isManager();
+      allow update: if (request.auth != null && request.auth.uid == uid && isSelfProfileOnly())
+                    || isManager();
+      allow delete: if isManager();
     }
 
     match /companies/{uid} {
       allow read: if (request.auth != null && request.auth.uid == uid)
                   || isManager();
-      allow write: if isManager();
+      allow create: if (request.auth != null && request.auth.uid == uid && isValidSelfCreate())
+                    || isManager();
+      allow update: if (request.auth != null && request.auth.uid == uid && isSelfProfileOnly())
+                    || isManager();
+      allow delete: if isManager();
     }
 
     match /{document=**} {

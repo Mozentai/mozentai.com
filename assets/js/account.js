@@ -33,6 +33,13 @@ var subLabel = document.getElementById("sub-label");
 var subManage = document.getElementById("sub-manage");
 var subscribeBtn = document.getElementById("subscribe-btn");
 
+var profileName = document.getElementById("profile-name");
+var profileEmail = document.getElementById("profile-email");
+var profileHex = document.getElementById("profile-hex");
+var profileTitles = document.getElementById("profile-titles");
+var profileSave = document.getElementById("profile-save");
+var profileOk = document.getElementById("profile-ok");
+
 var adminPanel = document.getElementById("admin-panel");
 var adminLookup = document.getElementById("admin-lookup");
 var adminFind = document.getElementById("admin-find");
@@ -155,25 +162,44 @@ function checkManager(user) {
   return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
 }
 
+function populateProfile(user, data) {
+  var name = (data && data.name) || user.displayName || "";
+  var email = user.email || "";
+  var hex = (data && data.smarthex) || "";
+  var titles = (data && data.titles) || [];
+
+  dashName.textContent = name || email;
+  dashHex.textContent = hex || "Not registered";
+
+  profileName.value = name;
+  profileEmail.value = email;
+  profileHex.value = hex;
+  profileTitles.value = titles.join(", ");
+
+  if (checkManager(user)) {
+    profileHex.removeAttribute("readonly");
+    profileHex.placeholder = "SmartHex-16";
+    profileTitles.removeAttribute("readonly");
+    profileTitles.placeholder = "P1, C1, AW1, GH1";
+  }
+}
+
 async function loadEngineer(user) {
   try {
     var snap = await getDoc(doc(db, "engineers", user.uid));
     if (!snap.exists()) {
-      dashName.textContent = user.displayName || user.email;
-      dashHex.textContent = "Not registered";
+      populateProfile(user, null);
       renderSubscription(null);
       dashEmpty.hidden = false;
       return;
     }
     var data = snap.data();
-    dashName.textContent = data.name || user.displayName || user.email;
-    dashHex.textContent = data.smarthex || "";
+    populateProfile(user, data);
     renderSubscription(data.subscription || null);
     renderCerts(data.certs || {});
     highlightCatalog(data.titles || []);
   } catch (err) {
-    dashName.textContent = user.displayName || user.email;
-    dashHex.textContent = "";
+    populateProfile(user, null);
     renderSubscription(null);
     dashEmpty.textContent = "Could not load your data.";
     dashEmpty.hidden = false;
@@ -240,6 +266,46 @@ onAuthStateChanged(auth, function (user) {
       window.location.href = link +
         "?client_reference_id=" + encodeURIComponent(user.uid) +
         "&prefilled_email=" + encodeURIComponent(user.email);
+    };
+
+    profileSave.onclick = async function () {
+      profileOk.classList.remove("is-visible");
+      profileSave.disabled = true;
+      profileSave.textContent = "Saving...";
+
+      var update = {
+        name: profileName.value.trim(),
+        email: user.email || "",
+      };
+
+      if (checkManager(user)) {
+        update.smarthex = profileHex.value.trim();
+        var titleStr = profileTitles.value.trim();
+        update.titles = titleStr
+          ? titleStr.split(",").map(function (t) { return t.trim().toUpperCase(); }).filter(Boolean)
+          : [];
+      }
+
+      try {
+        await setDoc(doc(db, "engineers", user.uid), update, { merge: true });
+        dashName.textContent = update.name || user.email;
+        if (update.smarthex !== undefined) dashHex.textContent = update.smarthex;
+        if (update.titles) highlightCatalog(update.titles);
+        profileOk.classList.add("is-visible");
+        setTimeout(function () { profileOk.classList.remove("is-visible"); }, 2000);
+      } catch (err) {
+        profileOk.textContent = "Save failed";
+        profileOk.style.color = "var(--stale)";
+        profileOk.classList.add("is-visible");
+        setTimeout(function () {
+          profileOk.classList.remove("is-visible");
+          profileOk.textContent = "Saved";
+          profileOk.style.color = "";
+        }, 3000);
+      }
+
+      profileSave.disabled = false;
+      profileSave.textContent = "Save";
     };
   } else {
     showGate();

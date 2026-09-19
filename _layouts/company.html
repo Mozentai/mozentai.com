@@ -117,7 +117,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 48px;
+        margin-bottom: 32px;
       }
       .dash-name {
         font-family: var(--mono);
@@ -133,6 +133,74 @@
         letter-spacing: 1px;
         margin-top: 4px;
       }
+      .profile-section {
+        margin-bottom: 48px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+      }
+      .profile-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .profile-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .profile-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .profile-input {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 13px;
+        padding: 10px 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .profile-input:focus { border-color: var(--accent); }
+      .profile-input::placeholder { color: var(--muted); }
+      .profile-input[readonly] {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .profile-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .profile-save {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      .profile-save:hover { transform: translateY(-1px); }
+      .profile-ok {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--fresh);
+        display: none;
+      }
+      .profile-ok.is-visible { display: inline; }
       .sign-out {
         font-family: var(--mono);
         font-size: 10px;
@@ -314,6 +382,7 @@
         .page { padding: 12px 24px 64px; }
         .topbar-nav { gap: 14px; }
         .topbar-link { font-size: 9px; letter-spacing: 2px; }
+        .profile-fields { grid-template-columns: 1fr; }
         .eng-row { grid-template-columns: 1fr; gap: 4px; }
         .eng-titles { text-align: left; }
         .sub-status { flex-wrap: wrap; }
@@ -345,6 +414,28 @@
             <div class="dash-hex" id="dash-hex"></div>
           </div>
           <button class="sign-out" id="sign-out" type="button">Sign out</button>
+        </div>
+
+        <div class="profile-section">
+          <h2 class="dash-section-title">Profile</h2>
+          <div class="profile-fields">
+            <div class="profile-field">
+              <label class="profile-label" for="profile-name">Company Name</label>
+              <input class="profile-input" id="profile-name" type="text" placeholder="Your company name">
+            </div>
+            <div class="profile-field">
+              <label class="profile-label" for="profile-email">Email</label>
+              <input class="profile-input" id="profile-email" type="email" readonly>
+            </div>
+            <div class="profile-field">
+              <label class="profile-label" for="profile-hex">CITC Number</label>
+              <input class="profile-input" id="profile-hex" type="text" readonly placeholder="Assigned on registration" maxlength="16">
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="profile-save" id="profile-save" type="button">Save</button>
+            <span class="profile-ok" id="profile-ok">Saved</span>
+          </div>
         </div>
 
         <div id="sub-gate" hidden>
