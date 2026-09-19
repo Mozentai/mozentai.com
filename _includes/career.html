@@ -28,7 +28,7 @@
     {% for title in site.data.career.titles %}
     <a
       class="wall-row wall-row--title"
-      href="#{{ title.exam }}"
+      href="/titles/{{ title.exam | downcase }}/"
       data-title="{{ title.name | downcase | escape }}"
       data-exam="{{ title.exam | downcase | escape }}"
       hidden

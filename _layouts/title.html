@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+    <title>{{ page.exam_title }} · {{ site.title }}</title>
+    {% seo %}
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #21262d;
+        --accent: #00e5a0;
+        --muted: #5a6b82;
+        --text: #c9d1d9;
+        --mono: 'JetBrains Mono', monospace;
+        --sans: 'Inter', -apple-system, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg);
+        font-family: var(--sans);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 40px;
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .topbar-mark {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 6px;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .topbar-nav { display: flex; gap: 24px; }
+      .topbar-link {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .topbar-link:hover,
+      .topbar-link.is-active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+      .page {
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 24px 40px 80px;
+        flex: 1;
+      }
+      .title-header {
+        margin-bottom: 48px;
+      }
+      .title-code {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 2px;
+      }
+      .title-name {
+        font-family: var(--mono);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 8px 0 12px;
+        letter-spacing: 0.5px;
+      }
+      .title-meta {
+        display: flex;
+        gap: 24px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.5px;
+      }
+      .title-meta strong { color: var(--accent); }
+      .curriculum {
+        display: flex;
+        flex-direction: column;
+      }
+      .cur-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .cur-topic {
+        font-size: 14px;
+        color: var(--text);
+        line-height: 1.5;
+      }
+      .cur-hours {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        white-space: nowrap;
+        letter-spacing: 0.5px;
+      }
+      .cur-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 0 0;
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.5px;
+      }
+      .cur-total-hours {
+        color: var(--accent);
+      }
+      .back {
+        display: inline-block;
+        margin-top: 48px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .back:hover { color: var(--accent); }
+      .site-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 64px;
+      }
+      .glider {
+        width: 56px;
+        height: 56px;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        opacity: 0.9;
+      }
+      @media (max-width: 600px) {
+        .topbar { padding: 24px; }
+        .page { padding: 12px 24px 64px; }
+        .topbar-nav { gap: 14px; }
+        .topbar-link { font-size: 9px; letter-spacing: 2px; }
+        .title-name { font-size: 22px; }
+        .cur-row { flex-direction: column; gap: 4px; }
+        .cur-hours { text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="topbar-mark" href="/">MOZENT&#x25B3;I</a>
+      <nav class="topbar-nav">
+        <a class="topbar-link" href="/about/">About</a>
+        <a class="topbar-link is-active" href="/professionals/">Professionals</a>
+        <a class="topbar-link" href="/hire/">Get in touch</a>
+      </nav>
+    </header>
+
+    {% assign exam = nil %}
+    {% for e in site.data.exams.exams %}
+      {% if e.code == page.exam %}
+        {% assign exam = e %}
+      {% endif %}
+    {% endfor %}
+
+    <main class="page">
+      {% if exam %}
+      <div class="title-header">
+        <span class="title-code">{{ exam.code }}</span>
+        <h1 class="title-name">{{ exam.title }}</h1>
+        <div class="title-meta">
+          <span><strong>{{ exam.hours }}h</strong> total</span>
+          <span>{{ exam.level }}</span>
+          <span>{{ exam.curriculum.size }} modules</span>
+        </div>
+      </div>
+
+      <div class="curriculum">
+        {% for mod in exam.curriculum %}
+        <div class="cur-row">
+          <span class="cur-topic">{{ mod.topic }}</span>
+          <span class="cur-hours">{{ mod.hours }}h</span>
+        </div>
+        {% endfor %}
+        <div class="cur-total">
+          <span>Total</span>
+          <span class="cur-total-hours">{{ exam.hours }}h</span>
+        </div>
+      </div>
+
+      <a class="back" href="/professionals/">&larr; Back to Career Wall</a>
+      {% endif %}
+    </main>
+
+    <footer class="site-footer">
+      <picture>
+        <source srcset="/assets/glider.png" media="(prefers-reduced-motion: reduce)">
+        <img class="glider" src="/assets/glider.gif" alt="Conway glider, the hacker emblem" width="56" height="56">
+      </picture>
+    </footer>
+  </body>
+</html>
