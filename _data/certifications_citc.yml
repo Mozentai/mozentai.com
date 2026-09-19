@@ -1,6 +1,5 @@
-# CITC certifications. One per exam. Modeled after HTB Academy certs.
-# Each cert has a name, code, description, and the path it validates.
-# Candidates must complete 100% of the curriculum and pass the exam.
+# CITC certifications. One per exam.
+# The title is granted after the candidate sits and passes. CITC does not teach the material.
 
 certifications:
   # Python

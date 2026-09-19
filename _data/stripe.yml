@@ -1,7 +1,10 @@
-# Stripe Payment Links and portal URL.
-# These are populated when Stripe Checkout is fully wired.
-# Do not commit real secret keys here. These are public Payment Link URLs only.
+# Stripe Payment Link URLs and portal URL.
+# Products and Prices already exist on acct_1UHPaDGduPYDReG6 (live).
+# Payment Links could not be created until card/payment methods are enabled in
+# https://dashboard.stripe.com/acct_1UHPaDGduPYDReG6/settings/payment_methods
+# Do not commit secret keys. These are public Payment Link URLs only.
 
 engineer_link: ""
 company_link: ""
 portal: ""
+exam_links: {}

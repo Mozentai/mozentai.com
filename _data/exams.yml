@@ -1,7 +1,7 @@
-# CITC exams and base curriculums.
-# Do not render on the public site.
+# CITC exams. Topics are what we validate, not a course to take.
+# Do not render question banks on the public site.
 # Performance type is generated from the sitting score in product code.
-# Hours are estimates. Specialist (X) requires cumulative mastery.
+# Hours are internal estimates only. Do not show them as teaching time.
 
 modes:
   - id: questionnaire

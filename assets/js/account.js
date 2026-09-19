@@ -52,6 +52,18 @@ var adminSave = document.getElementById("admin-save");
 var adminOk = document.getElementById("admin-ok");
 var adminErr = document.getElementById("admin-err");
 
+var sit = document.getElementById("sit");
+var sitCode = document.getElementById("sit-code");
+var sitTitle = document.getElementById("sit-title");
+var sitTopics = document.getElementById("sit-topics");
+var sitErr = document.getElementById("sit-err");
+var sitQuestionnaire = document.getElementById("sit-questionnaire");
+var sitInstructor = document.getElementById("sit-instructor");
+var sitCancel = document.getElementById("sit-cancel");
+
+var heldTitles = [];
+var pendingExam = null;
+
 var MANAGER_EMAILS = [
   "victor@mozentai.com",
   "spacemany2k38@gmail.com",
@@ -59,6 +71,7 @@ var MANAGER_EMAILS = [
 ];
 
 var stripe = window.MOZENTAI_STRIPE || {};
+var examsCatalog = window.MOZENTAI_EXAMS || {};
 var app = initializeApp(window.MOZENTAI_FIREBASE);
 var auth = getAuth(app);
 var db = getFirestore(app);
@@ -97,6 +110,68 @@ function validateSmartHex(id) {
 function showAdminError(msg) {
   adminErr.textContent = msg;
   adminErr.style.display = msg ? "block" : "none";
+}
+
+function showSitError(msg) {
+  sitErr.textContent = msg || "";
+  sitErr.classList.toggle("is-visible", !!msg);
+}
+
+function closeSit() {
+  sit.hidden = true;
+  pendingExam = null;
+  showSitError("");
+}
+
+function openSit(code, name) {
+  var examCode = (code || "").toUpperCase();
+  if (heldTitles.indexOf(examCode) !== -1) return;
+  if (!profileHex.value) {
+    var gateEl = document.getElementById("sub-gate");
+    if (gateEl) gateEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  if (heldTitles.length >= 5) {
+    pendingExam = null;
+    sitCode.textContent = examCode;
+    sitTitle.textContent = name || examCode;
+    sitTopics.innerHTML = "";
+    sit.hidden = false;
+    showSitError("No more titles can be added to this standing.");
+    sitQuestionnaire.disabled = true;
+    sitInstructor.disabled = true;
+    return;
+  }
+  sitQuestionnaire.disabled = false;
+  sitInstructor.disabled = false;
+  var exam = examsCatalog[examCode] || { title: name, topics: [] };
+  pendingExam = examCode;
+  sitCode.textContent = examCode;
+  sitTitle.textContent = exam.title || name || examCode;
+  sitTopics.textContent = "";
+  (exam.topics || []).forEach(function (topic) {
+    var li = document.createElement("li");
+    li.textContent = topic;
+    sitTopics.appendChild(li);
+  });
+  sit.hidden = false;
+  showSitError("");
+}
+
+function startExam(mode) {
+  if (!pendingExam) return;
+  var user = auth.currentUser;
+  if (!user) return;
+  var links = stripe.exam_links || {};
+  var link = links[pendingExam];
+  if (!link || link.indexOf("http") !== 0) {
+    showSitError("Checkout for this exam is not live yet.");
+    return;
+  }
+  window.location.href = link +
+    (link.indexOf("?") === -1 ? "?" : "&") +
+    "client_reference_id=" + encodeURIComponent(user.uid + ":" + pendingExam + ":" + mode) +
+    "&prefilled_email=" + encodeURIComponent(user.email || "");
 }
 
 function showGate() {
@@ -192,6 +267,7 @@ function populateProfile(user, data) {
   var email = user.email || "";
   var hex = (data && data.smarthex) || "";
   var titles = (data && data.titles) || [];
+  heldTitles = titles.map(function (t) { return String(t).toUpperCase(); });
 
   dashName.textContent = name || email;
   dashHex.textContent = hex || "Not registered";
@@ -396,3 +472,25 @@ adminSave.addEventListener("click", async function () {
   adminSave.disabled = false;
   adminSave.textContent = "Save";
 });
+
+document.querySelectorAll(".catalog-item").forEach(function (el) {
+  el.addEventListener("click", function () {
+    openSit(el.getAttribute("data-exam"), el.getAttribute("data-name"));
+  });
+});
+
+sitCancel.addEventListener("click", closeSit);
+sit.addEventListener("click", function (e) {
+  if (e.target === sit) closeSit();
+});
+sitQuestionnaire.addEventListener("click", function () {
+  startExam("questionnaire");
+});
+sitInstructor.addEventListener("click", function () {
+  startExam("instructor");
+});
+
+if (location.hash === "#exams") {
+  var examsEl = document.getElementById("exams");
+  if (examsEl) examsEl.scrollIntoView();
+}

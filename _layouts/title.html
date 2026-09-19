@@ -100,43 +100,50 @@
         color: var(--muted);
         letter-spacing: 0.5px;
       }
-      .title-meta strong { color: var(--accent); }
-      .curriculum {
+      .title-lead {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 640px;
+        margin: 20px 0 0;
+      }
+      .coverage-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .coverage {
         display: flex;
         flex-direction: column;
+        margin-bottom: 32px;
       }
-      .cur-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 16px;
+      .cov-row {
         padding: 14px 0;
         border-bottom: 1px solid var(--border);
-      }
-      .cur-topic {
         font-size: 14px;
         color: var(--text);
         line-height: 1.5;
       }
-      .cur-hours {
+      .sit-cta {
+        display: inline-block;
         font-family: var(--mono);
         font-size: 12px;
-        color: var(--accent);
-        white-space: nowrap;
-        letter-spacing: 0.5px;
-      }
-      .cur-total {
-        display: flex;
-        justify-content: space-between;
-        padding: 16px 0 0;
-        font-family: var(--mono);
-        font-size: 14px;
         font-weight: 700;
-        color: var(--text);
-        letter-spacing: 0.5px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 8px;
       }
-      .cur-total-hours {
-        color: var(--accent);
+      .sit-cta:hover {
+        box-shadow: 0 8px 24px rgba(0, 229, 160, 0.18);
       }
       .cert-block {
         margin-top: 56px;
@@ -198,8 +205,6 @@
         .topbar-nav { gap: 14px; }
         .topbar-link { font-size: 9px; letter-spacing: 2px; }
         .title-name { font-size: 22px; }
-        .cur-row { flex-direction: column; gap: 4px; }
-        .cur-hours { text-align: left; }
       }
     </style>
   </head>
@@ -228,24 +233,22 @@
         <span class="title-code">{{ exam.code }}</span>
         <h1 class="title-name">{{ exam.title }}</h1>
         <div class="title-meta">
-          <span><strong>{{ exam.hours }}h</strong> total</span>
+          <span>{{ exam.code }} exam</span>
           <span>{{ exam.level }}</span>
-          <span>{{ exam.curriculum.size }} modules</span>
         </div>
+        <p class="title-lead">
+          CITC does not teach this material. These are the domains we test. You prove them by sitting a questionnaire, or by scheduling a session with an instructor.
+        </p>
       </div>
 
-      <div class="curriculum">
+      <p class="coverage-label">What we validate</p>
+      <div class="coverage">
         {% for mod in exam.curriculum %}
-        <div class="cur-row">
-          <span class="cur-topic">{{ mod.topic }}</span>
-          <span class="cur-hours">{{ mod.hours }}h</span>
-        </div>
+        <div class="cov-row">{{ mod.topic }}</div>
         {% endfor %}
-        <div class="cur-total">
-          <span>Total</span>
-          <span class="cur-total-hours">{{ exam.hours }}h</span>
-        </div>
       </div>
+
+      <a class="sit-cta" href="/account/#exams">Sign in to sit this exam</a>
 
       {% assign cert = nil %}
       {% for c in site.data.certifications_citc.certifications %}

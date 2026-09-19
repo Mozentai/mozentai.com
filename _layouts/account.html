@@ -291,9 +291,14 @@
         border: 1px solid var(--border);
         border-radius: 6px;
         transition: border-color 0.2s;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        color: inherit;
       }
       .catalog-item:hover { border-color: var(--accent); }
-      .catalog-item--held { border-color: var(--fresh); }
+      .catalog-item--held { border-color: var(--fresh); cursor: default; }
       .catalog-exam {
         font-family: var(--mono);
         font-size: 13px;
@@ -314,6 +319,92 @@
         color: var(--muted);
       }
       .catalog-item--held .catalog-seal { color: var(--fresh); }
+
+      .catalog-lead {
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin: -8px 0 28px;
+        max-width: 560px;
+      }
+
+      .sit {
+        position: fixed;
+        inset: 0;
+        background: rgba(13, 17, 23, 0.86);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 40;
+      }
+      .sit[hidden] { display: none !important; }
+      .sit-card {
+        width: min(520px, 100%);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 32px;
+      }
+      .sit-code {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--accent);
+      }
+      .sit-title {
+        font-family: var(--mono);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 8px 0 16px;
+      }
+      .sit-lead {
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+      .sit-topics {
+        list-style: none;
+        margin: 0 0 28px;
+        padding: 0;
+        max-height: 220px;
+        overflow: auto;
+      }
+      .sit-topics li {
+        font-size: 13px;
+        color: var(--text);
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .sit-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .sit-cancel {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      .sit-cancel:hover { color: var(--accent); }
+      .sit-err {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--stale);
+        margin-bottom: 12px;
+        display: none;
+      }
+      .sit-err.is-visible { display: block; }
 
       .sub-status {
         display: flex;
@@ -575,8 +666,9 @@
         <div class="cert-list" id="cert-list"></div>
         <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
 
-        <div style="margin-top:48px;">
-          <h2 class="dash-section-title">Title Catalog</h2>
+        <div id="exams" style="margin-top:48px;">
+          <h2 class="dash-section-title">Exams</h2>
+          <p class="catalog-lead">CITC does not teach. Buy an exam, sit it as a questionnaire or with an instructor, and earn the cert if you pass.</p>
           {% assign grouped = site.data.career.titles | group_by_exp: "t", "t.name | split: ' ' | pop | join: ' '" %}
           {% assign disciplines = "" | split: "" %}
           {% assign current_disc = "" %}
@@ -613,16 +705,31 @@
                   {% endif %}
                 {% endif %}
                 {% if tdisc == disc %}
-              <div class="catalog-item" data-exam="{{ t.exam }}">
+              <button class="catalog-item" type="button" data-exam="{{ t.exam }}" data-name="{{ t.name | escape }}">
                 <span class="catalog-exam">{{ t.exam }}</span>
                 <span class="catalog-name">{{ t.name }}</span>
                 {% if t.category == "tool" %}<span class="catalog-seal">&#x25C9;</span>{% endif %}
-              </div>
+              </button>
                 {% endif %}
               {% endfor %}
             </div>
           </div>
           {% endfor %}
+        </div>
+
+        <div class="sit" id="sit" hidden>
+          <div class="sit-card">
+            <div class="sit-code" id="sit-code"></div>
+            <h3 class="sit-title" id="sit-title"></h3>
+            <p class="sit-lead" id="sit-lead">CITC does not teach this material. You prove it by sitting the exam.</p>
+            <ul class="sit-topics" id="sit-topics"></ul>
+            <p class="sit-err" id="sit-err"></p>
+            <div class="sit-actions">
+              <button class="btn" id="sit-questionnaire" type="button">Questionnaire</button>
+              <button class="btn btn--outline" id="sit-instructor" type="button">Instructor</button>
+            </div>
+            <button class="sit-cancel" id="sit-cancel" type="button">Cancel</button>
+          </div>
         </div>
 
         <div class="admin-panel" id="admin-panel">
@@ -669,6 +776,15 @@
     <script src="/assets/js/firebase-config.js"></script>
     <script>
       window.MOZENTAI_STRIPE = {{ site.data.stripe | jsonify }};
+      window.MOZENTAI_EXAMS = {
+        {% for e in site.data.exams.exams %}
+        {{ e.code | jsonify }}: {
+          title: {{ e.title | jsonify }},
+          level: {{ e.level | jsonify }},
+          topics: [{% for m in e.curriculum %}{{ m.topic | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      };
     </script>
     <script type="module" src="/assets/js/account.js"></script>
   </body>
