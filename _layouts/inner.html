@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" content="notranslate">
+    {% include head-security.html %}
     <title>{{ page.title | default: site.title }} · {{ site.title }}</title>
     {% seo %}
     <link rel="icon" type="image/png" href="/logo.png">
@@ -221,16 +222,16 @@
         <div class="field-row">
           <div class="field">
             <label for="name">{{ site.data.hire.fields.name }}</label>
-            <input id="name" name="name" type="text" required autocomplete="name">
+            <input id="name" name="name" type="text" required autocomplete="name" maxlength="200" pattern="[^<>]{1,200}">
           </div>
           <div class="field">
             <label for="email">{{ site.data.hire.fields.email }}</label>
-            <input id="email" name="email" type="email" required autocomplete="email">
+            <input id="email" name="email" type="email" required autocomplete="email" maxlength="320">
           </div>
         </div>
         <div class="field">
           <label for="company">{{ site.data.hire.fields.company }}</label>
-          <input id="company" name="company" type="text" autocomplete="organization">
+          <input id="company" name="company" type="text" autocomplete="organization" maxlength="200">
         </div>
         <div class="field">
           <label for="engagement">{{ site.data.hire.fields.engagement }}</label>
@@ -243,7 +244,7 @@
         </div>
         <div class="field">
           <label for="message">{{ site.data.hire.fields.message }}</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea id="message" name="message" required maxlength="8000"></textarea>
         </div>
         <button class="btn" type="submit">{{ site.data.hire.submit }}</button>
       </form>

@@ -65,6 +65,12 @@ function freshnessStatus(cert) {
   return { status: "fresh", label: "Fresh until " + dateStr };
 }
 
+function esc(str) {
+  var d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 function renderCerts(certs) {
   certList.innerHTML = "";
   if (!certs || Object.keys(certs).length === 0) {
@@ -72,16 +78,33 @@ function renderCerts(certs) {
     return;
   }
   dashEmpty.hidden = true;
-  var codes = Object.keys(certs).sort();
+  var codes = Object.keys(certs).filter(function (c) {
+    return /^[A-Z0-9]{2,4}$/i.test(c);
+  }).sort();
   codes.forEach(function (code) {
     var cert = certs[code];
     var f = freshnessStatus(cert);
+    var safe = esc(code);
     var row = document.createElement("div");
     row.className = "cert-row";
-    row.innerHTML =
-      '<span class="cert-dot cert-dot--' + f.status + '"></span>' +
-      '<span class="cert-code"><a href="/titles/' + code.toLowerCase() + '/">' + code + "</a></span>" +
-      '<span class="cert-freshness cert-freshness--' + f.status + '">' + f.label + "</span>";
+
+    var dot = document.createElement("span");
+    dot.className = "cert-dot cert-dot--" + f.status;
+
+    var codeEl = document.createElement("span");
+    codeEl.className = "cert-code";
+    var link = document.createElement("a");
+    link.href = "/titles/" + encodeURIComponent(code.toLowerCase()) + "/";
+    link.textContent = code;
+    codeEl.appendChild(link);
+
+    var fresh = document.createElement("span");
+    fresh.className = "cert-freshness cert-freshness--" + f.status;
+    fresh.textContent = f.label;
+
+    row.appendChild(dot);
+    row.appendChild(codeEl);
+    row.appendChild(fresh);
     certList.appendChild(row);
   });
 }
