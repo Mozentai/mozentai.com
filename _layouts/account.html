@@ -328,6 +328,64 @@
       .cert-freshness--expiring { color: var(--expiring); }
       .cert-freshness--stale { color: var(--stale); }
 
+      .admin-panel {
+        margin-top: 48px;
+        padding-top: 32px;
+        border-top: 1px solid var(--border);
+        display: none;
+      }
+      .admin-panel.is-visible { display: block; }
+      .admin-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+      .admin-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .admin-input {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 13px;
+        padding: 10px 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .admin-input:focus { border-color: var(--accent); }
+      .admin-input::placeholder { color: var(--muted); }
+      .admin-save {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      .admin-save:hover { transform: translateY(-1px); }
+      .admin-ok {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--fresh);
+        margin-left: 12px;
+        display: none;
+      }
+      .admin-ok.is-visible { display: inline; }
+
       .site-footer {
         display: flex;
         flex-direction: column;
@@ -407,6 +465,24 @@
         <h2 class="dash-section-title">Certifications</h2>
         <div class="cert-list" id="cert-list"></div>
         <p class="dash-empty" id="dash-empty" hidden>No certifications yet.</p>
+
+        <div class="admin-panel" id="admin-panel">
+          <h2 class="dash-section-title">Admin</h2>
+          <div class="admin-field">
+            <label class="admin-label" for="admin-name">Name</label>
+            <input class="admin-input" id="admin-name" type="text" placeholder="Full name">
+          </div>
+          <div class="admin-field">
+            <label class="admin-label" for="admin-hex">CITC Number</label>
+            <input class="admin-input" id="admin-hex" type="text" placeholder="SmartHex-16" maxlength="16">
+          </div>
+          <div class="admin-field">
+            <label class="admin-label" for="admin-titles">Titles (comma-separated exam codes)</label>
+            <input class="admin-input" id="admin-titles" type="text" placeholder="C1, C2, P1, AW1, GH1">
+          </div>
+          <button class="admin-save" id="admin-save" type="button">Save</button>
+          <span class="admin-ok" id="admin-ok">Saved</span>
+        </div>
       </div>
     </main>
 

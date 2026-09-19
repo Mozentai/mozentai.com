@@ -31,6 +31,19 @@ var subscribeBtn = document.getElementById("subscribe-btn");
 var cpfInput = document.getElementById("cpf-input");
 var cpfErr = document.getElementById("cpf-err");
 
+var adminPanel = document.getElementById("admin-panel");
+var adminName = document.getElementById("admin-name");
+var adminHex = document.getElementById("admin-hex");
+var adminTitles = document.getElementById("admin-titles");
+var adminSave = document.getElementById("admin-save");
+var adminOk = document.getElementById("admin-ok");
+
+var MANAGER_EMAILS = [
+  "victor@mozentai.com",
+  "spacemany2k38@gmail.com",
+  "victorblack@mozentai.com",
+];
+
 var stripe = window.MOZENTAI_STRIPE || {};
 
 var app = initializeApp(window.MOZENTAI_FIREBASE);
@@ -169,7 +182,20 @@ async function claimCpf(cpfDigits, uid) {
   await setDoc(doc(db, "cpf_index", cpfDigits), { uid: uid });
 }
 
+function isManager(user) {
+  return user && user.email && MANAGER_EMAILS.indexOf(user.email) !== -1;
+}
+
+function showAdminPanel(data) {
+  adminPanel.classList.add("is-visible");
+  adminName.value = data.name || "";
+  adminHex.value = data.smarthex || "";
+  var titles = data.titles || [];
+  adminTitles.value = titles.join(", ");
+}
+
 async function loadEngineer(user) {
+  var isAdmin = isManager(user);
   try {
     var snap = await getDoc(doc(db, "engineers", user.uid));
     if (!snap.exists()) {
@@ -177,6 +203,7 @@ async function loadEngineer(user) {
       dashHex.textContent = "Not registered";
       renderSubscription(null);
       dashEmpty.hidden = false;
+      if (isAdmin) showAdminPanel({ name: user.displayName || "" });
       return;
     }
     var data = snap.data();
@@ -188,12 +215,14 @@ async function loadEngineer(user) {
     }
     renderSubscription(data.subscription || null);
     renderCerts(data.certs || {});
+    if (isAdmin) showAdminPanel(data);
   } catch (err) {
     dashName.textContent = user.displayName || user.email;
     dashHex.textContent = "";
     renderSubscription(null);
     dashEmpty.textContent = "Could not load your data.";
     dashEmpty.hidden = false;
+    if (isAdmin) showAdminPanel({ name: user.displayName || "" });
   }
 }
 
@@ -260,4 +289,36 @@ signInBtn.addEventListener("click", function () {
 
 signOutBtn.addEventListener("click", function () {
   signOut(auth);
+});
+
+adminSave.addEventListener("click", async function () {
+  var user = auth.currentUser;
+  if (!user || !isManager(user)) return;
+
+  adminOk.classList.remove("is-visible");
+  adminSave.disabled = true;
+  adminSave.textContent = "Saving...";
+
+  var titleStr = adminTitles.value.trim();
+  var titles = titleStr
+    ? titleStr.split(",").map(function (t) { return t.trim().toUpperCase(); }).filter(Boolean)
+    : [];
+
+  var update = {
+    name: adminName.value.trim() || user.displayName || "",
+    email: user.email || "",
+    smarthex: adminHex.value.trim(),
+    titles: titles,
+  };
+
+  try {
+    await setDoc(doc(db, "engineers", user.uid), update, { merge: true });
+    dashName.textContent = update.name;
+    dashHex.textContent = update.smarthex;
+    adminOk.classList.add("is-visible");
+    setTimeout(function () { adminOk.classList.remove("is-visible"); }, 2000);
+  } catch (err) {}
+
+  adminSave.disabled = false;
+  adminSave.textContent = "Save";
 });
