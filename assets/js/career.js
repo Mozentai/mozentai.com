@@ -5,25 +5,25 @@
   var rows = Array.prototype.slice.call(document.querySelectorAll("#wall-results .wall-row"));
   var hint = document.getElementById("wall-hint");
 
-  function hay(el) {
-    return (
-      (el.getAttribute("data-name") || "") +
-      " " +
-      (el.getAttribute("data-hex") || "") +
-      " " +
-      (el.getAttribute("data-titles") || "") +
-      " " +
-      (el.getAttribute("data-title") || "") +
-      " " +
-      (el.getAttribute("data-exam") || "")
-    ).toLowerCase();
-  }
-
   function filter() {
     var q = (input.value || "").trim().toLowerCase();
     var any = false;
     rows.forEach(function (r) {
-      var show = q.length > 0 && hay(r).indexOf(q) !== -1;
+      var isPerson = r.classList.contains("wall-row--person");
+      var show = false;
+      if (q.length > 0) {
+        if (isPerson) {
+          var hex = (r.getAttribute("data-hex") || "").toLowerCase();
+          show = hex === q;
+        } else {
+          var hay = (
+            (r.getAttribute("data-title") || "") +
+            " " +
+            (r.getAttribute("data-exam") || "")
+          ).toLowerCase();
+          show = hay.indexOf(q) !== -1;
+        }
+      }
       r.hidden = !show;
       if (show) any = true;
     });
