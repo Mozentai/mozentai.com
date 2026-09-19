@@ -2,10 +2,9 @@
   var input = document.getElementById("wall-lookup");
   if (!input) return;
 
-  var cards = Array.prototype.slice.call(document.querySelectorAll("#wall-people .wall-card"));
-  var titles = Array.prototype.slice.call(document.querySelectorAll("#wall-titles .card"));
+  var rows = Array.prototype.slice.call(document.querySelectorAll("#wall-people .wall-row"));
+  var ladder = Array.prototype.slice.call(document.querySelectorAll(".ladder-grid .ladder-item"));
   var empty = document.getElementById("wall-empty");
-  var registered = cards.length;
 
   function hay(el) {
     return (
@@ -21,34 +20,19 @@
     ).replace(/\s+/g, " ").trim();
   }
 
-  function escapeRe(value) {
-    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  }
-
-  function matches(el, q) {
-    if (!q) return true;
-    var blob = hay(el);
-    if (blob === q) return true;
-    var tokens = q.split(/\s+/).filter(Boolean);
-    return tokens.every(function (token) {
-      return new RegExp("(^|\\s)" + escapeRe(token) + "(\\s|$)", "i").test(blob);
-    });
-  }
-
   function filter() {
     var q = (input.value || "").trim().toLowerCase();
-    var peopleHits = 0;
-    cards.forEach(function (card) {
-      var show = matches(card, q);
-      card.hidden = !show;
-      if (show) peopleHits += 1;
+    var hits = 0;
+    rows.forEach(function (r) {
+      var show = !q || hay(r).toLowerCase().indexOf(q) !== -1;
+      r.hidden = !show;
+      if (show) hits += 1;
     });
-    titles.forEach(function (card) {
-      card.hidden = q ? !matches(card, q) : false;
+    ladder.forEach(function (l) {
+      l.hidden = q ? hay(l).toLowerCase().indexOf(q) === -1 : false;
     });
     if (empty) {
-      var none = registered === 0 || (q && peopleHits === 0);
-      empty.classList.toggle("is-hidden", !none);
+      empty.classList.toggle("is-hidden", rows.length === 0 ? !q : hits > 0);
     }
   }
 

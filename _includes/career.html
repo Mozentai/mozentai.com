@@ -1,57 +1,46 @@
-<section class="section reveal" id="career">
-  <h2 class="section-title">{{ site.data.career.headline }}</h2>
-  <p class="section-lead">{{ site.data.career.lead }}</p>
+<section class="section" id="career">
+  <div class="wall-header">
+    <h2 class="section-title">{{ site.data.career.headline }}</h2>
+    <input
+      class="wall-lookup"
+      id="wall-lookup"
+      type="search"
+      placeholder="{{ site.data.career.lookup_placeholder }}"
+      autocomplete="off"
+    >
+  </div>
 
-  <label class="wall-lookup-label" for="wall-lookup">{{ site.data.career.lookup_label }}</label>
-  <input
-    class="wall-lookup"
-    id="wall-lookup"
-    type="search"
-    placeholder="{{ site.data.career.lookup_placeholder }}"
-    autocomplete="off"
-  >
-
-  <div class="wall-grid" id="wall-people">
+  {% if site.data.engineers.people.size > 0 %}
+  <div class="wall-list" id="wall-people">
     {% for person in site.data.engineers.people %}
-    <article
-      class="wall-card reveal"
-      style="--delay: {{ forloop.index0 | times: 80 }}ms"
+    <div
+      class="wall-row"
       data-name="{{ person.name | downcase | escape }}"
       data-hex="{{ person.smarthex | downcase | escape }}"
       data-titles="{{ person.titles | join: ' ' | downcase | escape }}"
     >
-      <div class="wall-photo{% unless person.photo %} wall-photo--mark{% endunless %}">
-        {% if person.photo %}
-        <img src="{{ person.photo }}" alt="{{ person.name }}" width="400" height="400">
-        {% endif %}
-      </div>
-      <p class="wall-hex">{{ person.smarthex }}</p>
-      <h3 class="wall-name">{{ person.name }}</h3>
-      <ul class="wall-titles">
-        {% for title in person.titles %}
-        <li>{{ title }}</li>
-        {% endfor %}
-      </ul>
-    </article>
+      <span class="wall-row-name">{{ person.name }}</span>
+      <span class="wall-row-hex">{{ person.smarthex }}</span>
+      <span class="wall-row-titles">{% if person.titles.size > 0 %}{{ person.titles | join: ', ' }}{% else %}&mdash;{% endif %}</span>
+    </div>
     {% endfor %}
   </div>
-  <p class="wall-empty{% if site.data.engineers.people.size > 0 %} is-hidden{% endif %}" id="wall-empty">{{ site.data.career.empty }}</p>
-  <p class="wall-id-hint">{{ site.data.career.id_hint }}</p>
+  {% endif %}
+  <p class="wall-empty{% if site.data.engineers.people.size > 0 %} is-hidden{% endif %}" id="wall-empty">No results.</p>
 
-  <h3 class="wall-subhead">{{ site.data.career.titles_kicker }}</h3>
-  <p class="section-lead">{{ site.data.career.titles_lead }}</p>
-  <div class="cards" id="wall-titles">
-    {% for title in site.data.career.titles %}
-    <article
-      class="card reveal"
-      style="--delay: {{ forloop.index0 | times: 100 }}ms"
-      data-title="{{ title.name | downcase | escape }}"
-      data-exam="{{ title.exam | downcase | escape }}"
-    >
-      <p class="card-icon">{{ title.exam }}</p>
-      <h3 class="card-title">{{ title.name }}</h3>
-      <p class="card-desc">{{ title.summary }}</p>
-    </article>
-    {% endfor %}
+  <div class="wall-ladder">
+    <h3 class="wall-subhead">{{ site.data.career.titles_kicker }}</h3>
+    <div class="ladder-grid" id="wall-titles">
+      {% for title in site.data.career.titles %}
+      <div
+        class="ladder-item"
+        data-title="{{ title.name | downcase | escape }}"
+        data-exam="{{ title.exam | downcase | escape }}"
+      >
+        <span class="ladder-code">{{ title.exam }}</span>
+        <span class="ladder-name">{{ title.name }}</span>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
