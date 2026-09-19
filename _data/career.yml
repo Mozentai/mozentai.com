@@ -183,3 +183,45 @@ titles:
   - name: Firebase Specialist
     exam: FBX
     hours: 360
+
+  # Git
+  - name: Git Engineer I
+    exam: GT1
+    hours: 40
+  - name: Git Engineer II
+    exam: GT2
+    hours: 90
+  - name: Git Engineer III
+    exam: GT3
+    hours: 160
+  - name: Git Specialist
+    exam: GTX
+    hours: 360
+
+  # GitHub
+  - name: GitHub Engineer I
+    exam: GH1
+    hours: 40
+  - name: GitHub Engineer II
+    exam: GH2
+    hours: 90
+  - name: GitHub Engineer III
+    exam: GH3
+    hours: 160
+  - name: GitHub Specialist
+    exam: GHX
+    hours: 360
+
+  # GitLab
+  - name: GitLab Engineer I
+    exam: GL1
+    hours: 40
+  - name: GitLab Engineer II
+    exam: GL2
+    hours: 90
+  - name: GitLab Engineer III
+    exam: GL3
+    hours: 160
+  - name: GitLab Specialist
+    exam: GLX
+    hours: 360

@@ -19,6 +19,9 @@ naming:
   logic: L
   cs: CS
   se: SE
+  git: GT
+  github: GH
+  gitlab: GL
   specialist: X
 
 # ─────────────────────────────────────────────
@@ -1583,6 +1586,378 @@ exams:
       - topic: Mentoring, curriculum design
         hours: 20
       - topic: Research project, tooling or methodology
+        hours: 48
+      - topic: Comprehensive assessment with instructor
+        hours: 40
+      - topic: Technical publication
+        hours: 40
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # GIT
+  # ─────────────────────────────────────────────
+
+  - code: GT1
+    title: Git Engineer I
+    level: Basic
+    hours: 40
+    curriculum:
+      - topic: Version control concepts, centralized vs distributed, DAG model
+        hours: 4
+      - topic: Repository initialization, staging area, commits, .gitignore
+        hours: 6
+      - topic: Branching, merging, fast-forward, three-way merge, conflict resolution
+        hours: 8
+      - topic: Remote operations, clone, fetch, pull, push, tracking branches
+        hours: 6
+      - topic: History inspection, log, diff, blame, bisect
+        hours: 4
+      - topic: Undoing changes, reset, revert, checkout, restore
+        hours: 4
+      - topic: Tagging, annotated vs lightweight, release conventions
+        hours: 3
+      - topic: Configuration, aliases, global vs local, credential helpers
+        hours: 3
+      - topic: Collaboration basics, pull request workflow, code review etiquette
+        hours: 2
+    questions: []
+
+  - code: GT2
+    title: Git Engineer II
+    level: Medium
+    hours: 90
+    curriculum:
+      - topic: Rebase, interactive rebase, squash, fixup, autosquash
+        hours: 10
+      - topic: Branching strategies, Git Flow, trunk-based, GitHub Flow
+        hours: 8
+      - topic: Cherry-pick, patch generation, format-patch, am
+        hours: 6
+      - topic: Submodules, subtrees, monorepo patterns
+        hours: 8
+      - topic: Stash, worktrees, multiple working directories
+        hours: 6
+      - topic: Hooks, client-side and server-side, pre-commit, commit-msg
+        hours: 8
+      - topic: Reflog, recovery, orphaned commits, garbage collection
+        hours: 6
+      - topic: Merge strategies, ours, theirs, recursive, octopus
+        hours: 6
+      - topic: Advanced diff, word diff, rename detection, diff algorithms
+        hours: 4
+      - topic: Signing commits and tags, GPG, SSH keys, verification
+        hours: 4
+      - topic: Large file handling, Git LFS, sparse checkout, partial clone
+        hours: 8
+      - topic: Performance, shallow clones, filter-branch, git-filter-repo
+        hours: 8
+      - topic: CI integration, automated testing on push, pre-receive hooks
+        hours: 8
+    questions: []
+
+  - code: GT3
+    title: Git Engineer III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: Git internals, object model, blobs, trees, commits, pack files
+        hours: 16
+      - topic: Transfer protocols, smart HTTP, SSH, pack negotiation
+        hours: 12
+      - topic: Custom merge drivers, diff drivers, attributes
+        hours: 10
+      - topic: Repository maintenance, gc, prune, fsck, repack strategies
+        hours: 10
+      - topic: Monorepo at scale, sparse index, cone-mode sparse checkout
+        hours: 14
+      - topic: Git server administration, bare repos, access control, mirrors
+        hours: 12
+      - topic: Advanced history rewriting, git-filter-repo, BFG, legal scrubbing
+        hours: 10
+      - topic: Multi-repo orchestration, meta tools, repo manifests
+        hours: 10
+      - topic: Security, signed pushes, commit verification at scale, supply chain
+        hours: 10
+      - topic: Performance tuning, commit-graph, multi-pack index, bitmap indexes
+        hours: 12
+      - topic: Automation, scripting with git plumbing commands
+        hours: 10
+      - topic: Migration, SVN to Git, Mercurial to Git, TFS to Git
+        hours: 10
+      - topic: Capstone, designing a Git workflow for a large engineering org
+        hours: 16
+      - topic: Technical documentation
+        hours: 8
+    questions: []
+
+  - code: GTX
+    title: Git Specialist
+    level: Specialist
+    hours: 360
+    curriculum:
+      - topic: Git source code, C implementation, contributing upstream
+        hours: 36
+      - topic: Custom transport, protocol extensions, partial clone internals
+        hours: 28
+      - topic: Enterprise Git infrastructure, fleet of repositories at scale
+        hours: 32
+      - topic: Advanced monorepo tooling, virtual file systems, GVFS/Scalar
+        hours: 28
+      - topic: Security research, hash collision, SHA-256 migration, signing infra
+        hours: 24
+      - topic: Performance research, large repo optimization, benchmarking
+        hours: 28
+      - topic: Git ecosystem tooling, building developer tools on top of Git
+        hours: 24
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Research project, original tooling or upstream contribution
+        hours: 48
+      - topic: Comprehensive assessment with instructor
+        hours: 40
+      - topic: Technical publication
+        hours: 40
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # GITHUB
+  # ─────────────────────────────────────────────
+
+  - code: GH1
+    title: GitHub Engineer I
+    level: Basic
+    hours: 40
+    curriculum:
+      - topic: GitHub fundamentals, repositories, README, licensing, topics
+        hours: 4
+      - topic: Pull requests, reviews, approvals, merge options, draft PRs
+        hours: 8
+      - topic: Issues, labels, milestones, project boards, templates
+        hours: 6
+      - topic: GitHub Actions basics, workflows, triggers, runners, marketplace
+        hours: 8
+      - topic: Branch protection, rulesets, required reviews, status checks
+        hours: 4
+      - topic: GitHub Pages, static site hosting, custom domains
+        hours: 3
+      - topic: Notifications, mentions, teams, organization basics
+        hours: 3
+      - topic: Security features, Dependabot, secret scanning, code scanning
+        hours: 4
+    questions: []
+
+  - code: GH2
+    title: GitHub Engineer II
+    level: Medium
+    hours: 90
+    curriculum:
+      - topic: Advanced Actions, composite actions, reusable workflows, matrix builds
+        hours: 12
+      - topic: Secrets management, environments, deployment protection rules
+        hours: 8
+      - topic: GitHub Packages, container registry, npm, Maven publishing
+        hours: 8
+      - topic: Advanced code review, CODEOWNERS, auto-merge, review assignment
+        hours: 6
+      - topic: GitHub API, REST v3, GraphQL v4, authentication, rate limits
+        hours: 10
+      - topic: Advanced security, CodeQL, custom queries, SARIF
+        hours: 8
+      - topic: GitHub Apps, webhooks, OAuth Apps, installation tokens
+        hours: 10
+      - topic: Organization management, teams, permissions, SSO, SCIM
+        hours: 6
+      - topic: Release management, semantic versioning, release notes, assets
+        hours: 4
+      - topic: GitHub CLI, gh extensions, scripting
+        hours: 4
+      - topic: Inner source, repository visibility, forking workflows
+        hours: 4
+      - topic: Discussions, wikis, community health files
+        hours: 4
+      - topic: Copilot, AI-assisted development, prompt patterns
+        hours: 6
+    questions: []
+
+  - code: GH3
+    title: GitHub Engineer III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: Enterprise GitHub, GHEC, GHES, data residency, audit log streaming
+        hours: 14
+      - topic: Advanced Actions, self-hosted runners, runner groups, ephemeral runners
+        hours: 14
+      - topic: Advanced security at scale, GHAS rollout, policy enforcement
+        hours: 14
+      - topic: Custom GitHub Apps, Probot, event-driven automation
+        hours: 12
+      - topic: Advanced API, GraphQL mutations, pagination, webhooks at scale
+        hours: 10
+      - topic: Migration, migrating to GitHub from other platforms, ghe-migrator
+        hours: 10
+      - topic: Compliance, audit logs, IP allow lists, EMU
+        hours: 10
+      - topic: Advanced Packages, multi-registry, attestations, provenance
+        hours: 8
+      - topic: Platform engineering, reusable workflow libraries, IssueOps
+        hours: 12
+      - topic: GitHub Advanced Security, dependency review, secret push protection
+        hours: 10
+      - topic: Performance, Actions caching, artifact management, large workflows
+        hours: 8
+      - topic: Capstone, enterprise GitHub platform design
+        hours: 20
+      - topic: Technical documentation
+        hours: 10
+    questions: []
+
+  - code: GHX
+    title: GitHub Specialist
+    level: Specialist
+    hours: 360
+    curriculum:
+      - topic: Enterprise architecture, multi-org strategy, governance at scale
+        hours: 32
+      - topic: Advanced platform engineering, custom runners infrastructure
+        hours: 28
+      - topic: GitHub ecosystem, integrations, marketplace apps, partner program
+        hours: 28
+      - topic: Security architecture, GHAS at scale, custom CodeQL packs
+        hours: 28
+      - topic: API platform, building products on GitHub APIs
+        hours: 28
+      - topic: Migration architecture, large-scale enterprise migrations
+        hours: 24
+      - topic: Open-source program management, community strategy
+        hours: 20
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Research project, original tooling or integration
+        hours: 48
+      - topic: Comprehensive assessment with instructor
+        hours: 40
+      - topic: Technical publication
+        hours: 40
+    questions: []
+
+  # ─────────────────────────────────────────────
+  # GITLAB
+  # ─────────────────────────────────────────────
+
+  - code: GL1
+    title: GitLab Engineer I
+    level: Basic
+    hours: 40
+    curriculum:
+      - topic: GitLab fundamentals, projects, groups, namespaces, permissions
+        hours: 4
+      - topic: Merge requests, approvals, merge options, draft MRs, review workflow
+        hours: 8
+      - topic: Issues, boards, labels, milestones, epics basics
+        hours: 6
+      - topic: GitLab CI/CD basics, .gitlab-ci.yml, stages, jobs, runners
+        hours: 8
+      - topic: GitLab Pages, static site hosting, custom domains
+        hours: 3
+      - topic: Container Registry, package registry fundamentals
+        hours: 3
+      - topic: Security scanning basics, SAST, dependency scanning
+        hours: 4
+      - topic: Snippets, wikis, project templates
+        hours: 2
+      - topic: Notifications, to-do lists, quick actions
+        hours: 2
+    questions: []
+
+  - code: GL2
+    title: GitLab Engineer II
+    level: Medium
+    hours: 90
+    curriculum:
+      - topic: Advanced CI/CD, variables, rules, needs, DAG pipelines, caching
+        hours: 12
+      - topic: Environments, deployments, review apps, feature flags
+        hours: 8
+      - topic: GitLab API, REST, GraphQL, personal access tokens, project tokens
+        hours: 10
+      - topic: Advanced security, DAST, container scanning, license compliance
+        hours: 8
+      - topic: Advanced runners, shared, group, project runners, executors, autoscaling
+        hours: 8
+      - topic: Multi-project pipelines, parent-child pipelines, trigger jobs
+        hours: 8
+      - topic: Release management, tags, release assets, changelog generation
+        hours: 4
+      - topic: GitLab Duo, AI features, code suggestions, chat
+        hours: 4
+      - topic: Compliance, audit events, compliance frameworks, separation of duties
+        hours: 6
+      - topic: Package management, npm, Maven, PyPI, Terraform modules
+        hours: 6
+      - topic: Monitoring, incidents, alerts, error tracking
+        hours: 4
+      - topic: Wiki, documentation, project insights
+        hours: 4
+      - topic: Integration, Jira, Slack, webhooks, services
+        hours: 8
+    questions: []
+
+  - code: GL3
+    title: GitLab Engineer III
+    level: Advanced
+    hours: 160
+    curriculum:
+      - topic: GitLab administration, self-managed, Omnibus, Helm, reference architectures
+        hours: 14
+      - topic: Advanced CI/CD, custom executors, Kubernetes executor, auto-scaling
+        hours: 14
+      - topic: Advanced security, security policies, vulnerability management, compliance pipelines
+        hours: 14
+      - topic: GitLab API automation, custom integrations, webhooks at scale
+        hours: 10
+      - topic: Geo replication, disaster recovery, backup strategies
+        hours: 12
+      - topic: Performance, large instance tuning, Gitaly, Praefect
+        hours: 12
+      - topic: Migration, importing from other platforms, project export/import
+        hours: 10
+      - topic: Advanced permissions, SAML, LDAP, group sync, IP restrictions
+        hours: 8
+      - topic: Value stream analytics, DORA metrics, productivity measurement
+        hours: 8
+      - topic: Platform engineering, project templates, instance-level CI/CD
+        hours: 10
+      - topic: Advanced Kubernetes, GitLab agent, cluster management
+        hours: 10
+      - topic: Capstone, enterprise GitLab platform design
+        hours: 20
+      - topic: Technical documentation
+        hours: 10
+    questions: []
+
+  - code: GLX
+    title: GitLab Specialist
+    level: Specialist
+    hours: 360
+    curriculum:
+      - topic: Enterprise architecture, multi-instance strategy, reference architectures at scale
+        hours: 32
+      - topic: Advanced platform engineering, custom runners fleet, autoscaling infra
+        hours: 28
+      - topic: GitLab internals, Rails codebase, contributing upstream
+        hours: 28
+      - topic: Security architecture, DevSecOps at scale, compliance automation
+        hours: 28
+      - topic: Advanced Geo, multi-site DR, cross-region failover
+        hours: 24
+      - topic: Migration architecture, large-scale enterprise migrations
+        hours: 24
+      - topic: Performance engineering, Gitaly optimization, database tuning
+        hours: 24
+      - topic: Mentoring, curriculum design
+        hours: 20
+      - topic: Research project, original tooling or upstream contribution
         hours: 48
       - topic: Comprehensive assessment with instructor
         hours: 40
