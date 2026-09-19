@@ -137,6 +137,34 @@
       .cur-total-hours {
         color: var(--accent);
       }
+      .cert-block {
+        margin-top: 56px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      .cert-badge {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .cert-fullname {
+        font-family: var(--mono);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+      .cert-desc {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
       .back {
         display: inline-block;
         margin-top: 48px;
@@ -215,6 +243,20 @@
           <span class="cur-total-hours">{{ exam.hours }}h</span>
         </div>
       </div>
+
+      {% assign cert = nil %}
+      {% for c in site.data.certifications_citc.certifications %}
+        {% if c.code == page.exam %}
+          {% assign cert = c %}
+        {% endif %}
+      {% endfor %}
+      {% if cert %}
+      <div class="cert-block">
+        <div class="cert-badge">{{ cert.abbr }}</div>
+        <div class="cert-fullname">{{ cert.name }}</div>
+        <p class="cert-desc">{{ cert.description }}</p>
+      </div>
+      {% endif %}
 
       <a class="back" href="/professionals/">&larr; Back to Career Wall</a>
       {% endif %}

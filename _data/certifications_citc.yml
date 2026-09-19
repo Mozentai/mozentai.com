@@ -1,0 +1,172 @@
+# CITC certifications. One per exam. Modeled after HTB Academy certs.
+# Each cert has a name, code, description, and the path it validates.
+# Candidates must complete 100% of the curriculum and pass the exam.
+
+certifications:
+  # Python
+  - code: P1
+    name: CITC Certified Python Engineer I
+    abbr: CITC CPE-I
+    description: Holders demonstrate foundational competency in Python development. They can write clean, tested code using core language features, data structures, and standard library tools.
+
+  - code: P2
+    name: CITC Certified Python Engineer II
+    abbr: CITC CPE-II
+    description: Holders demonstrate intermediate competency in Python development. They can build production applications with async, testing, packaging, databases, and web frameworks.
+
+  - code: P3
+    name: CITC Certified Python Engineer III
+    abbr: CITC CPE-III
+    description: Holders demonstrate advanced competency in Python systems programming. They understand CPython internals, performance engineering, distributed systems, and production architecture.
+
+  - code: PX
+    name: CITC Certified Python Specialist
+    abbr: CITC CPS
+    description: Holders demonstrate specialist-level mastery of the Python ecosystem. They can contribute to language tooling, design large-scale systems, and conduct original research.
+
+  # Cybersecurity
+  - code: C1
+    name: CITC Certified Cybersecurity Engineer I
+    abbr: CITC CCE-I
+    description: Holders demonstrate foundational competency in cybersecurity. They understand networking, web security, the OWASP Top 10, security tooling, and incident handling.
+
+  - code: C2
+    name: CITC Certified Cybersecurity Engineer II
+    abbr: CITC CCE-II
+    description: Holders demonstrate intermediate competency in penetration testing and security operations. They can exploit web applications, Active Directory, and common services, and produce professional reports.
+
+  - code: C3
+    name: CITC Certified Cybersecurity Engineer III
+    abbr: CITC CCE-III
+    description: Holders demonstrate advanced competency in offensive security. They can perform binary exploitation, reverse engineering, red team operations, and cloud/container attacks.
+
+  - code: CX
+    name: CITC Certified Cybersecurity Specialist
+    abbr: CITC CCS
+    description: Holders demonstrate specialist-level mastery of offensive and defensive security. They can develop exploits, conduct zero-day research, build custom tooling, and lead full-scope red team campaigns.
+
+  # Java
+  - code: J1
+    name: CITC Certified Java Engineer I
+    abbr: CITC CJE-I
+    description: Holders demonstrate foundational competency in Java development. They can write object-oriented code using the collections framework, generics, and functional programming features.
+
+  - code: J2
+    name: CITC Certified Java Engineer II
+    abbr: CITC CJE-II
+    description: Holders demonstrate intermediate competency in Java development. They can build production applications with Spring Boot, JPA, concurrency, and enterprise security patterns.
+
+  - code: J3
+    name: CITC Certified Java Engineer III
+    abbr: CITC CJE-III
+    description: Holders demonstrate advanced competency in Java systems engineering. They understand JVM internals, microservices architecture, and distributed systems at scale.
+
+  - code: JX
+    name: CITC Certified Java Specialist
+    abbr: CITC CJS
+    description: Holders demonstrate specialist-level mastery of the Java platform. They can engineer JVM tooling, contribute to framework internals, and architect large-scale enterprise systems.
+
+  # Go
+  - code: G1
+    name: CITC Certified Go Engineer I
+    abbr: CITC CGE-I
+    description: Holders demonstrate foundational competency in Go development. They can write concurrent programs using goroutines, channels, interfaces, and the standard library.
+
+  - code: G2
+    name: CITC Certified Go Engineer II
+    abbr: CITC CGE-II
+    description: Holders demonstrate intermediate competency in Go development. They can build production services with advanced concurrency, networking, databases, and modern testing practices.
+
+  - code: G3
+    name: CITC Certified Go Engineer III
+    abbr: CITC CGE-III
+    description: Holders demonstrate advanced competency in Go systems programming. They understand runtime internals, distributed systems, and performance engineering at scale.
+
+  - code: GX
+    name: CITC Certified Go Specialist
+    abbr: CITC CGS
+    description: Holders demonstrate specialist-level mastery of the Go ecosystem. They can contribute to the Go runtime, build infrastructure-grade systems, and conduct original research.
+
+  # Mathematics
+  - code: M1
+    name: CITC Certified Mathematics I
+    abbr: CITC CM-I
+    description: Holders demonstrate foundational competency in mathematics for computing. They understand discrete math, linear algebra, probability, number theory, and proof techniques.
+
+  - code: M2
+    name: CITC Certified Mathematics II
+    abbr: CITC CM-II
+    description: Holders demonstrate intermediate competency in applied mathematics. They can apply calculus, statistics, numerical methods, and information theory to engineering problems.
+
+  - code: M3
+    name: CITC Certified Mathematics III
+    abbr: CITC CM-III
+    description: Holders demonstrate advanced competency in mathematical theory. They understand abstract algebra, topology, cryptographic mathematics, and optimization.
+
+  - code: MX
+    name: CITC Certified Mathematics Specialist
+    abbr: CITC CMS
+    description: Holders demonstrate specialist-level mastery of mathematical foundations. They can contribute original research in algebra, analysis, or applied mathematics.
+
+  # Logic
+  - code: L1
+    name: CITC Certified Logic I
+    abbr: CITC CL-I
+    description: Holders demonstrate foundational competency in formal logic. They understand propositional and predicate logic, proof techniques, and formal systems.
+
+  - code: L2
+    name: CITC Certified Logic II
+    abbr: CITC CL-II
+    description: Holders demonstrate intermediate competency in logic and formal methods. They can work with modal logic, temporal logic, model checking, and formal verification.
+
+  - code: L3
+    name: CITC Certified Logic III
+    abbr: CITC CL-III
+    description: Holders demonstrate advanced competency in type theory, lambda calculus, proof assistants, and computability theory.
+
+  - code: LX
+    name: CITC Certified Logic Specialist
+    abbr: CITC CLS
+    description: Holders demonstrate specialist-level mastery of logic and formal methods. They can contribute to proof assistant development, categorical logic, or advanced type theory.
+
+  # Computer Science
+  - code: CS1
+    name: CITC Certified Computer Scientist I
+    abbr: CITC CCS-I
+    description: Holders demonstrate foundational competency in computer science. They understand data structures, algorithms, operating systems, networking, and databases.
+
+  - code: CS2
+    name: CITC Certified Computer Scientist II
+    abbr: CITC CCS-II
+    description: Holders demonstrate intermediate competency in computer science. They can design compilers, work with distributed systems, and apply advanced algorithms.
+
+  - code: CS3
+    name: CITC Certified Computer Scientist III
+    abbr: CITC CCS-III
+    description: Holders demonstrate advanced competency in computer science research and systems. They can design at scale, work with ML, and produce original technical work.
+
+  - code: CSX
+    name: CITC Certified Computer Science Specialist
+    abbr: CITC CCSS
+    description: Holders demonstrate specialist-level mastery of computer science. They can conduct original research in theory, systems, or AI and contribute to the field.
+
+  # Software Engineering
+  - code: SE1
+    name: CITC Certified Software Engineer I
+    abbr: CITC CSE-I
+    description: Holders demonstrate foundational competency in software engineering practices. They understand version control, testing, CI/CD, agile, and basic architecture.
+
+  - code: SE2
+    name: CITC Certified Software Engineer II
+    abbr: CITC CSE-II
+    description: Holders demonstrate intermediate competency in software engineering. They can design APIs, implement observability, manage infrastructure as code, and lead incident response.
+
+  - code: SE3
+    name: CITC Certified Software Engineer III
+    abbr: CITC CSE-III
+    description: Holders demonstrate advanced competency in software engineering leadership. They can design systems at scale, lead platform engineering, and drive reliability practices.
+
+  - code: SSX
+    name: CITC Certified Software Engineering Specialist
+    abbr: CITC CSES
+    description: Holders demonstrate specialist-level mastery of software engineering. They can architect hyperscale systems, lead engineering organizations, and contribute original methodologies.
